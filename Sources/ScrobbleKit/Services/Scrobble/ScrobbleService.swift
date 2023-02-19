@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ScrobbleService: SBKService {
+struct ScrobbleService: SBKAuthenticatedService {
     typealias ResponseType = SBKScrobbleList
 
     var artist: String
@@ -35,8 +35,7 @@ struct ScrobbleService: SBKService {
             .init(name: "artist", value: artist),
             .init(name: "track", value: track),
             .init(name: "album", value: album),
-            .init(name: "timestamp", value: "\(timestamp)"),
-            .init(name: "sk", value: sessionKey),
+            .init(name: "timestamp", value: "\(timestamp)")
         ]
     }
 }

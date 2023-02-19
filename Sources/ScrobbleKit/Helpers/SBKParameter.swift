@@ -12,6 +12,7 @@ enum SBKParameter: String {
     case method
     case apiKey = "api_key"
     case apiSig = "api_sig"
+    case sessionKey = "sk"
     
     static let baseURL = "https://ws.audioscrobbler.com/2.0/"
 }

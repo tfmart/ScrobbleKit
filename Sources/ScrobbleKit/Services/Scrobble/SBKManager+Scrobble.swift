@@ -38,7 +38,7 @@ extension SBKManager {
             track: "",
             album: "",
             date: Date(),
-            sessionKey: "",
+            sessionKey: sessionKey,
             apiKey: self.apiKey,
             secretKey: self.secret
         )
