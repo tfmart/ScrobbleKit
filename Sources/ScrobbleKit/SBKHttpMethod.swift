@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SBKHttpMethod: String {
+public enum SBKHttpMethod: String {
     case `get` = "GET"
     case post = "POST"
 }

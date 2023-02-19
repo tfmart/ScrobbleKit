@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SBKService {
+public protocol SBKService {
     associatedtype ResponseType: Decodable
     typealias CompletionType = ((ResponseType?, Error?) -> Void)?
     var sbkMethod: SBKMethod { get }
@@ -22,7 +22,7 @@ protocol SBKService {
 }
 
 // MARK: URL builder
-extension SBKService {
+internal extension SBKService {
     var baseURL: String {
         "https://ws.audioscrobbler.com/2.0/"
     }
@@ -61,7 +61,7 @@ extension SBKService {
 }
 
 // MARK: Encoding/Decoding
-extension SBKService {
+internal extension SBKService {
     func parse(_ response: Data) throws -> ResponseType {
         do {
             let resultModel = try JSONDecoder().decode(ResponseType.self, from: response)
@@ -99,7 +99,7 @@ extension SBKService {
 }
 
 // MARK: Default start() implementations
-extension SBKService {
+public extension SBKService {
     func start(_ completion: CompletionType) {
         guard let url = url else {
             completion?(nil, SBKError.badURL)
