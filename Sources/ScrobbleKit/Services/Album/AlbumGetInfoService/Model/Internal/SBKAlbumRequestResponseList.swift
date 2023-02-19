@@ -36,7 +36,7 @@ struct SBKImageResponse: Codable {
 }
 
 // MARK: - Tags
-struct SBKTagRequestResponseList: Codable {
+struct SBKTagRequestResponseList: Decodable {
     var tag: [SBKTag]
 }
 

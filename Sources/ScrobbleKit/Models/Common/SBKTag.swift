@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SBKTag: Codable {
+public struct SBKTag: Decodable {
     public let url: String
     public let name: String
 }

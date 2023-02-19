@@ -8,6 +8,7 @@
 import Foundation
 
 extension SBKManager {
+    @discardableResult
     func addTags(toAlbum album: String, artist: String, tags: [String]) async throws -> Bool {
         guard let sessionKey else { throw SBKError.missingSessionKey }
         let service = AlbumAddTagsService(
