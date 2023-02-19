@@ -8,17 +8,13 @@
 import Foundation
 
 extension SBKManager {
-    func getInfo(forAlbum album: String,
-                 artist: String,
-                 musicBrainzID: String? = nil,
+    func getInfo(forAlbum searchMethod: SBKAlbumSearchMethod,
                  autoCorrect: Bool = true,
                  username: String? = nil,
                  languageCode: SBKLanguageCode = .english
     ) async throws -> SBKAlbumResponse {
         let service = AlbumGetInfoService(
-            album: album,
-            artist: artist,
-            musicBrainzID: musicBrainzID,
+            searchMethod: searchMethod,
             autoCorrect: autoCorrect,
             username: username,
             languageCode: languageCode,
@@ -29,18 +25,14 @@ extension SBKManager {
         return .init(response: response)
     }
     
-    func getInfo(forAlbum album: String,
-                 artist: String,
-                 musicBrainzID: String? = nil,
+    func getInfo(forAlbum searchMethod: SBKAlbumSearchMethod,
                  autoCorrect: Bool = true,
                  username: String? = nil,
                  languageCode: SBKLanguageCode = .english,
                  _ completion: ((SBKAlbumResponse?, Error?) -> Void)?
     ) {
         let service = AlbumGetInfoService(
-            album: album,
-            artist: artist,
-            musicBrainzID: musicBrainzID,
+            searchMethod: searchMethod,
             autoCorrect: autoCorrect,
             username: username,
             languageCode: languageCode,

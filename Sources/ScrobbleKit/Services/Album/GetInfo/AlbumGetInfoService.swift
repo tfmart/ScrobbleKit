@@ -18,9 +18,7 @@ struct AlbumGetInfoService: SBKService {
     var httpMethod: SBKHttpMethod = .get
 
     init(
-        album: String,
-        artist: String,
-        musicBrainzID: String?,
+        searchMethod: SBKAlbumSearchMethod,
         autoCorrect: Bool,
         username: String?,
         languageCode: SBKLanguageCode,
@@ -29,12 +27,22 @@ struct AlbumGetInfoService: SBKService {
     ) {
         self.apiKey = apiKey
         self.secretKey = secretKey
-        self.queries = [
-            .init(name: "album", value: album),
-            .init(name: "artist", value: artist),
-            .init(name: "mbid", value: musicBrainzID),
-            .init(name: "username", value: nil),
-            .init(name: "autocorrect", bool: autoCorrect)
-        ]
+        switch searchMethod {
+        case .albumArtist(let album, let artist):
+            self.queries = [
+                .init(name: "artist", value: artist),
+                .init(name: "album", value: album),
+                .init(name: "autocorrect", bool: autoCorrect),
+                .init(name: "user", value: username),
+                .init(name: "lang", value: languageCode.rawValue)
+            ]
+        case .musicBrainzID(let id):
+            self.queries = [
+                .init(name: "mbid", value: id),
+                .init(name: "autocorrect", bool: autoCorrect),
+                .init(name: "user", value: username),
+                .init(name: "lang", value: languageCode.rawValue)
+            ]
+        }
     }
 }
