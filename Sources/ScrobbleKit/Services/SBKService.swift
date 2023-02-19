@@ -17,7 +17,7 @@ public protocol SBKService {
     var apiKey: String { get set }
     var secretKey: String { get set }
 
-    func start()
+    func start(_ completion: CompletionType)
     func start() async throws -> ResponseType
 }
 

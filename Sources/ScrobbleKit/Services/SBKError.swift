@@ -29,5 +29,7 @@ enum SBKError: Int, Error, Codable {
     case deprecated = 27
     case rateLimitExceded = 29
     // ScrobbleKit client errors
-    case badURL = 999
+    case missingSessionKey = 997
+    case badURL = 998
+    case failedToDecodeResponse = 999
 }
