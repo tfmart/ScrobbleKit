@@ -102,7 +102,7 @@ internal extension SBKService {
 public extension SBKService {
     func start(_ completion: CompletionType) {
         guard let url = url else {
-            completion?(nil, SBKError.badURL)
+            completion?(nil, SBKClientError.badURL)
             return
         }
         var request = URLRequest(url: url)
@@ -123,7 +123,7 @@ public extension SBKService {
     
     func start() async throws -> ResponseType {
         guard let url = url else {
-            throw SBKError.badURL
+            throw SBKClientError.badURL
         }
         var request = URLRequest(url: url)
         request.httpMethod = httpMethod.rawValue

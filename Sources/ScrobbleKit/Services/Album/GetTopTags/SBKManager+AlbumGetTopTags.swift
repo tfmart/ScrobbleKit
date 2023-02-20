@@ -38,7 +38,7 @@ extension SBKManager {
                 return
             }
             guard let tags = response?.toptags.tag else {
-                completion?(nil, SBKError.failedToDecodeResponse)
+                completion?(nil, SBKClientError.failedToDecodeResponse)
                 return
             }
             completion?(tags, nil)

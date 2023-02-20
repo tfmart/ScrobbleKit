@@ -10,7 +10,7 @@ import Foundation
 extension SBKManager {
 
     public func scrobble() async throws -> SBKScrobbleResponse {
-        guard let sessionKey else { throw SBKError.missingSessionKey }
+        guard let sessionKey else { throw SBKClientError.missingSessionKey }
         let service = ScrobbleService(
             artist: "",
             track: "",
@@ -30,7 +30,7 @@ extension SBKManager {
     
     public func scrobble(_ completion: ((SBKScrobbleResponse?, Error?) -> Void)? = nil) {
         guard let sessionKey else {
-            completion?(nil, SBKError.missingSessionKey)
+            completion?(nil, SBKClientError.missingSessionKey)
             return
         }
         let service = ScrobbleService(
@@ -48,7 +48,7 @@ extension SBKManager {
                 return
             }
             guard let list else {
-                completion?(nil, SBKError.failedToDecodeResponse)
+                completion?(nil, SBKClientError.failedToDecodeResponse)
                 return
             }
             completion?(SBKScrobbleResponse(list: list), nil)

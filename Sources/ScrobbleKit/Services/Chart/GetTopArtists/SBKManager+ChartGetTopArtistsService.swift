@@ -39,7 +39,7 @@ extension SBKManager {
                 return
             }
             guard let response else {
-                completion?(nil, SBKError.failedToDecodeResponse)
+                completion?(nil, SBKClientError.failedToDecodeResponse)
                 return
             }
             completion?(response.artists.artists, nil)

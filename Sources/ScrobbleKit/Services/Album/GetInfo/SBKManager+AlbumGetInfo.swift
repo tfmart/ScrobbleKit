@@ -46,7 +46,7 @@ extension SBKManager {
                 return
             }
             guard let album else {
-                completion?(nil, SBKError.failedToDecodeResponse)
+                completion?(nil, SBKClientError.failedToDecodeResponse)
                 return
             }
             completion?(.init(response: album), nil)
