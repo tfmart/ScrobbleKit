@@ -8,6 +8,16 @@
 import Foundation
 
 public extension SBKManager {
+    /// Fetches the top artists chart from Last.fm.
+    ///
+    /// - Parameters:
+    ///   - page: The page number to fetch. Defaults to first page.
+    ///   - limit: The number of results to fetch per page. Defaults to 50.
+    /// - Returns: An array of ``SBKArtist`` objects.
+    /// - Throws: An error if the API call fails or the response cannot be decoded.
+    ///
+    /// - Note: This method is asynchronous and should be called from within an `async` context.
+    /// See [Last.fm API documentation](https://www.last.fm/api/show/chart.getTopArtists) for more information.
     func getTopArtistsChart(
         page: Int = 1,
         limit: Int = 50
@@ -22,6 +32,14 @@ public extension SBKManager {
         return response.artists.artists
     }
     
+    /// Fetches the top artists chart from Last.fm.
+    ///
+    /// - Parameters:
+    ///   - page: The page number to fetch. Defaults to first page.
+    ///   - limit: The number of results to fetch per page. Defaults to 50.
+    ///   - completion: A closure to be called with the resulting array of ``SBKArtist`` objects or an error.
+    ///
+    /// - Note: See [Last.fm API documentation](https://www.last.fm/api/show/chart.getTopArtists) for more information.
     func getTopArtistsChart(
         page: Int = 1,
         limit: Int = 50,
