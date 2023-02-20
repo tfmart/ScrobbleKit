@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol SBKService {
+protocol SBKService {
     associatedtype ResponseType: Decodable
     typealias CompletionType = ((ResponseType?, Error?) -> Void)?
     var sbkMethod: SBKMethod { get }
@@ -99,7 +99,7 @@ internal extension SBKService {
 }
 
 // MARK: Default start() implementations
-public extension SBKService {
+extension SBKService {
     func start(_ completion: CompletionType) {
         guard let url = url else {
             completion?(nil, SBKClientError.badURL)
