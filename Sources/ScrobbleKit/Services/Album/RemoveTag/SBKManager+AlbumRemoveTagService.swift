@@ -17,7 +17,7 @@ public extension SBKManager {
       - Returns: A Boolean value indicating whether the tag was removed from the album.
       - Throws: An error of type ``SBKClientError``or ``SBKError`` if the operation fails
 
-      For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/album.removeTag).
+     - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/album.removeTag).
     */
     func removeTag(fromAlbum album: String, artist: String, tag: String) async throws -> Bool {
         guard let sessionKey else { throw SBKClientError.missingSessionKey }
@@ -41,7 +41,7 @@ public extension SBKManager {
       - Parameter tag: The tag to remove from the album.
       - Parameter completion: A completion block to be called with the result of the operation.
 
-      For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/album.removeTag).
+      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/album.removeTag).
     */
     func removeTag(fromAlbum album: String, artist: String, tag: String, _ completion: ((Bool, Error?) -> Void)?) {
         guard let sessionKey else {
