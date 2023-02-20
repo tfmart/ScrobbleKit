@@ -19,12 +19,17 @@ struct SBKArtistListResponse: Decodable {
     }
 }
 
-struct SBKArtist: Decodable {
+public struct SBKArtist: Decodable {
     let name: String
     let playcount: String
     let listeners: String
     let musicBrainzID: String?
     let url: String?
     let streamable: String?
-    let image: [SBKImageResponse]?
+    internal let image: [SBKImageResponse]?
+    
+    var images: SBKImage? {
+        guard let image else { return nil }
+        return SBKImage(response: image)
+    }
 }

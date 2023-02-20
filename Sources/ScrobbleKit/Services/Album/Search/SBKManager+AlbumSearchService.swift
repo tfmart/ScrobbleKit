@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension SBKManager {
+public extension SBKManager {
     func search(
         album: String,
         page: Int = 1,

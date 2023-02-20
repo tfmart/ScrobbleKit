@@ -12,16 +12,21 @@ struct SBKAlbumRequestResponseList: Decodable {
 }
 
 // MARK: - Album
-struct SBKAlbum: Decodable {
+public struct SBKAlbum: Decodable {
     var artist, name: String
     var mbid: String?
     var tags: SBKTagRequestResponseList?
     var playcount: String?
-    var image: [SBKImageResponse]?
+    internal var image: [SBKImageResponse]?
     var tracks: SBKAlbumTracksRequestResponseList?
     var url: String?
     var listeners: String?
     var wiki: SBKWikiResponse?
+    
+    var images: SBKImage? {
+        guard let image else { return nil }
+        return SBKImage(response: image)
+    }
 }
 
 // MARK: - Image

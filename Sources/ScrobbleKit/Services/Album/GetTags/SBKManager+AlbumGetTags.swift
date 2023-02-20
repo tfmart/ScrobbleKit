@@ -24,7 +24,7 @@ extension SBKManager {
         return response.tags.tag
     }
     
-    func getTags(forAlbum searchMethod: SBKAlbumSearchMethod,
+    public func getTags(forAlbum searchMethod: SBKAlbumSearchMethod,
                  autoCorrect: Bool = true,
                  username: String? = nil,
                  _ completion: (([SBKTag]?, Error?) -> Void)?

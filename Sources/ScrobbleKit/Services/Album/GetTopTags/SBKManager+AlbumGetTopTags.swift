@@ -22,7 +22,7 @@ extension SBKManager {
         return response.toptags.tag
     }
     
-    func getTopTags(forAlbum searchMethod: SBKAlbumSearchMethod,
+    public func getTopTags(forAlbum searchMethod: SBKAlbumSearchMethod,
                  autoCorrect: Bool = true,
                  _ completion: (([SBKTag]?, Error?) -> Void)?
     ) {

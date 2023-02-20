@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension SBKManager {
+public extension SBKManager {
     func getInfo(forAlbum searchMethod: SBKAlbumSearchMethod,
                  autoCorrect: Bool = true,
                  username: String? = nil,

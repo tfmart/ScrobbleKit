@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SBKAlbumResponse {
+public struct SBKAlbumResponse {
     var artist: String
     var name: String
     var tracks: [SBKAlbumTrack]

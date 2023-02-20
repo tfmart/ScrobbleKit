@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension SBKManager {
+public extension SBKManager {
     func getTopArtistsChart(
         page: Int = 1,
         limit: Int = 50
