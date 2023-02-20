@@ -9,7 +9,7 @@ import Foundation
 
 extension SBKManager {
     func getTopArtistsChart(
-        page: Int = 0,
+        page: Int = 1,
         limit: Int = 50
     ) async throws -> [SBKArtist] {
         let service = ChartGetTopArtistsService(
@@ -23,7 +23,7 @@ extension SBKManager {
     }
     
     func getTopArtistsChart(
-        page: Int = 0,
+        page: Int = 1,
         limit: Int = 50,
         _ completion: (([SBKArtist]?, Error?) -> Void)?
     ) {
