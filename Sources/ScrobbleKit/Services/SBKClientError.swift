@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SBKClientError: Error {
+public enum SBKClientError: Error {
     case missingSessionKey
     case badURL
     case failedToDecodeResponse
