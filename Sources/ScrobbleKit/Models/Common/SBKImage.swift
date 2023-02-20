@@ -7,18 +7,36 @@
 
 import Foundation
 
+/**
+ Represents an image that may be returned from a Last.fm API call.
+ */
 public struct SBKImage {
+    /// The URL for the small-sized image.
     public var small: String?
+    
+    /// The URL for the medium-sized image.
     public var medium: String?
+    
+    /// The URL for the large-sized image.
     public var large: String?
+    
+    /// The URL for the extra-large-sized image.
     public var extraLarge: String?
+    
+    /// The URL for the mega-sized image.
     public var mega: String?
     
+    /**
+     Initializes an instance of `SBKImage` with the given `SBKImageResponse` array.
+     
+     - parameter response: The `SBKImageResponse` array to initialize from.
+     */
     internal init(response: [SBKImageResponse]) {
-        self.small = response.first(where: {$0.size == "small"})?.text
-        self.medium = response.first(where: {$0.size == "medium"})?.text
-        self.large = response.first(where: {$0.size == "large"})?.text
-        self.extraLarge = response.first(where: {$0.size == "extralarge"})?.text
-        self.mega = response.first(where: {$0.size == "mega"})?.text
+        self.small = response.first(where: { $0.size == "small" })?.text
+        self.medium = response.first(where: { $0.size == "medium" })?.text
+        self.large = response.first(where: { $0.size == "large" })?.text
+        self.extraLarge = response.first(where: { $0.size == "extralarge" })?.text
+        self.mega = response.first(where: { $0.size == "mega" })?.text
     }
 }
+
