@@ -26,12 +26,8 @@ public struct SBKImage {
     /// The URL for the mega-sized image.
     public var mega: String?
     
-    /**
-     Initializes an instance of `SBKImage` with the given `SBKImageResponse` array.
-     
-     - parameter response: The `SBKImageResponse` array to initialize from.
-     */
-    internal init(response: [SBKImageResponse]) {
+    internal init?(response: [SBKImageResponse]?) {
+        guard let response else { return nil }
         self.small = response.first(where: { $0.size == "small" })?.text
         self.medium = response.first(where: { $0.size == "medium" })?.text
         self.large = response.first(where: { $0.size == "large" })?.text

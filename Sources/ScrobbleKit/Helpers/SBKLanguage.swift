@@ -8,7 +8,7 @@
 import Foundation
 
 /**
- An enumeration of language codes used by the Songkick API.
+ An enumeration of language codes expressed as an ISO 639 alpha-2 code, used by the Last.fm API.
 
  The following language codes are currently supported:
 

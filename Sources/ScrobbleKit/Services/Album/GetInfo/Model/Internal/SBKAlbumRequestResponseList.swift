@@ -21,7 +21,7 @@ public struct SBKAlbum: Decodable {
     var tracks: SBKAlbumTracksRequestResponseList?
     var url: String?
     var listeners: String?
-    var wiki: SBKWikiResponse?
+    var wiki: SBKWiki?
     
     var images: SBKImage? {
         guard let image else { return nil }
@@ -86,9 +86,4 @@ struct SBKAlbumTrackStreamable: Codable {
         case fulltrack
         case text = "#text"
     }
-}
-
-// MARK: - Wiki
-struct SBKWikiResponse: Decodable {
-    var published, summary, content: String
 }

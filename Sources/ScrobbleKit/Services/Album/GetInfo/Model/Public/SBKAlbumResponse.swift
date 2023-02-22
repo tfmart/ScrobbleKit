@@ -30,11 +30,7 @@ public struct SBKAlbumResponse {
         }
         self.tags = response.album.tags?.tag
         self.musicBrainzID = response.album.mbid
-        if let wiki = response.album.wiki {
-            self.wiki = SBKWiki(response: wiki)
-        } else {
-            self.wiki = nil
-        }
+        self.wiki = response.album.wiki
         self.playcount = response.album.playcount
         self.lastFmURL = response.album.url
     }
