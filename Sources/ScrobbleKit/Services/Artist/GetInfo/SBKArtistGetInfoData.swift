@@ -20,13 +20,19 @@ public struct SBKArtistGetInfoData {
     public var similarArtists: [SBKArtistGetInfoSimilarArtist]?
     
     internal init(response: SBKArtistGetInfoRequestResponse) {
-        self.name = response.artist.artist
+        self.name = response.artist.name
         self.url = response.artist.url
         self.musicBrainzID = response.artist.mbid
         self.image = .init(response: response.artist.image)
-        self.isOnTour = Bool(integer: response.artist.ontour)
         self.wiki = response.artist.bio
         self.tags = response.artist.tags?.tag
+        self.similarArtists = response.artist.similar?.artist
+        
+        if let ontour = response.artist.ontour, let onTourInt = Int(ontour) {
+            self.isOnTour = Bool(integer: onTourInt)
+        } else {
+            self.isOnTour = nil
+        }
         
         if let stats = response.artist.stats {
             self.listeners = Int(stats.listeners)

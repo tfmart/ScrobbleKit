@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SBKArtistGetInfoRequestResponse.swift
 //  
 //
 //  Created by Tomas Martins on 22/02/23.
@@ -12,12 +12,12 @@ struct SBKArtistGetInfoRequestResponse: Decodable {
 }
 
 struct SBKArtistGetInfoProperties: Decodable {
-    var artist: String
+    var name: String
     var mbid: String?
     var image: [SBKImageResponse]?
     var url: String
-    var streamable: Int?
-    var ontour: Int?
+    var streamable: String?
+    var ontour: String?
     var stats: SBKArtistGetInfoPropertiesStats?
     var similar: SBKArtistGetInfoSimilarResponse?
     var tags: SBKTagRequestResponseList?
