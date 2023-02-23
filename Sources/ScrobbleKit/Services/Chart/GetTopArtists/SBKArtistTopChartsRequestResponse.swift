@@ -21,7 +21,7 @@ struct SBKArtistListResponse: Decodable {
 
 public struct SBKArtist: Decodable {
     let name: String
-    let playcount: String
+    let playcount: String?
     let listeners: String
     let musicBrainzID: String?
     let url: String?

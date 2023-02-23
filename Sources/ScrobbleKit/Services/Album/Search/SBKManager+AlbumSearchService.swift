@@ -29,7 +29,7 @@ public extension SBKManager {
     ) async throws -> [SBKAlbum] {
         let service = AlbumSearchService(album: album, limit: limit, page: page, apiKey: apiKey, secretKey: secret)
         let response = try await service.start()
-        guard let albumList = response.results.albumMatches?.album else {
+        guard let albumList = response.results.matches.album else {
             throw SBKClientError.failedToDecodeResponse
         }
         return albumList
@@ -63,7 +63,7 @@ public extension SBKManager {
                 completion?(nil, SBKClientError.failedToDecodeResponse)
                 return
             }
-            completion?(response?.results.albumMatches?.album, nil)
+            completion?(response?.results.matches.album, nil)
         }
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct AlbumSearchService: SBKService {
-    typealias ResponseType = SBKAlbumSearchResponse
+    typealias ResponseType = SBKSearchResultsResponse<SBKAlbumSearchResultListResponse>
     
     var sbkMethod: SBKMethod = .searchForAlbum
     var queries: [URLQueryItem]
