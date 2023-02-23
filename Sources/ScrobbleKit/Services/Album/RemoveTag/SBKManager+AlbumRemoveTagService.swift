@@ -21,9 +21,8 @@ public extension SBKManager {
     */
     func removeTag(fromAlbum album: String, artist: String, tag: String) async throws -> Bool {
         guard let sessionKey else { throw SBKClientError.missingSessionKey }
-        let service = AlbumRemoveTagService(
-            album: album,
-            artist: artist,
+        let service = RemoveTagService(
+            to: .album(album, artist: artist),
             tag: tag,
             apiKey: apiKey,
             secretKey: secret,
@@ -48,9 +47,8 @@ public extension SBKManager {
             completion?(false, SBKClientError.missingSessionKey)
             return
         }
-        let service = AlbumRemoveTagService(
-            album: album,
-            artist: artist,
+        let service = RemoveTagService(
+            to: .album(album, artist: artist),
             tag: tag,
             apiKey: apiKey,
             secretKey: secret,
