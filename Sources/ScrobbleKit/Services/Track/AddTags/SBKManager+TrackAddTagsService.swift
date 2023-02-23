@@ -1,17 +1,17 @@
 //
-//  File.swift
+//  SBKManager+TrackAddTagsService.swift
 //  
 //
-//  Created by Tomas Martins on 20/02/23.
+//  Created by Tomas Martins on 22/02/23.
 //
 
 import Foundation
 
 public extension SBKManager {
     @discardableResult
-    func addTags(toArtist artist: String, tags: [String]) async throws -> Bool {
+    func addTags(toTrack track: String, artist: String, tags: [String]) async throws -> Bool {
         guard let sessionKey else { throw SBKClientError.missingSessionKey }
-        let service = AddTagsService(to: .artist(artist),
+        let service = AddTagsService(to: .track(track, artist: artist),
                                      tags: tags,
                                      apiKey: apiKey,
                                      secretKey: secret,
@@ -20,12 +20,12 @@ public extension SBKManager {
         return true
     }
     
-    func addTags(toArtist artist: String, tags: [String], _ completion: ((Bool?, Error?) -> Void)?) {
+    func addTags(toTrack track: String, artist: String, tags: [String], _ completion: ((Bool?, Error?) -> Void)?) {
         guard let sessionKey else {
             completion?(nil, SBKClientError.missingSessionKey)
             return
         }
-        let service = AddTagsService(to: .artist(artist),
+        let service = AddTagsService(to: .track(track, artist: artist),
                                      tags: tags,
                                      apiKey: apiKey,
                                      secretKey: secret,
@@ -43,3 +43,4 @@ public extension SBKManager {
         }
     }
 }
+

@@ -76,6 +76,10 @@ internal extension SBKService {
     }
     
     func parse(_ response: Data) async throws -> ResponseType {
+        if let JSONString = String(data: response, encoding: String.Encoding.utf8) {
+            print(url?.absoluteString ?? "NO URL")
+            print(JSONString)
+        }
         do {
             let resultModel = try JSONDecoder().decode(ResponseType.self, from: response)
             return resultModel

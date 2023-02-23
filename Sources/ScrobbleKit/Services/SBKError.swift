@@ -93,7 +93,7 @@ public enum SBKError: Int, Error, Codable {
         case .subscriberOnly:
             return NSLocalizedString("This method is only available to paid Last.fm subscribers.", comment: "")
         case .invalidSignature:
-            return NSLocalizedString("The digital signature is invalid.", comment: "")
+            return NSLocalizedString("The signature is invalid.", comment: "")
         case .invalidToken:
             return NSLocalizedString("The token supplied is either invalid or has expired.", comment: "")
         case .notAvailabeForStreaming:
