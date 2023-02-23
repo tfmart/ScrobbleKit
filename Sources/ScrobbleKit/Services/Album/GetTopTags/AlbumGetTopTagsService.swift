@@ -28,12 +28,12 @@ struct AlbumGetTopTagsService: SBKService {
             self.queries = [
                 .init(name: "artist", value: artist),
                 .init(name: "album", value: album),
-                .init(name: "autocorrect", bool: autoCorrect)
+                .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect)
             ]
         case .musicBrainzID(let id):
             self.queries = [
                 .init(name: "mbid", value: id),
-                .init(name: "autocorrect", bool: autoCorrect)
+                .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect)
             ]
         }
     }

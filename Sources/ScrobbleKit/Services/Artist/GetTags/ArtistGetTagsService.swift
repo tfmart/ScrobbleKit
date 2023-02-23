@@ -34,8 +34,8 @@ struct ArtistGetTagsService: SBKService {
             queries.append(URLQueryItem(name: "user", value: user))
         }
         
-        if let autocorrect = autocorrect {
-            queries.append(URLQueryItem(name: "autocorrect", bool: autocorrect))
+        if let autoCorrect = autocorrect {
+            queries.append(.init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect))
         }
         
         self.queries = queries

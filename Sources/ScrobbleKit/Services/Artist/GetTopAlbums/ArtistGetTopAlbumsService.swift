@@ -32,14 +32,14 @@ struct ArtistGetTopAlbumsService: SBKService {
                 .init(name: "artist", value: artist),
                 .init(name: "limit", numericValue: limit),
                 .init(name: "page", numericValue: page),
-                .init(name: "autocorrect", bool: autoCorrect)
+                .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect),
             ]
         case .musicBrainzID(let mbid):
             queries = [
                 .init(name: "mbid", value: mbid),
                 .init(name: "limit", numericValue: limit),
                 .init(name: "page", numericValue: page),
-                .init(name: "autocorrect", bool: autoCorrect)
+                .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect),
             ]
         }
     }
