@@ -13,9 +13,15 @@ import Foundation
 public struct SBKTag: Decodable {
     
     /// The URL for the tag on the Last.fm website.
-    public let url: String
+    public let url: String?
     
     /// The name of the tag.
     public let name: String
+    
+    public let reach: Int?
+    
+    public let count: Int?
+    
+    public let wiki: SBKWiki?
 }
 
