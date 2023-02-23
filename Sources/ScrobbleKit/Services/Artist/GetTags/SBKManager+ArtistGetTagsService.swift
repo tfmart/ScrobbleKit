@@ -51,7 +51,7 @@ public extension SBKManager {
     func getArtistTags(_ searchMethod: SBKArtistSearchMethod,
                        user: String? = nil,
                        autocorrect: Bool,
-                       completion: (([SBKTag]?, Error?) -> Void)?) {
+                       _ completion: (([SBKTag]?, Error?) -> Void)?) {
         let service = ArtistGetTagsService(searchMethod: searchMethod, user: user, autocorrect: autocorrect, apiKey: apiKey, secretKey: secret)
         service.start { response, error in
             guard error == nil else {

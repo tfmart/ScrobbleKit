@@ -28,7 +28,7 @@ public struct SBKAlbumResponse {
         } else {
             self.albumArt = nil
         }
-        self.tags = response.album.tags?.tag
+        self.tags = response.album.tags
         self.musicBrainzID = response.album.mbid
         self.wiki = response.album.wiki
         self.playcount = response.album.playcount

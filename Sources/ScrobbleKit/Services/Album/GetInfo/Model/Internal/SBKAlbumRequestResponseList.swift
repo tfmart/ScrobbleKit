@@ -15,7 +15,7 @@ struct SBKAlbumRequestResponseList: Decodable {
 public struct SBKAlbum: Decodable {
     var artist, name: String
     var mbid: String?
-    var tags: SBKTagRequestResponseList?
+    internal var tagList: SBKTagRequestResponseList?
     var playcount: String?
     internal var image: [SBKImageResponse]?
     var tracks: SBKAlbumTracksRequestResponseList?
@@ -23,9 +23,39 @@ public struct SBKAlbum: Decodable {
     var listeners: String?
     var wiki: SBKWiki?
     
+    enum CodingKeys: String, CodingKey {
+        case artist
+        case name
+        case mbid
+        case tagList = "tags"
+        case playcount
+        case image
+        case tracks
+        case url
+        case listeners
+        case wiki
+    }
+    
     var images: SBKImage? {
         guard let image else { return nil }
         return SBKImage(response: image)
+    }
+    
+    var tags: [SBKTag] {
+        guard let tagList else { return [] }
+        return tagList.tag
+    }
+    
+    internal init(topAlbumArtist: SBKArtistTopAlbum) {
+        self.artist = topAlbumArtist.artist.name
+        self.name = topAlbumArtist.name
+        self.url = topAlbumArtist.url
+        self.mbid = topAlbumArtist.mbid
+        self.playcount = "\(topAlbumArtist.playcount)"
+        self.image = topAlbumArtist.image
+        
+        self.tagList = nil
+        self.wiki = nil
     }
 }
 
