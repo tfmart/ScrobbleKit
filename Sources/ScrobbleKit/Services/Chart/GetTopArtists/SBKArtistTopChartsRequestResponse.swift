@@ -22,7 +22,7 @@ struct SBKArtistListResponse: Decodable {
 public struct SBKArtist: Decodable {
     let name: String
     let playcount: String?
-    let listeners: String
+    let listeners: String?
     let musicBrainzID: String?
     let url: String?
     let streamable: String?
@@ -31,5 +31,15 @@ public struct SBKArtist: Decodable {
     var images: SBKImage? {
         guard let image else { return nil }
         return SBKImage(response: image)
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case playcount
+        case listeners
+        case musicBrainzID = "mbid"
+        case url
+        case streamable
+        case image
     }
 }
