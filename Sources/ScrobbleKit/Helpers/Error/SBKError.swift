@@ -68,7 +68,7 @@ public enum SBKError: Int, Error, LocalizedError, Codable {
     /// Your IP has made too many requests in a short period.
     case rateLimitExceded = 29
     
-    var localizedDescription: String {
+    public var errorDescription: String? {
         switch self {
         case .invalidService:
             return NSLocalizedString("The service specified does not exist.", comment: "")
