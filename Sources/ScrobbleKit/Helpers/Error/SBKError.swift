@@ -8,7 +8,7 @@
 import Foundation
 
 /// Error codes that may be returned by the Last.fm API.
-public enum SBKError: Int, Error, Codable {
+public enum SBKError: Int, Error, LocalizedError, Codable {
     // Last.fm service errors
     
     /// The service specified does not exist.
