@@ -16,6 +16,8 @@ protocol SBKService {
 
     var apiKey: String { get set }
     var secretKey: String { get set }
+    
+    var completedQueries: [URLQueryItem] { get }
 
     func start(_ completion: CompletionType)
     func start() async throws -> ResponseType
