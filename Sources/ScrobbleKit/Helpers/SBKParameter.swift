@@ -14,6 +14,8 @@ enum SBKParameter: String {
     case apiSig = "api_sig"
     case sessionKey = "sk"
     case autoCorrect = "autocorrect"
+    case username = "user"
+    case musicBrainzID = "mbid"
     
     static let baseURL = "https://ws.audioscrobbler.com/2.0/"
 }

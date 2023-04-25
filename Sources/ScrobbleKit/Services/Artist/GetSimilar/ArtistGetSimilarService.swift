@@ -34,7 +34,7 @@ struct ArtistGetSimilarService: SBKService {
             ]
         case .musicBrainzID(let mbid):
             queries = [
-                .init(name: "mbid", value: mbid),
+                .init(name: SBKParameter.musicBrainzID.rawValue, value: mbid),
                 .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect),
                 .init(name: "limit", numericValue: limit)
             ]

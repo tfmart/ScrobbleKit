@@ -36,7 +36,7 @@ struct ArtistGetTopAlbumsService: SBKService {
             ]
         case .musicBrainzID(let mbid):
             queries = [
-                .init(name: "mbid", value: mbid),
+                .init(name: SBKParameter.musicBrainzID.rawValue, value: mbid),
                 .init(name: "limit", numericValue: limit),
                 .init(name: "page", numericValue: page),
                 .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect),

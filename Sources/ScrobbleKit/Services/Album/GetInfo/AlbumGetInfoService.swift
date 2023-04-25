@@ -38,7 +38,7 @@ struct AlbumGetInfoService: SBKService {
             ]
         case .musicBrainzID(let id):
             self.queries = [
-                .init(name: "mbid", value: id),
+                .init(name: SBKParameter.musicBrainzID.rawValue, value: id),
                 .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect),
                 .init(name: "user", value: username),
                 .init(name: "lang", value: languageCode.rawValue)

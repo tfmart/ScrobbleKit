@@ -21,10 +21,6 @@ public extension SBKManager {
         for username: String? = nil,
         _ completion: ((SBKUser?, Error?) -> Void)?
     ) {
-        guard let sessionKey else {
-            completion?(nil, SBKClientError.missingSessionKey)
-            return
-        }
         let service = UserGetInfoService(username: username, apiKey: apiKey, secretKey: secret, sessionKey: sessionKey)
         service.start { response, error in
             guard error == nil else {
@@ -53,7 +49,6 @@ public extension SBKManager {
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/user.getInfo).
      */
     func getUserInfo(for username: String? = nil) async throws -> SBKUser {
-        guard let sessionKey else { throw SBKClientError.missingSessionKey }
         let service = UserGetInfoService(username: username, apiKey: apiKey, secretKey: secret, sessionKey: sessionKey)
         let response = try await service.start()
         let user = SBKUser(from: response.user)

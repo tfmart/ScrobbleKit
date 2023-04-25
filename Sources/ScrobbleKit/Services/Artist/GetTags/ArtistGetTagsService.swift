@@ -27,7 +27,7 @@ struct ArtistGetTagsService: SBKService {
         case .artistName(let artist):
             queries.append(URLQueryItem(name: "artist", value: artist))
         case .musicBrainzID(let mbid):
-            queries.append(URLQueryItem(name: "mbid", value: mbid))
+            queries.append(URLQueryItem(name: SBKParameter.musicBrainzID.rawValue, value: mbid))
         }
         
         if let user = user {
