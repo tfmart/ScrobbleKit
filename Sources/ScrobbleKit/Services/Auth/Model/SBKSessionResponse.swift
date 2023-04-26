@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct SBKSessionResponse: Decodable {
-    let info: SBKSessionResponseInfo
+public struct SBKSessionResponse: Decodable {
+    public let info: SBKSessionResponseInfo
     
     enum CodingKeys: String, CodingKey {
         case info = "session"
     }
 }
 
-class SBKSessionResponseInfo: Decodable {
-    let name, key: String
-    let subscriber: Int
+public class SBKSessionResponseInfo: Decodable {
+    public let name, key: String
+    public let subscriber: Int
 }

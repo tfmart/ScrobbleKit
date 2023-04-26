@@ -16,7 +16,7 @@ public class SBKManager {
     }
     
     @discardableResult
-    func startSession(username: String, password: String) async throws -> SBKSessionResponse {
+    public func startSession(username: String, password: String) async throws -> SBKSessionResponse {
         let service = AuthSessionService(username: username,
                                          password: password,
                                          apiKey: apiKey,
