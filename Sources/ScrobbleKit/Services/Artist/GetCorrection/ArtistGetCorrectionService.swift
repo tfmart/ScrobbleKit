@@ -8,7 +8,7 @@
 import Foundation
 
 struct ArtistGetCorrectionService: SBKService {
-    typealias ResponseType = String
+    typealias ResponseType = SBKCorrectedResponse<SBKArtist>
     
     var apiKey: String
     var secretKey: String
