@@ -19,7 +19,7 @@ public struct SBKTrack: Decodable {
     public var name: String
     public var mbid: String?
     public var playcount: String?
-    public var listeners: String
+    public var listeners: String?
     public var duration: String?
     internal var imageList: [SBKImageResponse]?
     internal var artistData: SBKAlbumTrackArtist

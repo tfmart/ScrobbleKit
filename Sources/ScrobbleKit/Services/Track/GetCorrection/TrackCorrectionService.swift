@@ -8,7 +8,7 @@
 import Foundation
 
 struct TrackCorrectionService: SBKService {
-    typealias ResponseType = SBKCorrectedResult<SBKTrack>
+    typealias ResponseType = SBKCorrectedResponse<SBKTrack>
 
     var sbkMethod: SBKMethod = .getCorrectedTrackInfo
     var queries: [URLQueryItem]

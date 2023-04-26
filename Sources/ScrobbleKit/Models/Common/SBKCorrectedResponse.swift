@@ -24,6 +24,7 @@ struct SBKCorrectedResultDetail<T: Decodable>: Decodable {
     
     private enum ResultCodingKeys: String, CodingKey {
         case artist = "artist"
+        case track = "track"
     }
     
     init(from decoder: Decoder) throws {
@@ -32,6 +33,8 @@ struct SBKCorrectedResultDetail<T: Decodable>: Decodable {
         switch "\(T.self)" {
         case "SBKArtist":
             self.result = try container.decode(T.self, forKey: SBKCorrectedResultDetail<T>.ResultCodingKeys.artist)
+        case "SBKTrack":
+            self.result = try container.decode(T.self, forKey: SBKCorrectedResultDetail<T>.ResultCodingKeys.track)
         default:
             fatalError("This response type is not supported")
         }
