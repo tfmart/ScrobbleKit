@@ -8,20 +8,20 @@
 import Foundation
 
 public struct SBKUser {
-    var username: String
-    var realName: String?
-    var image: SBKImage?
-    var country: String?
-    var age: String?
-    var isPro: Bool
-    var playcount: Int
-    var artistCount: String
-    var playlistsCount: Int?
-    var bootstrap: String?
-    var gender: String?
-    var url: String
-    var type: String?
-    var memberSince: Date
+    public var username: String
+    public var realName: String?
+    public var image: SBKImage?
+    public var country: String?
+    public var age: String?
+    public var isPro: Bool
+    public var playcount: Int
+    public var artistCount: String
+    public var playlistsCount: Int?
+    public var bootstrap: String?
+    public var gender: String?
+    public var url: String
+    public var type: String?
+    public var memberSince: Date
     
     init(from response: SBKUserInfoDataResponse) {
         self.username = response.name
