@@ -9,12 +9,12 @@ import Foundation
 
 extension SBKManager {
 
-    public func scrobble() async throws -> SBKScrobbleResponse {
+    public func scrobble(track: String, artist: String, album: String?) async throws -> SBKScrobbleResponse {
         guard let sessionKey else { throw SBKClientError.missingSessionKey }
         let service = ScrobbleService(
-            artist: "",
-            track: "",
-            album: "",
+            artist: artist,
+            track: track,
+            album: album,
             date: Date(),
             sessionKey: sessionKey,
             apiKey: self.apiKey,
@@ -28,15 +28,15 @@ extension SBKManager {
         }
     }
     
-    public func scrobble(_ completion: ((SBKScrobbleResponse?, Error?) -> Void)? = nil) {
+    public func scrobble(track: String, artist: String, album: String?, _ completion: ((SBKScrobbleResponse?, Error?) -> Void)? = nil) {
         guard let sessionKey else {
             completion?(nil, SBKClientError.missingSessionKey)
             return
         }
         let service = ScrobbleService(
-            artist: "",
-            track: "",
-            album: "",
+            artist: artist,
+            track: track,
+            album: album,
             date: Date(),
             sessionKey: sessionKey,
             apiKey: self.apiKey,
