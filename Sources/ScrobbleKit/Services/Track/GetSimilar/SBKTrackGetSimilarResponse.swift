@@ -49,6 +49,7 @@ extension SBKTrack {
                   listeners: nil,
                   duration: duration,
                   artist: similarTrack.artist,
+                  url: URL(string: similarTrack.url),
                   imageList: similarTrack.image)
     }
 }

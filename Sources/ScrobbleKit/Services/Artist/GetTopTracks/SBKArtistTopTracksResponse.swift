@@ -22,6 +22,7 @@ public struct SBKTrack: Decodable {
     public var listeners: String?
     public var duration: String?
     public var artist: SBKArtist
+    public var url: URL?
     internal var imageList: [SBKImageResponse]?
     
     enum CodingKeys: String, CodingKey {
