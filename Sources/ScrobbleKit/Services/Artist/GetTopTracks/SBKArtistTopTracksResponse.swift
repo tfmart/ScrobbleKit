@@ -21,23 +21,19 @@ public struct SBKTrack: Decodable {
     public var playcount: String?
     public var listeners: String?
     public var duration: String?
+    public var artist: SBKArtist
     internal var imageList: [SBKImageResponse]?
-    internal var artistData: SBKAlbumTrackArtist
     
     enum CodingKeys: String, CodingKey {
         case name
         case mbid
         case playcount
         case listeners
-        case artistData = "artist"
+        case artist
         case imageList = "image"
     }
     
     public var images: SBKImage? {
         return SBKImage(response: imageList)
-    }
-    
-    public var artist: String {
-        return artistData.name
     }
 }
