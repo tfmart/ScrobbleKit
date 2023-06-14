@@ -42,8 +42,9 @@ public struct SBKAlbum: Decodable {
     }
     
     var tags: [SBKTag] {
-        guard let tagList else { return [] }
-        return tagList.tag
+        guard let tagList,
+              let tags = tagList.tag else { return [] }
+        return tags
     }
     
     internal init(topAlbumArtist: SBKArtistTopAlbum) {
@@ -71,8 +72,12 @@ struct SBKImageResponse: Codable {
 }
 
 // MARK: - Tags
+struct SBKTagRequestResponse: Decodable {
+    var tags: SBKTagRequestResponseList
+}
+
 struct SBKTagRequestResponseList: Decodable {
-    var tag: [SBKTag]
+    var tag: [SBKTag]?
 }
 
 // MARK: - Tracks

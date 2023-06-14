@@ -23,7 +23,10 @@ public extension SBKManager {
     func getTopTags(page: Int = 1, limit: Int = 50) async throws -> [SBKTag] {
         let service = ChartGetTopTagsService(page: page, limit: limit, apiKey: apiKey, secretKey: secret)
         let response = try await service.start()
-        return response.toptags.tag
+        guard let tags = response.toptags.tag else {
+            return []
+        }
+        return tags
     }
     
     /**

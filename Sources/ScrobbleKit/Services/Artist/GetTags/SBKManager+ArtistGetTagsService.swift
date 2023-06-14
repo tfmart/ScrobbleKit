@@ -32,7 +32,10 @@ public extension SBKManager {
             apiKey: apiKey,
             secretKey: secret)
         let response = try await service.start()
-        return response.tags.tag
+        guard let tags = response.tags.tag else {
+            return []
+        }
+        return tags
     }
     
     /**
