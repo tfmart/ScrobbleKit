@@ -10,7 +10,7 @@ import Foundation
 struct SBKSearchQuery: Codable {
     let text: String
     let role: String
-    let searchTerms: String
+    let searchTerms: String?
     let startPage: String
 
     private enum CodingKeys: String, CodingKey {

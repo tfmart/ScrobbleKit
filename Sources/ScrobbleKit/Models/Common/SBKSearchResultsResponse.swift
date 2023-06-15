@@ -46,6 +46,8 @@ struct SBKSearchResultsDetails<T: Decodable>: Decodable {
             self.matches = try matchesContainer.decode(T.self, forKey: SBKSearchResultsDetails<T>.MatchesCodingKeys.artist)
         case "SBKAlbumSearchResultListResponse":
             self.matches = try matchesContainer.decode(T.self, forKey: SBKSearchResultsDetails<T>.MatchesCodingKeys.album)
+        case "SBKTrackSearchResultListResponse":
+            self.matches = try matchesContainer.decode(T.self, forKey: SBKSearchResultsDetails<T>.MatchesCodingKeys.track)
         default:
             fatalError("This response type is not supported")
         }
