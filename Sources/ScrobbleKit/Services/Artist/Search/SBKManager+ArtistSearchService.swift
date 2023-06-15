@@ -22,8 +22,8 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/artist.search).
      */
-    func searchArtists(
-        _ query: String,
+    func search(
+        artist query: String,
         limit: Int = 50,
         page: Int = 1
     ) async throws -> [SBKArtist] {
@@ -49,8 +49,8 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/artist.search).
      */
-    func searchArtists(
-        _ query: String,
+    func search(
+        artist query: String,
         limit: Int = 50,
         page: Int = 1,
         _ completion: (([SBKArtist]?, Error?) -> Void)?
