@@ -15,7 +15,7 @@ public struct SBKUser {
     public var age: String?
     public var isPro: Bool
     public var playcount: Int
-    public var artistCount: String
+    public var artistCount: String?
     public var playlistsCount: Int?
     public var bootstrap: String?
     public var gender: String?
@@ -57,7 +57,7 @@ struct SBKUserInfoDataResponse: Decodable {
     let age: String?
     let gender: String?
     let playcount: String
-    let artistCount: String
+    let artistCount: String?
     let playlists: String?
     let registered: SBKRegisteredInfo
     let bootstrap: String?
@@ -93,7 +93,18 @@ struct SBKUserInfoDataResponse: Decodable {
         
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
-            unixTime = try container.decode(Date.self, forKey: .unixTime)
+            if let date = try? container.decode(Date.self, forKey: .unixTime) {
+                unixTime = date
+            } else {
+                let dateString = try container.decode(String.self, forKey: .unixTime)
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+                if let date = dateFormatter.date(from: dateString) {
+                    unixTime = date
+                } else {
+                    throw NSError(domain: "DateConversionError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to convert the string to a date."])
+                }
+            }
             timeString = try container.decode(String.self, forKey: .timeString)
         }
     }
