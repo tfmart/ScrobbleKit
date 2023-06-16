@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SBKTrackGetSimilarResponse.swift
 //  
 //
 //  Created by Tomas Martins on 14/06/23.

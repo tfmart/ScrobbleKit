@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SBKGeoTopArtistsResponse.swift
 //  
 //
 //  Created by Tomas Martins on 23/02/23.

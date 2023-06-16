@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SBKArtistSearchMethod.swift
 //  
 //
 //  Created by Tomas Martins on 22/02/23.

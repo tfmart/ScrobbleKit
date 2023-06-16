@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Bool+Int.swift
 //  
 //
 //  Created by Tomas Martins on 22/02/23.
