@@ -11,4 +11,5 @@ public enum SBKClientError: Error {
     case missingSessionKey
     case badURL
     case failedToDecodeResponse
+    case overLimitPerPage
 }
