@@ -72,3 +72,21 @@ struct SBKUserGetTopTagsResult: Decodable {
 struct SBKUserGetTopTagsAttribute: Decodable {
     let user: String
 }
+
+struct SBKUserGetTopTracksResponse: Decodable {
+    let topTracks: SBKUserGetTopTracksResult
+    
+    private enum CodingKeys: String, CodingKey {
+        case topTracks = "toptracks"
+    }
+}
+
+struct SBKUserGetTopTracksResult: Decodable {
+    let attributes: SBKUserGetTopAlbumsAttributes
+    let tracks: [SBKTrack]
+    
+    private enum CodingKeys: String, CodingKey {
+        case tracks = "track"
+        case attributes = "@attr"
+    }
+}
