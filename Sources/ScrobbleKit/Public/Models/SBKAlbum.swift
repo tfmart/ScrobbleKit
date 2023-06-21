@@ -8,7 +8,8 @@
 import Foundation
 
 public struct SBKAlbum: Decodable {
-    var artist, name: String
+    var name: String
+    var artist: SBKArtist
     var mbid: String?
     internal var tagList: SBKTagRequestResponseList?
     var playcount: String?
@@ -43,7 +44,7 @@ public struct SBKAlbum: Decodable {
     }
     
     internal init(topAlbumArtist: SBKArtistTopAlbum) {
-        self.artist = topAlbumArtist.artist.name
+        self.artist = .init(name: topAlbumArtist.artist.name, musicBrainzID: topAlbumArtist.artist.mbid, url: topAlbumArtist.artist.url)
         self.name = topAlbumArtist.name
         self.url = topAlbumArtist.url
         self.mbid = topAlbumArtist.mbid
