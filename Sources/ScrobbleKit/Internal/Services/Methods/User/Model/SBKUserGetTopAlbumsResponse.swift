@@ -32,3 +32,21 @@ struct SBKUserGetTopAlbumsAttributes: SBKSearchAttribute {
     var totalPages: String
     var total: String
 }
+
+struct SBKUserGetTopArtistsResponse: Decodable {
+    let topArtists: SBKUserGetTopArtistsResult
+    
+    private enum CodingKeys: String, CodingKey {
+        case topArtists = "topartists"
+    }
+}
+
+struct SBKUserGetTopArtistsResult: Decodable {
+    let attributes: SBKUserGetTopAlbumsAttributes
+    let artists: [SBKArtist]
+    
+    private enum CodingKeys: String, CodingKey {
+        case artists = "artist"
+        case attributes = "@attr"
+    }
+}
