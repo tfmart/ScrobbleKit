@@ -50,3 +50,25 @@ struct SBKUserGetTopArtistsResult: Decodable {
         case attributes = "@attr"
     }
 }
+
+struct SBKUserGetTopTagsResponse: Decodable {
+    let topTags: SBKUserGetTopTagsResult
+    
+    private enum CodingKeys: String, CodingKey {
+        case topTags = "toptags"
+    }
+}
+
+struct SBKUserGetTopTagsResult: Decodable {
+    let attributes: SBKUserGetTopTagsAttribute
+    let tags: [SBKTag]
+    
+    private enum CodingKeys: String, CodingKey {
+        case tags = "tag"
+        case attributes = "@attr"
+    }
+}
+
+struct SBKUserGetTopTagsAttribute: Decodable {
+    let user: String
+}

@@ -23,5 +23,24 @@ public struct SBKTag: Decodable {
     public let count: Int?
     
     public let wiki: SBKWiki?
+    
+    enum CodingKeys: CodingKey {
+        case url
+        case name
+        case reach
+        case count
+        case wiki
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container: KeyedDecodingContainer<SBKTag.CodingKeys> = try decoder.container(keyedBy: SBKTag.CodingKeys.self)
+        
+        self.url = try container.decodeIfPresent(String.self, forKey: SBKTag.CodingKeys.url)
+        self.name = try container.decode(String.self, forKey: SBKTag.CodingKeys.name)
+        self.reach = try container.decodeIfPresent(Int.self, forKey: SBKTag.CodingKeys.reach)
+        self.count = try? container.decodeIfPresent(Int.self, forKey: SBKTag.CodingKeys.count)
+        self.wiki = try container.decodeIfPresent(SBKWiki.self, forKey: SBKTag.CodingKeys.wiki)
+        
+    }
 }
 
