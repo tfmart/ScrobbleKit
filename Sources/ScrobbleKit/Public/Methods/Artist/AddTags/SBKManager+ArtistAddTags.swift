@@ -8,6 +8,13 @@
 import Foundation
 
 public extension SBKManager {
+    /// Adds tags to an artist asynchronously.
+    ///
+    /// - Parameters:
+    ///   - artist: The name of the artist to add tags to.
+    ///   - tags: An array of tags to be added.
+    /// - Returns: A boolean value indicating whether the operation was successful.
+    /// - Throws: ``SBKClientError`` if the operation fails, or an error returned by the Last.fm
     @discardableResult
     func addTags(toArtist artist: String, tags: [String]) async throws -> Bool {
         guard let sessionKey else { throw SBKClientError.missingSessionKey }
@@ -20,6 +27,12 @@ public extension SBKManager {
         return true
     }
     
+    /// Adds tags to an artist.
+    ///
+    /// - Parameters:
+    ///   - artist: The name of the artist to add tags to.
+    ///   - tags: An array of tags to be added.
+    ///   - completion: An optional completion closure that will be called when the operation is complete. It takes two parameters: a boolean value indicating whether the operation was successful, and an error of type `Error` if an error occurred during the operation.
     func addTags(toArtist artist: String, tags: [String], _ completion: ((Bool?, Error?) -> Void)?) {
         guard let sessionKey else {
             completion?(nil, SBKClientError.missingSessionKey)

@@ -9,17 +9,17 @@ import Foundation
 
 public extension SBKManager {
     /**
-     Get the top tracks of a user on Last.fm.
+     Get the top tracks of a user on Last.fm asynchronously.
      
      - Parameters:
-       - user: The username of the user.
-       - period: The time period over which to retrieve top tracks for. Possible values: overall, 7day, 1month, 3month, 6month, 12month. Default value is nil.
-       - limit: The number of results to fetch per page. Default value is 50.
-       - page: The page number to fetch. Default value is 1.
+     - user: The username of the user.
+     - period: The time period over which to retrieve top tracks for. Possible values: overall, 7day, 1month, 3month, 6month, 12month. Default value is `overall`.
+     - limit: The number of results to fetch per page. Default value is `50`.
+     - page: The page number to fetch. Default value is `1`.
      
-     - Returns: An asynchronous task that returns a string.
+     - Returns: An asynchronous task that returns a ``SBKSearchResult`` object with a list of ``SBKTrack``
      
-     - Throws: An error of type `SBKError` if the operation fails.
+     - Throws: An error of type ``SBKError`` if the operation fails.
      
      - Note: See [Last.fm's user.getTopTracks documentation](https://www.last.fm/api/show/user.getTopTracks) for more information.
      */
@@ -54,11 +54,11 @@ public extension SBKManager {
      Get the top tracks of a user on Last.fm.
      
      - Parameters:
-       - user: The username of the user.
-       - period: The time period over which to retrieve top tracks for. Possible values: overall, 7day, 1month, 3month, 6month, 12month. Default value is nil.
-       - limit: The number of results to fetch per page. Default value is 50.
-       - page: The page number to fetch. Default value is 1.
-       - completion: The completion handler to call when the request is complete. It returns a string and an optional error.
+     - user: The username of the user.
+     - period: The time period over which to retrieve top tracks for. Possible values: overall, 7day, 1month, 3month, 6month, 12month. Default value is `overall`.
+     - limit: The number of results to fetch per page. Default value is `50`.
+     - page: The page number to fetch. Default value is `1`.
+     - completion: The completion handler to call when the request is complete. It returns a ``SBKSearchResult`` object with a list of ``SBKTrack`` and an optional `Error`.
      
      - Note: See [Last.fm's user.getTopTracks documentation](https://www.last.fm/api/show/user.getTopTracks) for more information.
      */

@@ -19,9 +19,9 @@ public extension SBKManager {
      - extended: Includes extended data in each artist and whether or not the user has loved each track. Default value is nil.
      - to: End timestamp of a range in UNIX timestamp format. Default value is nil.
      
-     - Returns: An asynchronous task that returns a string.
+     - Returns: An asynchronous task that returns an ``SBKSearchResult`` object containing the recent tracks.
      
-     - Throws: An error of type `SBKError` if the operation fails.
+     - Throws: An error of type ``SBKError`` if the operation fails.
      
      - Note: See [Last.fm's user.getRecentTracks documentation](https://www.last.fm/api/show/user.getRecentTracks) for more information.
      */
@@ -64,7 +64,7 @@ public extension SBKManager {
      - from: Beginning timestamp of a range in UNIX timestamp format. Default value is nil.
      - extended: Includes extended data in each artist and whether or not the user has loved each track. Default value is nil.
      - to: End timestamp of a range in UNIX timestamp format. Default value is nil.
-     - completion: The completion handler to call when the request is complete. It returns a string and an optional error.
+     - completion: The completion handler to call when the request is complete. It returns an ``SBKSearchResult`` object containing the recent tracks, or an error if the operation fails.
      
      - Note: See [Last.fm's user.getRecentTracks documentation](https://www.last.fm/api/show/user.getRecentTracks) for more information.
      */

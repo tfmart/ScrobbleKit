@@ -12,14 +12,14 @@ public extension SBKManager {
      Get friends of a user on Last.fm.
      
      - Parameters:
-       - user: The username of the user.
-       - recentTracks: Whether to include information about the user's recent tracks. Default value is `false`.
-       - limit: The maximum number of friends to retrieve. Default value is 50.
-       - page: The page number of the results to retrieve. Default value is 1.
+     - user: The username of the user.
+     - recentTracks: Whether to include information about the user's recent tracks. Default value is `false`.
+     - limit: The maximum number of friends to retrieve. Default value is 50.
+     - page: The page number of the results to retrieve. Default value is 1.
      
-     - Returns: An asynchronous task that returns an array of friend usernames.
+     - Returns: An asynchronous task that returns an array of ``SBKUser``.
      
-     - Throws: An error of type `SBKError` if the operation fails.
+     - Throws: An error of type ``SBKError`` if the operation fails.
      
      - Note: See [Last.fm's user.getFriends documentation](https://www.last.fm/api/show/user.getFriends) for more information.
      */
@@ -46,7 +46,7 @@ public extension SBKManager {
        - recentTracks: Whether to include information about the user's recent tracks. Default value is `false`.
        - limit: The maximum number of friends to retrieve. Default value is 50.
        - page: The page number of the results to retrieve. Default value is 1.
-       - completion: The completion handler to call when the request is complete. It returns an array of friend usernames and an optional error.
+       - completion: The completion handler to call when the request is complete. It returns an array of ``SBKUser``  and an optional error.
      
      - Note: See [Last.fm's user.getFriends documentation](https://www.last.fm/api/show/user.getFriends) for more information.
      */

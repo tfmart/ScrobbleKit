@@ -13,7 +13,7 @@ public extension SBKManager {
      
      - Parameters:
         - username: The username of the user to retrieve information for.
-        - completion: A closure to be executed when the request is complete. It returns an optional ``SBKUserInfo`` object representing the user information and an optional error.
+        - completion: A closure to be executed when the request is complete. It returns an optional ``SBKUser`` object representing the user information and an optional error.
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/user.getInfo).
      */
@@ -42,7 +42,7 @@ public extension SBKManager {
      - Parameters:
         - username: The username of the user to retrieve information for.
      
-     - Returns: A ``SBKUserInfo`` object representing the user information.
+     - Returns: A ``SBKUser`` object representing the user information.
      
      - Throws: An error of type ``SBKClientError`` or ``SBKError`` if there is an issue with the API request or decoding the response.
      

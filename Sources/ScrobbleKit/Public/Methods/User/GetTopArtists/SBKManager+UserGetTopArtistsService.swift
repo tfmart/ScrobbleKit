@@ -12,14 +12,14 @@ public extension SBKManager {
      Get the top artists of a user on Last.fm.
      
      - Parameters:
-       - user: The username of the user.
-       - period: The time period over which to retrieve top artists for. Possible values: overall, 7day, 1month, 3month, 6month, 12month. Default value is nil.
-       - limit: The number of results to fetch per page. Default value is 50.
-       - page: The page number to fetch. Default value is 1.
+     - user: The username of the user.
+     - period: The time period over which to retrieve top artists for. Possible values: overall, 7day, 1month, 3month, 6month, 12month. Default value is `overall`.
+     - limit: The number of results to fetch per page. Default value is 50.
+     - page: The page number to fetch. Default value is 1.
      
-     - Returns: An asynchronous task that returns a string.
+     - Returns: An asynchronous task that returns a ``SBKSearchResult`` object containing a list of ``SBKArtist`` results.
      
-     - Throws: An error of type `SBKError` if the operation fails.
+     - Throws: An error of type ``SBKError`` if the operation fails.
      
      - Note: See [Last.fm's user.getTopArtists documentation](https://www.last.fm/api/show/user.getTopArtists) for more information.
      */
@@ -54,11 +54,11 @@ public extension SBKManager {
      Get the top artists of a user on Last.fm.
      
      - Parameters:
-       - user: The username of the user.
-       - period: The time period over which to retrieve top artists for. Possible values: overall, 7day, 1month, 3month, 6month, 12month. Default value is nil.
-       - limit: The number of results to fetch per page. Default value is 50.
-       - page: The page number to fetch. Default value is 1.
-       - completion: The completion handler to call when the request is complete. It returns a string and an optional error.
+     - user: The username of the user.
+     - period: The time period over which to retrieve top artists for. Possible values: overall, 7day, 1month, 3month, 6month, 12month. Default value is `overall`.
+     - limit: The number of results to fetch per page. Default value is 50.
+     - page: The page number to fetch. Default value is 1.
+     - completion: The completion handler to call when the request is complete. It returns a ``SBKSearchResult`` object containing a list of ``SBKArtist`` results and an optional error.
      
      - Note: See [Last.fm's user.getTopArtists documentation](https://www.last.fm/api/show/user.getTopArtists) for more information.
      */

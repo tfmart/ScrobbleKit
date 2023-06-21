@@ -9,15 +9,15 @@ import Foundation
 
 public extension SBKManager {
     /**
-     Get the top tags of a user on Last.fm.
+     Get the top tags of a user on Last.fm asynchronously.
      
      - Parameters:
-       - user: The username of the user.
-       - limit: Limit the number of tags returned. Default value is nil.
+     - user: The username of the user.
+     - limit: Limit the number of tags returned. Default value is `nil`.
      
-     - Returns: An asynchronous task that returns a string.
+     - Returns: An asynchronous task that returns an ``SBKSearchResult`` object containing an array of ``SBKTag`` objects.
      
-     - Throws: An error of type `SBKError` if the operation fails.
+     - Throws: An error of type ``SBKError`` if the operation fails.
      
      - Note: See [Last.fm's user.getTopTags documentation](https://www.last.fm/api/show/user.getTopTags) for more information.
      */
@@ -44,9 +44,9 @@ public extension SBKManager {
      Get the top tags of a user on Last.fm.
      
      - Parameters:
-       - user: The username of the user.
-       - limit: Limit the number of tags returned. Default value is nil.
-       - completion: The completion handler to call when the request is complete. It returns a string and an optional error.
+     - user: The username of the user.
+     - limit: Limit the number of tags returned. Default value is `nil`.
+     - completion: The completion handler to call when the request is complete. It returns an ``SBKSearchResult`` object containing an array of ``SBKTag`` objects and an optional error.
      
      - Note: See [Last.fm's user.getTopTags documentation](https://www.last.fm/api/show/user.getTopTags) for more information.
      */

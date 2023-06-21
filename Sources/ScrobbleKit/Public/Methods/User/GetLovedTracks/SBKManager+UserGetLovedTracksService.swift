@@ -16,7 +16,7 @@ public extension SBKManager {
        - limit: The maximum number of loved tracks to retrieve. Default value is 50.
        - page: The page number of the results to retrieve. Default value is 1.
      
-     - Returns: An asynchronous task that returns an array of loved track names.
+     - Returns: An asynchronous task that returns an instance of ``SBKLovedTracks``
      
      - Throws: An error of type `SBKError` if the operation fails.
      
@@ -43,7 +43,7 @@ public extension SBKManager {
        - user: The username of the user.
        - limit: The maximum number of loved tracks to retrieve. Default value is 50.
        - page: The page number of the results to retrieve. Default value is 1.
-       - completion: The completion handler to call when the request is complete. It returns an array of loved track names and an optional error.
+       - completion: The completion handler to call when the request is complete. It returns an instance of ``SBKLovedTracks`` and an optional error.
      
      - Note: See [Last.fm's user.getLovedTracks documentation](https://www.last.fm/api/show/user.getLovedTracks) for more information.
      */

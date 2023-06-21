@@ -17,9 +17,9 @@ public extension SBKManager {
        - limit: The number of results to fetch per page. Defaults to 50.
        - page: The page number to fetch. Defaults to first page.
      
-     - Returns: An asynchronous task that returns an `SBKSearchResult` containing an array of `SBKArtist` objects.
+     - Returns: An asynchronous task that returns an ``SBKSearchResult`` containing an array of ``SBKArtist`` objects.
      
-     - Throws: An error of type `SBKError` if the operation fails.
+     - Throws: An error of type ``SBKError` if the operation fails.
      
      - Note: See [Last.fm's user.getPersonalTags documentation](https://www.last.fm/api/show/user.getPersonalTags) for more information.
      */
@@ -61,9 +61,9 @@ public extension SBKManager {
        - limit: The number of results to fetch per page. Defaults to 50.
        - page: The page number to fetch. Defaults to first page.
      
-     - Returns: An asynchronous task that returns an `SBKSearchResult` containing an array of `SBKTrack` objects.
+     - Returns: An asynchronous task that returns an ``SBKSearchResult`` containing an array of ``SBKTrack`` objects.
      
-     - Throws: An error of type `SBKError` if the operation fails.
+     - Throws: An error of type ``SBKError`` if the operation fails.
      
      - Note: See [Last.fm's user.getPersonalTags documentation](https://www.last.fm/api/show/user.getPersonalTags) for more information.
      */
