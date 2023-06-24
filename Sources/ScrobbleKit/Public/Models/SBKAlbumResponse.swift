@@ -8,18 +8,18 @@
 import Foundation
 
 public struct SBKAlbumResponse {
-    var artist: String
-    var name: String
-    var tracks: [SBKAlbumTrack]
-    var albumArt: SBKImage?
-    var tags: [SBKTag]?
-    var musicBrainzID: String?
-    var wiki: SBKWiki?
-    var playcount: String?
-    var lastFmURL: String?
+    public var artist: String
+    public var name: String
+    internal var tracks: [SBKAlbumTrack]
+    public var albumArt: SBKImage?
+    public var tags: [SBKTag]?
+    public var musicBrainzID: String?
+    public var wiki: SBKWiki?
+    public var playcount: String?
+    public var lastFmURL: String?
     
     internal init(response: SBKAlbumRequestResponseList) {
-        self.artist = response.album.artist.name
+        self.artist = response.album.name
         self.name = response.album.name
         self.tracks = response.album.tracks?.track.compactMap({ $0 }) ?? []
         
@@ -33,5 +33,17 @@ public struct SBKAlbumResponse {
         self.wiki = response.album.wiki
         self.playcount = response.album.playcount
         self.lastFmURL = response.album.url
+    }
+    
+    public var tracklist: [SBKTrack] {
+        self.tracks.map {
+            SBKTrack(name: $0.name,
+                     duration: "\($0.duration ?? 0)",
+                     artist: .init(name: $0.artist.name,
+                                   musicBrainzID: $0.artist.mbid,
+                                   url: $0.artist.url),
+                     url: URL(string: $0.url),
+                     imageList: nil)
+        }
     }
 }
