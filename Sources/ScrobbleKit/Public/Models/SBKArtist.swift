@@ -8,16 +8,16 @@
 import Foundation
 
 public struct SBKArtist: Decodable {
-    let name: String
-    let playcount: String?
-    let listeners: String?
-    let musicBrainzID: String?
-    let url: String?
-    let streamable: String?
+    public let name: String
+    public let playcount: String?
+    public let listeners: String?
+    public let musicBrainzID: String?
+    public let url: String?
+    public let streamable: String?
     internal let image: [SBKImageResponse]?
     internal let artistText: String?
     
-    var images: SBKImage? {
+    public var images: SBKImage? {
         guard let image else { return nil }
         return SBKImage(response: image)
     }

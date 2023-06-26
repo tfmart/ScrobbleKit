@@ -19,6 +19,7 @@ public extension SBKManager {
 
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/album.removeTag).
     */
+    @discardableResult
     func removeTag(fromAlbum album: String, artist: String, tag: String) async throws -> Bool {
         guard let sessionKey else { throw SBKClientError.missingSessionKey }
         let service = RemoveTagService(

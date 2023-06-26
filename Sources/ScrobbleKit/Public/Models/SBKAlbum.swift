@@ -8,16 +8,16 @@
 import Foundation
 
 public struct SBKAlbum: Decodable {
-    var name: String
-    var artist: String
-    var mbid: String?
+    public var name: String
+    public var artist: String
+    public var mbid: String?
     internal var tagList: SBKTagRequestResponseList?
-    var playcount: String?
+    public var playcount: String?
     internal var image: [SBKImageResponse]?
-    var tracks: SBKAlbumTracksRequestResponseList?
-    var url: String?
-    var listeners: String?
-    var wiki: SBKWiki?
+    internal var tracks: SBKAlbumTracksRequestResponseList?
+    public var url: String?
+    public var listeners: String?
+    public var wiki: SBKWiki?
     
     enum CodingKeys: String, CodingKey {
         case artist
@@ -32,15 +32,38 @@ public struct SBKAlbum: Decodable {
         case wiki
     }
     
-    var images: SBKImage? {
+    public var images: SBKImage? {
         guard let image else { return nil }
         return SBKImage(response: image)
     }
     
-    var tags: [SBKTag] {
+    public var tags: [SBKTag] {
         guard let tagList,
               let tags = tagList.tag else { return [] }
         return tags
+    }
+    
+    public var tracklist: [SBKTrack] {
+        guard let tracks = tracks?.track else { return [] }
+        return tracks.map { track in
+            let url = URL(string: track.url)
+            
+            var duration: String? {
+                guard let duration = track.duration else {
+                    return nil
+                }
+                return String(duration)
+            }
+            
+            return SBKTrack(name: track.name,
+                     mbid: nil,
+                     playcount: nil,
+                     listeners: nil,
+                     duration: duration,
+                     artist: .init(name: track.artist.name, musicBrainzID: track.artist.mbid, url: track.artist.url),
+                     url: url,
+                     imageList: nil)
+        }
     }
     
     internal init(topAlbumArtist: SBKArtistTopAlbum) {
