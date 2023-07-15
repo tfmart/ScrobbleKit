@@ -8,7 +8,7 @@
 import Foundation
 
 
-extension SBKManager {
+public extension SBKManager {
     /**
      Gets the top tracks by an artist.
      
