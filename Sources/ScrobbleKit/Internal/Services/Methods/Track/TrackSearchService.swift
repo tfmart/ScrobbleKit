@@ -19,7 +19,7 @@ struct TrackSearchService: SBKService {
     
     init(
         track: String,
-        artist: String,
+        artist: String?,
         limit: Int,
         page: Int,
         apiKey: String,

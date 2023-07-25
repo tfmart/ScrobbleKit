@@ -23,7 +23,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's track.search documentation](https://www.last.fm/api/show/track.search) for more information.
      */
-    func search(track: String, artist: String, limit: Int = 30, page: Int = 0) async throws -> [SBKTrack] {
+    func search(track: String, artist: String? = nil, limit: Int = 30, page: Int = 0) async throws -> [SBKTrack] {
         let service = TrackSearchService(
             track: track,
             artist: artist,
@@ -50,7 +50,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's track.search documentation](https://www.last.fm/api/show/track.search) for more information.
      */
-    func search(track: String, artist: String, limit: Int = 30, page: Int = 0, completion: (([SBKTrack]?, Error?) -> Void)?) {
+    func search(track: String, artist: String? = nil, limit: Int = 30, page: Int = 0, completion: (([SBKTrack]?, Error?) -> Void)?) {
         let service = TrackSearchService(
             track: track,
             artist: artist,
