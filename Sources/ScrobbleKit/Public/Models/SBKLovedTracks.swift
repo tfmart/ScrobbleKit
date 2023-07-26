@@ -8,8 +8,8 @@
 import Foundation
 
 public struct SBKLovedTracks {
-    let searchAttributes: SBKSearchAttributes
-    let tracks: [SBKLovedTrack]
+    public let searchAttributes: SBKSearchAttributes
+    public let tracks: [SBKLovedTrack]
     
     internal init(from response: _UserGetLovedTracksResponse) {
         let responseAttributes = response.lovedtracks.attributes

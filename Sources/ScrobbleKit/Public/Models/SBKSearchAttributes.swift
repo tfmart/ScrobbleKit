@@ -9,9 +9,9 @@ import Foundation
 
 
 public struct SBKSearchAttributes {
-    let term: String
-    let totalPages: String
-    let page: String
-    let perPage: String
-    let total: String
+    public let term: String
+    public let totalPages: String
+    public let page: String
+    public let perPage: String
+    public let total: String
 }
