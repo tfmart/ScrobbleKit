@@ -46,6 +46,6 @@ public struct SBKLovedTracks {
 }
 
 public struct SBKLovedTrack {
-    let track: SBKTrack
-    let date: Date?
+    public let track: SBKTrack
+    public let date: Date?
 }
