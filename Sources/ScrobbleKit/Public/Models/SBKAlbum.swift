@@ -77,6 +77,29 @@ public struct SBKAlbum: Decodable {
         self.tagList = nil
         self.wiki = nil
     }
+    
+    
+    public init(from decoder: Decoder) throws {
+        let container: KeyedDecodingContainer<SBKAlbum.CodingKeys> = try decoder.container(keyedBy: SBKAlbum.CodingKeys.self)
+        
+        self.name = try container.decode(String.self, forKey: SBKAlbum.CodingKeys.name)
+        self.mbid = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.mbid)
+        self.tagList = try container.decodeIfPresent(SBKTagRequestResponseList.self, forKey: SBKAlbum.CodingKeys.tagList)
+        self.playcount = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.playcount)
+        self.image = try container.decodeIfPresent([SBKImageResponse].self, forKey: SBKAlbum.CodingKeys.image)
+        self.tracks = try container.decodeIfPresent(SBKAlbumTracksRequestResponseList.self, forKey: SBKAlbum.CodingKeys.tracks)
+        self.url = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.url)
+        self.listeners = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.listeners)
+        self.wiki = try container.decodeIfPresent(SBKWiki.self, forKey: SBKAlbum.CodingKeys.wiki)
+        
+        if let artist = try? container.decode(String.self, forKey: SBKAlbum.CodingKeys.artist) {
+            self.artist = artist
+        } else {
+            let artist = try container.decode(SBKArtist.self, forKey: SBKAlbum.CodingKeys.artist)
+            self.artist = artist.name
+        }
+        
+    }
 }
 
 // MARK: - Image
