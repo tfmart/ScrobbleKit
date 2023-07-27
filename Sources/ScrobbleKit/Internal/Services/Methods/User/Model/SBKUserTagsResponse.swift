@@ -38,11 +38,11 @@ public enum SBKSearchTerms {
 }
 
 public struct SBKSearchResult<Model: Decodable> {
-    var results: [Model]
-    var searchTerms: [SBKSearchTerms: String]
+    public var results: [Model]
+    public var searchTerms: [SBKSearchTerms: String]
     
-    var page: Int
-    var perPage: Int
-    var totalPages: Int
-    var total: Int
+    public var page: Int
+    public var perPage: Int
+    public var totalPages: Int
+    public var total: Int
 }
