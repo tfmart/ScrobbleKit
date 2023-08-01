@@ -19,7 +19,7 @@ public struct SBKAlbumResponse {
     public var lastFmURL: String?
     
     internal init(response: SBKAlbumRequestResponseList) {
-        self.artist = response.album.name
+        self.artist = response.album.artist
         self.name = response.album.name
         self.tracks = response.album.tracks?.track.compactMap({ $0 }) ?? []
         
