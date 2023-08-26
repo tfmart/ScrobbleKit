@@ -23,21 +23,11 @@ struct _UserLovedTracksList: Decodable {
 
 struct _UserLovedTrack: Decodable {
     let artist: SBKArtist
-    let date: _UserLovedTrackDate
+    let date: SBKTimestamp
     let name: String
     let mbid: String?
     let url: String
     let image: [SBKImageResponse]
-}
-
-struct _UserLovedTrackDate: Decodable {
-    let timestamp: String
-    let date: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case timestamp = "uts"
-        case date = "#text"
-    }
 }
 
 struct _UserLovedTracksAttributes: Decodable {
