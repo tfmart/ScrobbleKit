@@ -5,7 +5,10 @@
 //  Created by Tomas Martins on 19/02/23.
 //
 
-public class SBKManager {
+import Foundation
+import Combine
+
+public class SBKManager: ObservableObject {
     internal let apiKey: String
     internal let secret: String
     internal var sessionKey: String?
