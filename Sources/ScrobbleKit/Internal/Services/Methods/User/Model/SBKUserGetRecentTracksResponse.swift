@@ -24,7 +24,7 @@ struct SBKUserGetRecentTracksResult: Decodable {
     init(from decoder: Decoder) throws {
         let container: KeyedDecodingContainer<SBKUserGetRecentTracksResult.CodingKeys> = try decoder.container(keyedBy: SBKUserGetRecentTracksResult.CodingKeys.self)
         
-        self.tracks = try container.decode([SBKScrobbledTrack].self, forKey: SBKUserGetRecentTracksResult.CodingKeys.tracks)
+        self.tracks = try container.decode([SBKThrowable<SBKScrobbledTrack>].self, forKey: SBKUserGetRecentTracksResult.CodingKeys.tracks)
         self.attributes = try container.decode(SBKUserGetRecentTracksAttributes.self, forKey: SBKUserGetRecentTracksResult.CodingKeys.attributes)
         
     }
