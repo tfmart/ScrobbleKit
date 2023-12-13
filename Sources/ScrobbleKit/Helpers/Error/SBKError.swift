@@ -75,7 +75,7 @@ public enum SBKError: Int, Error, LocalizedError, Codable {
         case .invalidMethod:
             return NSLocalizedString("The requested method does not exist.", comment: "")
         case .unauthorized:
-            return NSLocalizedString("Make sure your Last.fm credentials are correct", comment: "")
+            return NSLocalizedString("This token has not been authorized.", comment: "")
         case .invalidServiceFormat:
             return NSLocalizedString("The service does not have a format that can be parsed.", comment: "")
         case .missingRequiredParameter:
