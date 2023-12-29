@@ -15,7 +15,7 @@ public extension SBKManager {
      - track: The search method for the track. It can be either the track name and artist name, or a MusicBrainz ID.
      - autoCorrect: Transform misspelled track or artist names into correct names, returning the correct version instead. The default value is `true`.
      - limit: The maximum number of similar tracks to retrieve. Pass `nil` to use the default limit.
-     - completion: A closure to be executed when the request is complete. It returns an optional ``SBKTrackSimilarResponse`` object representing the similar tracks and an optional error.
+     - completion: A closure to be executed when the request is complete. It returns an array of ``SBKTrack`` objects representing the similar tracks and an optional error.
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/track.getSimilar).
      */
@@ -59,7 +59,7 @@ public extension SBKManager {
      - autoCorrect: Transform misspelled track or artist names into correct names, returning the correct version instead. The default value is `true`.
      - limit: The maximum number of similar tracks to retrieve. Pass `nil` to use the default limit.
      
-     - Returns: A ``SBKTrackSimilarResponse`` object representing the similar tracks.
+     - Returns: an array of ``SBKTrack`` objects  representing the similar tracks.
      
      - Throws: An error of type ``SBKClientError`` or ``SBKError`` if there is an issue with the API request or decoding the response.
      

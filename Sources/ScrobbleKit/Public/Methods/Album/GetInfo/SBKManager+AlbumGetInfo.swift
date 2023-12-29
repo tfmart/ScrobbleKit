@@ -48,7 +48,7 @@ public extension SBKManager {
         - autoCorrect: Transform misspelled artist or album names into correct names, returning the correct version instead. The corrected artist name will be returned in the response. The default value is `true`.
         - username: The username for the context of the request. If supplied, the user's playcount for this album is included in the response. The default value is `nil`.
         - languageCode: The language to return the biography in, expressed as an ISO 639 alpha-2 code. The default value is ``SBKLanguageCode.english``.
-        - completion: The completion handler to call when the operation is complete. The handler takes two arguments: an ``SBKAlbumResponse`` object that contains the metadata and tracklist for the album, and an error of type ``SBKError`` if the operation fails.
+        - completion: The completion handler to call when the operation is complete. The handler takes two arguments: an ``SBKAlbumResponse`` object that contains the metadata and tracklist for the album, and an error if the operation fails.
      
      - Note: See [Last.fm's album.addTags documentation](https://www.last.fm/api/show/album.getInfo) for more information.
      */
