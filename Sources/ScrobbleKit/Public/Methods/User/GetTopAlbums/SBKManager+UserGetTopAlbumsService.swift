@@ -13,7 +13,7 @@ public extension SBKManager {
      
      - Parameters:
      - user: The username of the user.
-     - period: The time period over which to retrieve top albums for. Possible values: overall, 7day, 1month, 3month, 6month, 12month. Default value is ``SBKSearchPeriod.overall``.
+     - period: The time period over which to retrieve top albums for. Possible values: overall, 7day, 1month, 3month, 6month, 12month. Default value is ``SBKSearchPeriod/overall``.
      - limit: The number of results to fetch per page. Default value is 50.
      - page: The page number to fetch. Default value is 1.
      
@@ -55,7 +55,7 @@ public extension SBKManager {
      
      - Parameters:
      - user: The username of the user.
-     - period: The time period over which to retrieve top albums for. Possible values: overall, 7day, 1month, 3month, 6month, 12month. Default value is ``SBKSearchPeriod.overall``.
+     - period: The time period over which to retrieve top albums for. Possible values: overall, 7day, 1month, 3month, 6month, 12month. Default value is ``SBKSearchPeriod/overall``.
      - limit: The number of results to fetch per page. Default value is 50.
      - page: The page number to fetch. Default value is 1.
      - completion: The completion handler to call when the request is complete. It returns an ``SBKSearchResult`` object containing the top albums, or an optional error.
