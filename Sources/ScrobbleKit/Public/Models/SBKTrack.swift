@@ -7,16 +7,25 @@
 
 import Foundation
 
+/// Represents information about a track retrieved from Last.fm.
 public struct SBKTrack: Decodable {
+    /// The name of the track.
     public var name: String
+    /// The MusicBrainz ID of the track, if available.
     public var mbid: String?
+    /// The playcount of the track.
     public var playcount: String?
+    /// The number of listeners for the track.
     public var listeners: String?
+    /// The duration of the track.
     public var duration: String?
+    /// The artist associated with the track.
     public var artist: SBKArtist
+    /// The URL associated with the track.
     public var url: URL?
-    internal var imageList: [SBKImageResponse]?
-    
+    /// The artwork image associated with the track.
+    public var artwork: SBKImage?
+
     enum CodingKeys: String, CodingKey {
         case name
         case mbid
@@ -24,10 +33,6 @@ public struct SBKTrack: Decodable {
         case listeners
         case artist
         case imageList = "image"
-    }
-    
-    public var images: SBKImage? {
-        return SBKImage(response: imageList)
     }
     
     internal init(name: String, mbid: String? = nil, playcount: String? = nil, listeners: String? = nil, duration: String? = nil, artist: SBKArtist, url: URL? = nil, imageList: [SBKImageResponse]? = nil) {
@@ -38,7 +43,7 @@ public struct SBKTrack: Decodable {
         self.duration = duration
         self.artist = artist
         self.url = url
-        self.imageList = imageList
+        self.artwork = SBKImage(response: imageList)
     }
     
     public init(from decoder: Decoder) throws {
@@ -55,7 +60,9 @@ public struct SBKTrack: Decodable {
             let artist = SBKArtist(name: aristString, playcount: nil, listeners: nil, musicBrainzID: nil, url: nil, streamable: nil, image: nil)
             self.artist = artist
         }
-        self.imageList = try container.decodeIfPresent([SBKImageResponse].self, forKey: SBKTrack.CodingKeys.imageList)
+        if let imageList = try container.decodeIfPresent([SBKImageResponse].self, forKey: SBKTrack.CodingKeys.imageList) {
+            self.artwork = SBKImage(response: imageList)
+        }
         
     }
 }
