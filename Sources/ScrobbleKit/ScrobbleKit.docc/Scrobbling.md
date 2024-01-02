@@ -34,7 +34,7 @@ do {
 
 Upon successful scrobbling, an instance of ``SBKScrobbleResponse`` is returned. This response provides information about the scrobbled tracks and any corrections made to metadata to avoid typos or outdated aliases.
 
-To check the number of scrobbled and ignored tracks, use the ``SBKScrobbleResponse/successfulScrobbles`` and ``SBKScrobbleResponse/ingnoredTracks`` properties:
+To check the number of scrobbled and ignored tracks, use the ``SBKScrobbleResponse/successfulScrobbles`` and ``SBKScrobbleResponse/ignoredTracks`` properties:
 
 ```swift
 let response = try await SBKManager.scrobble(track: track,
