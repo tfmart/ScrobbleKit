@@ -7,15 +7,25 @@
 
 import Foundation
 
+/// Represents the response to a Last.fm album request, providing information such as artist, name, tracklist, and album details.
 public struct SBKAlbumResponse {
+    /// The artist of the album.
     public var artist: String
+    /// The name of the album.
     public var name: String
+    /// The list of tracks associated with the album.
     internal var tracks: [SBKAlbumTrack]
-    public var albumArt: SBKImage?
+    /// The album artwork image.
+    public var artwork: SBKImage?
+    /// The list of tags associated with the album.
     public var tags: [SBKTag]?
+    /// The MusicBrainz ID of the album.
     public var musicBrainzID: String?
+    /// The wiki information associated with the album.
     public var wiki: SBKWiki?
+    /// The playcount of the album.
     public var playcount: String?
+    /// The Last.fm URL of the album.
     public var lastFmURL: String?
     
     internal init(response: SBKAlbumRequestResponseList) {
@@ -24,9 +34,9 @@ public struct SBKAlbumResponse {
         self.tracks = response.album.tracks?.track.compactMap({ $0 }) ?? []
         
         if let images = response.album.image {
-            self.albumArt = SBKImage(response: images)
+            self.artwork = SBKImage(response: images)
         } else {
-            self.albumArt = nil
+            self.artwork = nil
         }
         self.tags = response.album.tags
         self.musicBrainzID = response.album.mbid
@@ -35,6 +45,7 @@ public struct SBKAlbumResponse {
         self.lastFmURL = response.album.url
     }
     
+    /// The tracklist associated with the album.
     public var tracklist: [SBKTrack] {
         self.tracks.map {
             SBKTrack(name: $0.name,
