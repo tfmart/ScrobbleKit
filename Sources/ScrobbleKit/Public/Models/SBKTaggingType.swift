@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SBKTaggingType.swift
 //  
 //
 //  Created by Tomas Martins on 17/06/23.

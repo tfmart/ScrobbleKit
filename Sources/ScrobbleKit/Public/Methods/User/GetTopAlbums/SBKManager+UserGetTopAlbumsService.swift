@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SBKManager+GetTopAlbumsService.swift
 //  
 //
 //  Created by Tomas Martins on 20/06/23.
