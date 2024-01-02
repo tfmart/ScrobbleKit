@@ -25,7 +25,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getRecentTracks documentation](https://www.last.fm/api/show/user.getRecentTracks) for more information.
      */
-    func getRecentTracks(from user: String, limit: Int = 50, page: Int = 1, from: TimeInterval? = nil, extended: Bool? = nil, to: TimeInterval? = nil) async throws -> SBKSearchResult<SBKScrobbledTrack> {
+    func getRecentTracks(fromUser user: String, limit: Int = 50, page: Int = 1, from: TimeInterval? = nil, extended: Bool? = nil, to: TimeInterval? = nil) async throws -> SBKSearchResult<SBKScrobbledTrack> {
         let service = UserGetRecentTracksService(
             user: user,
             limit: limit,
@@ -68,7 +68,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getRecentTracks documentation](https://www.last.fm/api/show/user.getRecentTracks) for more information.
      */
-    func getRecentTracks(from user: String, limit: Int = 50, page: Int = 1, from: TimeInterval? = nil, extended: Bool? = nil, to: TimeInterval? = nil, completion: ((SBKSearchResult<SBKScrobbledTrack>?, Error?) -> Void)?) {
+    func getRecentTracks(fromUser user: String, limit: Int = 50, page: Int = 1, from: TimeInterval? = nil, extended: Bool? = nil, to: TimeInterval? = nil, completion: ((SBKSearchResult<SBKScrobbledTrack>?, Error?) -> Void)?) {
         let service = UserGetRecentTracksService(
             user: user,
             limit: limit,

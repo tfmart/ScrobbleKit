@@ -19,8 +19,8 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/track.getSimilar).
      */
-    func getSimilar(
-        track: SBKTrackSearchMethod,
+    func getSimilarTracks(
+        _ track: SBKTrackSearchMethod,
         autoCorrect: Bool = true,
         limit: Int? = nil,
         completion: (([SBKTrack]?, Error?) -> Void)?
@@ -65,8 +65,8 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/track.getSimilar).
      */
-    func getSimilar(
-        track: SBKTrackSearchMethod,
+    func getSimilarTracks(
+        _ track: SBKTrackSearchMethod,
         autoCorrect: Bool = true,
         limit: Int? = nil
     ) async throws -> [SBKTrack] {

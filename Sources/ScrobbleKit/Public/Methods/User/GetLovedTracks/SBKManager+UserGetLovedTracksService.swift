@@ -23,7 +23,7 @@ public extension SBKManager {
      - Note: See [Last.fm's user.getLovedTracks documentation](https://www.last.fm/api/show/user.getLovedTracks) for more information.
      */
     @discardableResult
-    func getLovedTracks(for user: String, limit: Int = 50, page: Int = 1) async throws -> SBKLovedTracks {
+    func getLovedTracks(fromUser user: String, limit: Int = 50, page: Int = 1) async throws -> SBKLovedTracks {
         let service = UserGetLovedTracksService(
             user: user,
             limit: limit,
@@ -47,7 +47,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getLovedTracks documentation](https://www.last.fm/api/show/user.getLovedTracks) for more information.
      */
-    func getLovedTracks(for user: String, limit: Int = 50, page: Int = 1, completion: ((SBKLovedTracks?, Error?) -> Void)?) {
+    func getLovedTracks(fromUser user: String, limit: Int = 50, page: Int = 1, completion: ((SBKLovedTracks?, Error?) -> Void)?) {
         let service = UserGetLovedTracksService(
             user: user,
             limit: limit,

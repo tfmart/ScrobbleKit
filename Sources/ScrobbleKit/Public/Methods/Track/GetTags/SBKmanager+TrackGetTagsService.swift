@@ -19,8 +19,8 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/track.getTags).
      */
-    func getTagsForTrack(
-        searchMethod: SBKTrackSearchMethod,
+    func getTags(
+        forTrack searchMethod: SBKTrackSearchMethod,
         autoCorrect: Bool = true,
         username: String? = nil,
         completion: (([SBKTag]?, Error?) -> Void)?
@@ -60,8 +60,8 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/track.getTags).
      */
-    func getTagsForTrack(
-        searchMethod: SBKTrackSearchMethod,
+    func getTags(
+        forTrack searchMethod: SBKTrackSearchMethod,
         autoCorrect: Bool = true,
         username: String? = nil
     ) async throws -> [SBKTag] {

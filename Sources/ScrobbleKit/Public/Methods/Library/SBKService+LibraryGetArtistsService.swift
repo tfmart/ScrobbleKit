@@ -20,7 +20,7 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/library.getArtists).
      */
-    func getLibraryArtists(for user: String, limit: Int = 50, page: Int = 1) async throws -> [SBKArtist] {
+    func getArtistsFromLibrary(from user: String, limit: Int = 50, page: Int = 1) async throws -> [SBKArtist] {
         let service = LibraryGetArtistsService(user: user, limit: limit, page: page, apiKey: apiKey, secret: secret)
         let response = try await service.start()
         return response.artists.artist
@@ -35,7 +35,7 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/library.getArtists).
      */
-    func getLibraryArtists(for user: String, limit: Int = 50, page: Int = 1, _ completion: (([SBKArtist]?, Error?) -> Void)?) {
+    func getArtistsFromLibrary(from user: String, limit: Int = 50, page: Int = 1, _ completion: (([SBKArtist]?, Error?) -> Void)?) {
         let service = LibraryGetArtistsService(user: user, limit: limit, page: page, apiKey: apiKey, secret: secret)
         service.start { response, error in
             guard error == nil else {

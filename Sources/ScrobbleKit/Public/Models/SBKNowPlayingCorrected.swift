@@ -22,7 +22,7 @@ public struct SBKNowPlayingCorrected {
     }
     
     /// Dictionary containing the corrected information.
-    let correctedInformation: [SBKNowPlayingInfo: String]
+    public let correctedInformation: [SBKNowPlayingInfo: String]
     
     /**
      Initializes a `SBKNowPlayingCorrected` instance with the provided response.

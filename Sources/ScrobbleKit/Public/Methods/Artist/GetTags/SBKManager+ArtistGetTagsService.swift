@@ -22,7 +22,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's artist.getTags documentation](https://www.last.fm/api/show/artist.getTags) for more information.
      */
-    func getArtistTags(_ searchMethod: SBKArtistSearchMethod,
+    func getTags(forArtist searchMethod: SBKArtistSearchMethod,
                        user: String? = nil,
                        autocorrect: Bool) async throws -> [SBKTag] {
         let service = ArtistGetTagsService(
@@ -51,7 +51,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's artist.getTags documentation](https://www.last.fm/api/show/artist.getTags) for more information.
      */
-    func getArtistTags(_ searchMethod: SBKArtistSearchMethod,
+    func getTags(forArtist searchMethod: SBKArtistSearchMethod,
                        user: String? = nil,
                        autocorrect: Bool,
                        _ completion: (([SBKTag]?, Error?) -> Void)?) {

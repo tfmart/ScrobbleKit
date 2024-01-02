@@ -21,8 +21,8 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/track.getInfo).
      */
-    func getTrackInfo(
-        track: String,
+    func getInfo(
+        forTrack track: String,
         artist: String,
         username: String? = nil,
         autoCorrect: Bool = false,
@@ -59,8 +59,8 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/track.getInfo).
      */
-    func getTrackInfo(
-        track: String,
+    func getInfo(
+        forTrack track: String,
         artist: String,
         username: String? = nil,
         autoCorrect: Bool = false,

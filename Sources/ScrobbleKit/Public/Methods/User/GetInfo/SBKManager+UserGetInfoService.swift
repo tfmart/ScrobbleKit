@@ -17,8 +17,8 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/user.getInfo).
      */
-    func getUserInfo(
-        for username: String? = nil,
+    func getInfo(
+        forUser username: String? = nil,
         _ completion: ((SBKUser?, Error?) -> Void)?
     ) {
         let service = UserGetInfoService(username: username, apiKey: apiKey, secretKey: secret, sessionKey: sessionKey)
@@ -48,7 +48,7 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/user.getInfo).
      */
-    func getUserInfo(for username: String? = nil) async throws -> SBKUser {
+    func getInfo(forUser username: String? = nil) async throws -> SBKUser {
         let service = UserGetInfoService(username: username, apiKey: apiKey, secretKey: secret, sessionKey: sessionKey)
         let response = try await service.start()
         let user = SBKUser(from: response.user)

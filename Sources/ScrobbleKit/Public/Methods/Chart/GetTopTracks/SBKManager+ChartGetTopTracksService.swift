@@ -21,7 +21,7 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/chart.getTopTracks).
      */
-    func getTopTracks(limit: Int = 50, page: Int = 1) async throws -> [SBKTrack] {
+    func getTracksChart(limit: Int = 50, page: Int = 1) async throws -> [SBKTrack] {
         let service = ChartGetTopTracksService(limit: limit, page: page, apiKey: apiKey, secretKey: secret)
         let response = try await service.start()
         return response.tracks.track
@@ -37,7 +37,7 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/chart.getTopTracks).
      */
-    func getTopTracks(limit: Int = 50, page: Int = 1, _ completion: (([SBKTrack]?, Error?) -> Void)?) {
+    func getTracksChart(limit: Int = 50, page: Int = 1, _ completion: (([SBKTrack]?, Error?) -> Void)?) {
         let service = ChartGetTopTracksService(limit: limit, page: page, apiKey: apiKey, secretKey: secret)
         service.start { response, error in
             guard error == nil else {

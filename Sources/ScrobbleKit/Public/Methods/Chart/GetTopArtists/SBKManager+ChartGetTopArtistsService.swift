@@ -18,7 +18,7 @@ public extension SBKManager {
     ///
     /// - Note: This method is asynchronous and should be called from within an `async` context.
     /// See [Last.fm API documentation](https://www.last.fm/api/show/chart.getTopArtists) for more information.
-    func getTopArtistsChart(
+    func getArtistsChart(
         page: Int = 1,
         limit: Int = 50
     ) async throws -> [SBKArtist] {
@@ -40,7 +40,7 @@ public extension SBKManager {
     ///   - completion: A closure to be called with the resulting array of ``SBKArtist`` objects or an error.
     ///
     /// - Note: See [Last.fm API documentation](https://www.last.fm/api/show/chart.getTopArtists) for more information.
-    func getTopArtistsChart(
+    func getArtistsChart(
         page: Int = 1,
         limit: Int = 50,
         _ completion: (([SBKArtist]?, Error?) -> Void)?

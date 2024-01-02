@@ -1,6 +1,6 @@
 //
 //  SBKManager+AristGetInfoService.swift
-//  
+//
 //
 //  Created by Tomas Martins on 22/02/23.
 //
@@ -24,8 +24,8 @@ public extension SBKManager {
      
      - Note: See [Last.fm's artist.getInfo documentation](https://www.last.fm/api/show/artist.getInfo) for more information.
      */
-    func getArtistInfo(
-        _ artist: SBKArtistSearchMethod,
+    func getInfo(
+        forArtist artist: SBKArtistSearchMethod,
         autocorrect: Bool = true,
         username: String? = nil,
         language: SBKLanguageCode = .english
@@ -54,8 +54,8 @@ public extension SBKManager {
      
      - Note: See [Last.fm's artist.getInfo documentation](https://www.last.fm/api/show/artist.getInfo) for more information.
      */
-    func getArtistInfo(
-        _ artist: SBKArtistSearchMethod,
+    func getInfo(
+        forArtist artist: SBKArtistSearchMethod,
         autocorrect: Bool = true,
         username: String? = nil,
         language: SBKLanguageCode = .english,
