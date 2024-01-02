@@ -17,9 +17,10 @@ To begin using ScrobbleKit, you can check out our <doc:QuickStart> guide for an 
 - <doc:Authentication>
 - ``SBKManager/startSession(username:password:)-76puy``
 - ``SBKManager/setSessionKey(_:)``
-- ``SBKSessionResponse``
+- ``SBKSessionResponseInfo``
 
 ### Scrobbling
 
+- <doc:Scrobbling>
 - ``SBKManager/scrobble(track:artist:album:)``
 - ``SBKScrobbleResponse``

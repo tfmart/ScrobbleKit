@@ -10,8 +10,7 @@ Certain ScrobbleKit services, such as scrobbling a song to a Last.fm profile, ne
 
 Use the ``SBKManager/startSession(username:password:)-76puy`` method to create a new token by providing the Last.fm account's username and password.
 
-- Warning:
-Last.fm's API does not support authentication via email; you must provide the account's username under the username parameter.
+- Important: Last.fm's API does not support authentication via email; you must provide the account's username under the `username` parameter.
 
 ```swift
 let manager = SBKManager(apiKey: API_KEY, secret: SECRET_KEY)
