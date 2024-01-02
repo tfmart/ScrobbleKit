@@ -7,6 +7,14 @@
 
 import Foundation
 
+/// Represents the fields of metadata of a song that may be corrected when attempting to scrobble it.
 public enum SBKScrobbleResponseAttribute {
-    case artist, title, album, albumArtist
+    /// The artist associated with the song
+    case artist
+    /// The title of the song
+    case title
+    /// The album associated with the song
+    case album
+    /// The artist of the album associated with the song
+    case albumArtist
 }

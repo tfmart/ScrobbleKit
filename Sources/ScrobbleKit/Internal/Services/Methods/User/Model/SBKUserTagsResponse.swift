@@ -28,21 +28,3 @@ struct SBKUserTagsListResults: Decodable {
     var album: [SBKAlbum]?
     var artist: [SBKArtist]?
 }
-
-public enum SBKSearchTerms {
-    case artist
-    case user
-    case tag
-    case album
-    case track
-}
-
-public struct SBKSearchResult<Model: Decodable> {
-    public var results: [Model]
-    public var searchTerms: [SBKSearchTerms: String]
-    
-    public var page: Int
-    public var perPage: Int
-    public var totalPages: Int
-    public var total: Int
-}
