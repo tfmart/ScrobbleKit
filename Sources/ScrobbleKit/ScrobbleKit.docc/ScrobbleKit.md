@@ -15,7 +15,7 @@ To begin using ScrobbleKit, you can check out our <doc:QuickStart> guide for an 
 ### Authenticating an User
 
 - <doc:Authentication>
-- ``SBKManager/startSession(username:password:)``
+- ``SBKManager/startSession(username:password:)-76puy``
 - ``SBKManager/setSessionKey(_:)``
 - ``SBKSessionResponse``
 

@@ -8,7 +8,7 @@ Certain ScrobbleKit services, such as scrobbling a song to a Last.fm profile, ne
 
 ### Generating a Session Token
 
-Use the ``SBKManager/startSession(username:password:)`` method to create a new token by providing the Last.fm account's username and password.
+Use the ``SBKManager/startSession(username:password:)-76puy`` method to create a new token by providing the Last.fm account's username and password.
 
 - Warning:
 Last.fm's API does not support authentication via email; you must provide the account's username under the username parameter.
@@ -17,7 +17,7 @@ Last.fm's API does not support authentication via email; you must provide the ac
 let manager = SBKManager(apiKey: API_KEY, secret: SECRET_KEY)
 
 do {
-    try await manager.startSession(username: USERNAME, secret: PASSWORD)
+    try await manager.startSession(username: USERNAME, password: PASSWORD)
 } catch {
     // Handle sign-in error
 }
@@ -25,7 +25,7 @@ do {
 
 Upon successful authentication, the ``SBKManager`` instance will automatically set the generated token for subsequent requests. However, it is recommended that your application securely stores the generated token, allowing it to access authenticated services without requiring users to repeatedly authenticate with their Last.fm account.
 
-Retrieve the session token from the ``SBKSessionResponseInfo`` instance returned by the ``SBKManager/startSession(username:password:)`` method, using the ``SBKSessionResponseInfo/key`` property:
+Retrieve the session token from the ``SBKSessionResponseInfo`` instance returned by the ``SBKManager/startSession(username:password:)-76puy`` method, using the ``SBKSessionResponseInfo/key`` property:
 
 ```swift
 do {
