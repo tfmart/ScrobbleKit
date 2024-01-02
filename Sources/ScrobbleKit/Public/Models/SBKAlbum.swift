@@ -7,16 +7,24 @@
 
 import Foundation
 
+/// Represents information from an album in Last.fm, providing details such as name, artist, playcount, and tags.
 public struct SBKAlbum: Decodable {
+    /// The name of the album.
     public var name: String
+    /// The artist associated with the album.
     public var artist: String
+    /// The MusicBrainz ID of the album, if available.
     public var mbid: String?
     internal var tagList: SBKTagRequestResponseList?
+    /// The playcount of the album.
     public var playcount: String?
     internal var image: [SBKImageResponse]?
     internal var tracks: SBKAlbumTracksRequestResponseList?
+    /// The URL of the album on Last.fm.
     public var url: String?
+    /// The number of listeners for the album.
     public var listeners: String?
+    /// The wiki information associated with the album.
     public var wiki: SBKWiki?
     
     enum CodingKeys: String, CodingKey {
@@ -32,17 +40,20 @@ public struct SBKAlbum: Decodable {
         case wiki
     }
     
-    public var images: SBKImage? {
+    /// The artwork of the album.
+    public var artwork: SBKImage? {
         guard let image else { return nil }
         return SBKImage(response: image)
     }
     
+    /// The list of tags associated with the album.
     public var tags: [SBKTag] {
         guard let tagList,
               let tags = tagList.tag else { return [] }
         return tags
     }
     
+    /// The list of tracks associated with the album.
     public var tracklist: [SBKTrack] {
         guard let tracks = tracks?.track else { return [] }
         return tracks.map { track in
