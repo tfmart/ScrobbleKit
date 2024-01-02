@@ -7,20 +7,23 @@
 
 import Foundation
 
+/// Represents information about an artist retrieved from Last.fm, providing details such as name, playcount, and images.
 public struct SBKArtist: Decodable {
+    /// The name of the artist.
     public let name: String
+    /// The playcount of the artist.
     public let playcount: String?
+    /// The number of listeners for the artist.
     public let listeners: String?
+    /// The MusicBrainz ID of the artist, if available.
     public let musicBrainzID: String?
+    /// The URL associated with the artist.
     public let url: String?
+    /// An image of the artist, if available.
+    public var image: SBKImage?
     public let streamable: String?
-    internal let image: [SBKImageResponse]?
     internal let artistText: String?
     
-    public var images: SBKImage? {
-        guard let image else { return nil }
-        return SBKImage(response: image)
-    }
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -50,7 +53,9 @@ public struct SBKArtist: Decodable {
         self.musicBrainzID = try container.decodeIfPresent(String.self, forKey: SBKArtist.CodingKeys.musicBrainzID)
         self.url = try container.decodeIfPresent(String.self, forKey: SBKArtist.CodingKeys.url)
         self.streamable = try container.decodeIfPresent(String.self, forKey: SBKArtist.CodingKeys.streamable)
-        self.image = try container.decodeIfPresent([SBKImageResponse].self, forKey: SBKArtist.CodingKeys.image)
+        if let imageResponse = try container.decodeIfPresent([SBKImageResponse].self, forKey: SBKArtist.CodingKeys.image) {
+            self.image = SBKImage(response: imageResponse)
+        }
     }
     
     internal init(name: String, playcount: String? = nil, listeners: String? = nil, musicBrainzID: String? = nil, url: String? = nil, streamable: String? = nil, image: [SBKImageResponse]? = nil, artistText: String? = nil) {
@@ -60,7 +65,7 @@ public struct SBKArtist: Decodable {
         self.musicBrainzID = musicBrainzID
         self.url = url
         self.streamable = streamable
-        self.image = image
+        self.image = SBKImage(response: image)
         self.artistText = artistText
     }
 }

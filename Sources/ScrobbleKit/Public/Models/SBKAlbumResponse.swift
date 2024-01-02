@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Represents the response to a Last.fm album request, providing information such as artist, name, tracklist, and album details.
+/// Represents the response to the `album.getInfo` method
 public struct SBKAlbumResponse {
     /// The artist of the album.
     public var artist: String
@@ -19,7 +19,7 @@ public struct SBKAlbumResponse {
     public var artwork: SBKImage?
     /// The list of tags associated with the album.
     public var tags: [SBKTag]?
-    /// The MusicBrainz ID of the album.
+    /// The MusicBrainz ID of the album, if available.
     public var musicBrainzID: String?
     /// The wiki information associated with the album.
     public var wiki: SBKWiki?
