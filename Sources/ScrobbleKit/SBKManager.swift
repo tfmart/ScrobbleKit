@@ -23,13 +23,13 @@ public class SBKManager: ObservableObject {
     }
     
     @discardableResult
-    public func startSession(username: String, password: String) async throws -> SBKSessionResponse {
+    public func startSession(username: String, password: String) async throws -> SBKSessionResponseInfo {
         let service = AuthSessionService(username: username,
                                          password: password,
                                          apiKey: apiKey,
                                          secretKey: secret)
         let result = try await service.start()
         self.sessionKey = result.info.key
-        return result
+        return result.info
     }
 }

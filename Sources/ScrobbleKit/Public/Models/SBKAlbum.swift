@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SBKAlbum.swift
 //  
 //
 //  Created by Tomas Martins on 16/06/23.
