@@ -7,10 +7,14 @@
 
 import Foundation
 
+/// Represents the response of a scrobble request, containing information about all the tracks that have been either scrobbled or ignored by the service.
 public struct SBKScrobbleResponse {
+    /// List of tracks that have been attempted to be scrobbled.
     public let tracks: [SBKScrobbleResponseTrack]
-    public let scrobbledTracks: Int
-    public let ingnoredTracks: Int
+    /// The count of tracks that have been successfully scrobbled.
+    public let successfulScrobbles: Int
+    /// The count of tracks that have been ignored.
+    public let ignoredTracks: Int
     
     internal init(list: SBKScrobbleList) {
         self.tracks = list.scrobbles.scrobbles.compactMap({ sbkScrobble in
@@ -54,7 +58,7 @@ public struct SBKScrobbleResponse {
                 status: status
             )
         })
-        self.scrobbledTracks = list.scrobbles.attr.accepted
-        self.ingnoredTracks = list.scrobbles.attr.ignored
+        self.successfulScrobbles = list.scrobbles.attr.accepted
+        self.ignoredTracks = list.scrobbles.attr.ignored
     }
 }
