@@ -7,8 +7,11 @@
 
 import Foundation
 
+/// Represents information about an user's Loved Tracks list.
 public struct SBKLovedTracks {
+    /// The attributes of the current query
     public let searchAttributes: SBKSearchAttributes
+    /// The list of tracks in the list.
     public let tracks: [SBKLovedTrack]
     
     internal init(from response: _UserGetLovedTracksResponse) {
@@ -43,9 +46,4 @@ public struct SBKLovedTracks {
             return SBKLovedTrack(track: track, date: date)
         }
     }
-}
-
-public struct SBKLovedTrack {
-    public let track: SBKTrack
-    public let date: Date?
 }
