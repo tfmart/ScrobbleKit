@@ -34,7 +34,7 @@ struct SBKTrackGetSimilarListTrack: Decodable {
     var image: [SBKImageResponse]
 }
 
-extension SBKTrack {
+extension SBKSimilarTrack {
     init(similarTrack: SBKTrackGetSimilarListTrack) {
         var duration: String? {
             if let duration = similarTrack.duration {
@@ -43,13 +43,16 @@ extension SBKTrack {
                 return nil
             }
         }
-        self.init(name: similarTrack.name,
-                  mbid: similarTrack.mbid,
-                  playcount: "\(similarTrack.playcount)",
-                  listeners: nil,
-                  duration: duration,
-                  artist: similarTrack.artist,
-                  url: URL(string: similarTrack.url),
-                  imageList: similarTrack.image)
+        
+        let track = SBKTrack(name: similarTrack.name,
+                             mbid: similarTrack.mbid,
+                             playcount: "\(similarTrack.playcount)",
+                             listeners: nil,
+                             duration: duration,
+                             artist: similarTrack.artist,
+                             url: URL(string: similarTrack.url),
+                             imageList: similarTrack.image)
+        
+        self.init(track: track, match: similarTrack.match)
     }
 }
