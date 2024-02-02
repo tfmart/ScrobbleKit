@@ -14,7 +14,7 @@ public struct SBKAlbum: Decodable {
     /// The artist associated with the album.
     public var artist: String
     /// The MusicBrainz ID of the album, if available.
-    public var musicBrainzID: String?
+    public var musicBrainzID: UUID?
     /// The playcount of the album.
     public var playcount: Int?
     /// The URL of the album on Last.fm.
@@ -82,7 +82,7 @@ public struct SBKAlbum: Decodable {
         self.artist = topAlbumArtist.artist.name
         self.name = topAlbumArtist.name
         self.url = topAlbumArtist.url
-        self.musicBrainzID = topAlbumArtist.mbid
+        self.musicBrainzID = UUID(optionalString: topAlbumArtist.mbid)
         self.playcount = topAlbumArtist.playcount
         self.image = topAlbumArtist.image
         
@@ -99,7 +99,7 @@ public struct SBKAlbum: Decodable {
         let container: KeyedDecodingContainer<SBKAlbum.CodingKeys> = try decoder.container(keyedBy: SBKAlbum.CodingKeys.self)
         
         self.name = try container.decode(String.self, forKey: SBKAlbum.CodingKeys.name)
-        self.musicBrainzID = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.musicBrainzID)
+        self.musicBrainzID = UUID(optionalString: try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.musicBrainzID))
         self.playcount = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKAlbum.CodingKeys.playcount)?.intValue
         self.image = try container.decodeIfPresent([SBKImageResponse].self, forKey: SBKAlbum.CodingKeys.image)
         self.tracks = try container.decodeIfPresent(SBKAlbumTracksRequestResponseList.self, forKey: SBKAlbum.CodingKeys.tracks)

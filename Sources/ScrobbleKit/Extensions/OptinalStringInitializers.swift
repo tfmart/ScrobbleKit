@@ -20,3 +20,10 @@ extension Int {
         self = integerValue
     }
 }
+
+extension UUID {
+    init?(optionalString: String?) {
+        guard let optionalString, let uuid = UUID(uuidString: optionalString) else { return nil }
+        self = uuid
+    }
+}
