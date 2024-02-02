@@ -24,7 +24,17 @@ public struct SBKImage {
     public var extraLarge: String?
     
     /// The URL for the mega-sized image.
-    public var mega: String?
+    public var mega: URL?
+    
+    /// Returns the URL of the largest available size among small, medium, large, extra-large, and mega.
+    ///
+    /// The `largestSize` property prioritizes larger sizes in descending order, returning the first non-nil URL found.
+    ///
+    /// - Returns: The URL of the largest available size, or `nil` if no size is available.
+    public var largestSize: String? {
+        let sizes = [mega, extraLarge, large, medium, small]
+        return sizes.first { $0 != nil } as? String
+    }
     
     internal init?(response: [SBKImageResponse]?) {
         guard let response else { return nil }
