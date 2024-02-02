@@ -27,7 +27,7 @@ public extension SBKManager {
                  autoCorrect: Bool = true,
                  username: String? = nil,
                  languageCode: SBKLanguageCode = .english
-    ) async throws -> SBKAlbumResponse {
+    ) async throws -> SBKAlbum {
         let service = AlbumGetInfoService(
             searchMethod: searchMethod,
             autoCorrect: autoCorrect,
@@ -37,7 +37,7 @@ public extension SBKManager {
             secretKey: secret
         )
         let response = try await service.start()
-        return .init(response: response)
+        return .init(albumResponse: response)
     }
     
     /**
@@ -56,7 +56,7 @@ public extension SBKManager {
                  autoCorrect: Bool = true,
                  username: String? = nil,
                  languageCode: SBKLanguageCode = .english,
-                 _ completion: ((SBKAlbumResponse?, Error?) -> Void)?
+                 _ completion: ((SBKAlbum?, Error?) -> Void)?
     ) {
         let service = AlbumGetInfoService(
             searchMethod: searchMethod,
@@ -76,7 +76,7 @@ public extension SBKManager {
                 completion?(nil, SBKClientError.failedToDecodeResponse)
                 return
             }
-            completion?(.init(response: album), nil)
+            completion?(.init(albumResponse: album), nil)
         }
     }
 }
