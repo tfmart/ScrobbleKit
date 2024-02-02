@@ -40,7 +40,13 @@ public struct SBKTag: Decodable {
         self.reach = try container.decodeIfPresent(Int.self, forKey: SBKTag.CodingKeys.reach)
         self.count = try? container.decodeIfPresent(Int.self, forKey: SBKTag.CodingKeys.count)
         self.wiki = try container.decodeIfPresent(SBKWiki.self, forKey: SBKTag.CodingKeys.wiki)
-        
+    }
+    
+    internal init(url: String? = nil, name: String, reach: Int? = nil, count: Int? = nil, wiki: SBKWiki? = nil) {
+        self.url = url
+        self.name = name
+        self.reach = reach
+        self.count = count
+        self.wiki = wiki
     }
 }
-
