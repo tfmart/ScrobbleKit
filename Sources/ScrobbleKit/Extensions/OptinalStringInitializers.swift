@@ -1,5 +1,5 @@
 //
-//  URL+String.swift
+//  OptinalStringInitializers.swift
 //
 //
 //  Created by Tomas Martins on 02/02/24.
@@ -11,5 +11,12 @@ extension URL {
     init?(optionalString: String?) {
         guard let optionalString, let url = URL(string: optionalString) else { return nil }
         self = url
+    }
+}
+
+extension Int {
+    init?(optionalString: String?) {
+        guard let optionalString, let integerValue = Int(optionalString) else { return nil }
+        self = integerValue
     }
 }

@@ -16,11 +16,11 @@ public struct SBKAlbum: Decodable {
     /// The MusicBrainz ID of the album, if available.
     public var musicBrainzID: String?
     /// The playcount of the album.
-    public var playcount: String?
+    public var playcount: Int?
     /// The URL of the album on Last.fm.
     public var url: String?
     /// The number of listeners for the album.
-    public var listeners: String?
+    public var listeners: Int?
     /// The wiki information associated with the album.
     public var wiki: SBKWiki?
     
@@ -83,7 +83,7 @@ public struct SBKAlbum: Decodable {
         self.name = topAlbumArtist.name
         self.url = topAlbumArtist.url
         self.musicBrainzID = topAlbumArtist.mbid
-        self.playcount = "\(topAlbumArtist.playcount)"
+        self.playcount = topAlbumArtist.playcount
         self.image = topAlbumArtist.image
         
         self.tagList = nil
@@ -100,11 +100,11 @@ public struct SBKAlbum: Decodable {
         
         self.name = try container.decode(String.self, forKey: SBKAlbum.CodingKeys.name)
         self.musicBrainzID = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.musicBrainzID)
-        self.playcount = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.playcount)
+        self.playcount = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKAlbum.CodingKeys.playcount)?.intValue
         self.image = try container.decodeIfPresent([SBKImageResponse].self, forKey: SBKAlbum.CodingKeys.image)
         self.tracks = try container.decodeIfPresent(SBKAlbumTracksRequestResponseList.self, forKey: SBKAlbum.CodingKeys.tracks)
         self.url = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.url)
-        self.listeners = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.listeners)
+        self.listeners = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKAlbum.CodingKeys.listeners)?.intValue
         self.wiki = try container.decodeIfPresent(SBKWiki.self, forKey: SBKAlbum.CodingKeys.wiki)
         
         if let artist = try? container.decode(String.self, forKey: SBKAlbum.CodingKeys.artist) {
