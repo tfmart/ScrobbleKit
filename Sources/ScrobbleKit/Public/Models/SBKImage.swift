@@ -12,27 +12,44 @@ import Foundation
  */
 public struct SBKImage {
     /// The URL for the small-sized image.
-    public var small: String?
+    public var small: URL?
     
     /// The URL for the medium-sized image.
-    public var medium: String?
+    public var medium: URL?
     
     /// The URL for the large-sized image.
-    public var large: String?
+    public var large: URL?
     
     /// The URL for the extra-large-sized image.
-    public var extraLarge: String?
+    public var extraLarge: URL?
     
     /// The URL for the mega-sized image.
-    public var mega: String?
+    public var mega: URL?
+    
+    /// Returns the URL of the largest available size among small, medium, large, extra-large, and mega.
+    ///
+    /// The `largestSize` property prioritizes larger sizes in descending order, returning the first non-nil URL found.
+    ///
+    /// - Returns: The URL of the largest available size, or `nil` if no size is available.
+    public var largestSize: URL? {
+        let sizes = [mega, extraLarge, large, medium, small]
+        let largestImage = sizes.first { $0 != nil }
+        guard let url = largestImage else { return nil }
+        return url
+    }
     
     internal init?(response: [SBKImageResponse]?) {
         guard let response else { return nil }
-        self.small = response.first(where: { $0.size == "small" })?.text
-        self.medium = response.first(where: { $0.size == "medium" })?.text
-        self.large = response.first(where: { $0.size == "large" })?.text
-        self.extraLarge = response.first(where: { $0.size == "extralarge" })?.text
-        self.mega = response.first(where: { $0.size == "mega" })?.text
+        let smallString = response.first(where: { $0.size == "small" })?.text
+        self.small = URL(optionalString: smallString)
+        let mediumString = response.first(where: { $0.size == "medium" })?.text
+        self.medium = URL(optionalString: mediumString)
+        let largeString = response.first(where: { $0.size == "large" })?.text
+        self.large = URL(optionalString: largeString)
+        let extraLargeString = response.first(where: { $0.size == "extralarge" })?.text
+        self.extraLarge = URL(optionalString: extraLargeString)
+        let megaString = response.first(where: { $0.size == "mega" })?.text
+        self.mega = URL(optionalString: megaString)
     }
 }
 

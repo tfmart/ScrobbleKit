@@ -14,23 +14,24 @@ public struct SBKAlbum: Decodable {
     /// The artist associated with the album.
     public var artist: String
     /// The MusicBrainz ID of the album, if available.
-    public var mbid: String?
-    internal var tagList: SBKTagRequestResponseList?
+    public var musicBrainzID: UUID?
     /// The playcount of the album.
-    public var playcount: String?
-    internal var image: [SBKImageResponse]?
-    internal var tracks: SBKAlbumTracksRequestResponseList?
+    public var playcount: Int?
     /// The URL of the album on Last.fm.
     public var url: String?
     /// The number of listeners for the album.
-    public var listeners: String?
+    public var listeners: Int?
     /// The wiki information associated with the album.
     public var wiki: SBKWiki?
+    
+    internal var image: [SBKImageResponse]?
+    internal var tracks: SBKAlbumTracksRequestResponseList?
+    internal var tagList: SBKTagRequestResponseList?
     
     enum CodingKeys: String, CodingKey {
         case artist
         case name
-        case mbid
+        case musicBrainzID = "mbid"
         case tagList = "tags"
         case playcount
         case image
@@ -81,12 +82,16 @@ public struct SBKAlbum: Decodable {
         self.artist = topAlbumArtist.artist.name
         self.name = topAlbumArtist.name
         self.url = topAlbumArtist.url
-        self.mbid = topAlbumArtist.mbid
-        self.playcount = "\(topAlbumArtist.playcount)"
+        self.musicBrainzID = UUID(optionalString: topAlbumArtist.mbid)
+        self.playcount = topAlbumArtist.playcount
         self.image = topAlbumArtist.image
         
         self.tagList = nil
         self.wiki = nil
+    }
+    
+    internal init(albumResponse: SBKAlbumRequestResponseList) {
+        self = albumResponse.album
     }
     
     
@@ -94,13 +99,12 @@ public struct SBKAlbum: Decodable {
         let container: KeyedDecodingContainer<SBKAlbum.CodingKeys> = try decoder.container(keyedBy: SBKAlbum.CodingKeys.self)
         
         self.name = try container.decode(String.self, forKey: SBKAlbum.CodingKeys.name)
-        self.mbid = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.mbid)
-        self.tagList = try container.decodeIfPresent(SBKTagRequestResponseList.self, forKey: SBKAlbum.CodingKeys.tagList)
-        self.playcount = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.playcount)
+        self.musicBrainzID = UUID(optionalString: try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.musicBrainzID))
+        self.playcount = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKAlbum.CodingKeys.playcount)?.intValue
         self.image = try container.decodeIfPresent([SBKImageResponse].self, forKey: SBKAlbum.CodingKeys.image)
         self.tracks = try container.decodeIfPresent(SBKAlbumTracksRequestResponseList.self, forKey: SBKAlbum.CodingKeys.tracks)
         self.url = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.url)
-        self.listeners = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.listeners)
+        self.listeners = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKAlbum.CodingKeys.listeners)?.intValue
         self.wiki = try container.decodeIfPresent(SBKWiki.self, forKey: SBKAlbum.CodingKeys.wiki)
         
         if let artist = try? container.decode(String.self, forKey: SBKAlbum.CodingKeys.artist) {
@@ -110,6 +114,12 @@ public struct SBKAlbum: Decodable {
             self.artist = artist.name
         }
         
+        if let tagString = try? container.decodeIfPresent(String.self, forKey: .tagList) {
+            if tagString.isEmpty { self.tagList = nil }
+            else { self.tagList =  .init(tag: [.init(name: tagString)] )}
+        } else {
+            self.tagList = try container.decodeIfPresent(SBKTagRequestResponseList.self, forKey: SBKAlbum.CodingKeys.tagList)
+        }
     }
 }
 

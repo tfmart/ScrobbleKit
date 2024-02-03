@@ -18,11 +18,42 @@ struct SBKTagRequestResponse: Decodable {
 
 struct SBKTagRequestResponseList: Decodable {
     var tag: [SBKTag]?
+    
+    enum CodingKeys: CodingKey {
+        case tag
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let tagString = try? container.decodeIfPresent(String.self, forKey: .tag) {
+            if tagString.isEmpty { self.tag = [] }
+            else { self.tag = [.init(name: tagString)] }
+        } else {
+            self.tag = try container.decodeIfPresent([SBKTag].self, forKey: .tag)
+        }
+    }
+    
+    internal init(tag: [SBKTag]? = nil) {
+        self.tag = tag
+    }
 }
 
 // MARK: - Tracks
-struct SBKAlbumTracksRequestResponseList: Codable {
+struct SBKAlbumTracksRequestResponseList: Decodable {
     var track: [SBKAlbumTrack]
+    
+    enum CodingKeys: CodingKey {
+        case track
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let track = try? container.decode(SBKAlbumTrack.self, forKey: .track) {
+            self.track = [track]
+        } else {
+            self.track = try container.decode([SBKAlbumTrack].self, forKey: .track)
+        }
+    }
 }
 
 // MARK: - Track
