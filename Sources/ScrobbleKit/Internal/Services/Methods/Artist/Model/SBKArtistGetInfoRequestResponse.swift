@@ -31,4 +31,8 @@ struct SBKArtistGetInfoPropertiesStats: Decodable {
 
 struct SBKArtistGetInfoSimilarResponse: Decodable {
     var artist: [SBKArtistGetInfoSimilarArtist]
+    
+    var sbkArtist: [SBKArtist] {
+        return artist.map { SBKArtist(similarArtist: $0) }
+    }
 }
