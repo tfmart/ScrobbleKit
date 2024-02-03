@@ -12,15 +12,16 @@ public struct SBKArtist: Decodable {
     /// The name of the artist.
     public let name: String
     /// The playcount of the artist.
-    public let playcount: String?
+    public let playcount: Int?
     /// The number of listeners for the artist.
-    public let listeners: String?
+    public let listeners: Int?
     /// The MusicBrainz ID of the artist, if available.
-    public let musicBrainzID: String?
+    public let musicBrainzID: UUID?
     /// The URL associated with the artist.
-    public let url: String?
+    public let url: URL?
     /// An image of the artist, if available.
     public var image: SBKImage?
+    
     public let streamable: String?
     internal let artistText: String?
     
@@ -48,10 +49,10 @@ public struct SBKArtist: Decodable {
             self.name = artistText
         }
         
-        self.playcount = try container.decodeIfPresent(String.self, forKey: SBKArtist.CodingKeys.playcount)
-        self.listeners = try container.decodeIfPresent(String.self, forKey: SBKArtist.CodingKeys.listeners)
-        self.musicBrainzID = try container.decodeIfPresent(String.self, forKey: SBKArtist.CodingKeys.musicBrainzID)
-        self.url = try container.decodeIfPresent(String.self, forKey: SBKArtist.CodingKeys.url)
+        self.playcount = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKArtist.CodingKeys.playcount)?.intValue
+        self.listeners = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKArtist.CodingKeys.listeners)?.intValue
+        self.musicBrainzID = UUID(optionalString: try container.decodeIfPresent(String.self, forKey: SBKArtist.CodingKeys.musicBrainzID))
+        self.url = try container.decodeIfPresent(URL.self, forKey: SBKArtist.CodingKeys.url)
         self.streamable = try container.decodeIfPresent(String.self, forKey: SBKArtist.CodingKeys.streamable)
         if let imageResponse = try container.decodeIfPresent([SBKImageResponse].self, forKey: SBKArtist.CodingKeys.image) {
             self.image = SBKImage(response: imageResponse)
@@ -60,10 +61,10 @@ public struct SBKArtist: Decodable {
     
     internal init(name: String, playcount: String? = nil, listeners: String? = nil, musicBrainzID: String? = nil, url: String? = nil, streamable: String? = nil, image: [SBKImageResponse]? = nil, artistText: String? = nil) {
         self.name = name
-        self.playcount = playcount
-        self.listeners = listeners
-        self.musicBrainzID = musicBrainzID
-        self.url = url
+        self.playcount = Int(optionalString: playcount)
+        self.listeners = Int(optionalString: listeners)
+        self.musicBrainzID = UUID(optionalString: musicBrainzID)
+        self.url = URL(optionalString: url)
         self.streamable = streamable
         self.image = SBKImage(response: image)
         self.artistText = artistText

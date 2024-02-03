@@ -1,5 +1,5 @@
 //
-//  NumeralStringCodable.swift
+//  NumericStringDecoder.swift
 //
 //
 //  Created by Tomas Martins on 02/02/24.
