@@ -22,7 +22,7 @@ public struct SBKArtistGetInfoData {
     /// The number of listeners for the artist on Last.fm.
     public var listeners: Int?
     /// The number of times the artist's tracks have been played on Last.fm.
-    public var playCount: Int?
+    public var playcount: Int?
     /// The tags associated with the artist.
     public var tags: [SBKTag]?
     /// The Wikipedia content for the artist.
@@ -47,10 +47,10 @@ public struct SBKArtistGetInfoData {
         
         if let stats = response.artist.stats {
             self.listeners = Int(stats.listeners)
-            self.playCount = Int(stats.playcount)
+            self.playcount = Int(stats.playcount)
         } else {
             self.listeners = nil
-            self.playCount = nil
+            self.playcount = nil
         }
     }
 }

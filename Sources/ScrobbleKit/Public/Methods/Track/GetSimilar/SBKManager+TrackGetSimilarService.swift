@@ -23,7 +23,7 @@ public extension SBKManager {
         _ track: SBKTrackSearchMethod,
         autoCorrect: Bool = true,
         limit: Int? = nil,
-        completion: (([SBKTrack]?, Error?) -> Void)?
+        completion: (([SBKSimilarTrack]?, Error?) -> Void)?
     ) {
         let service = TrackGetSimilarService(
             track: track,
@@ -42,7 +42,7 @@ public extension SBKManager {
                 return
             }
             
-            var tracks: [SBKTrack] = []
+            var tracks: [SBKSimilarTrack] = []
             for similarTrack in response.similarTracks.tracks {
                 tracks.append(.init(similarTrack: similarTrack))
             }
@@ -69,7 +69,7 @@ public extension SBKManager {
         _ track: SBKTrackSearchMethod,
         autoCorrect: Bool = true,
         limit: Int? = nil
-    ) async throws -> [SBKTrack] {
+    ) async throws -> [SBKSimilarTrack] {
         let service = TrackGetSimilarService(
             track: track,
             autoCorrect: autoCorrect,
@@ -79,7 +79,7 @@ public extension SBKManager {
         )
         let response = try await service.start()
         
-        var tracks: [SBKTrack] = []
+        var tracks: [SBKSimilarTrack] = []
         for similarTrack in response.similarTracks.tracks {
             tracks.append(.init(similarTrack: similarTrack))
         }

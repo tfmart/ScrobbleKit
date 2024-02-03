@@ -40,7 +40,7 @@ manager.getInfo(forAlbum: .albumArtist(album: "Random Access Memories",
 
 ```
 
-For more detailed information on API methods available through ScrobbleKit, check out the [full documentation]()
+For more detailed information on API methods available through ScrobbleKit, check out the [full documentation](https://tfmart.github.io/ScrobbleKit/documentation/scrobblekit/)
 
 # Requirements
 
