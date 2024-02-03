@@ -21,6 +21,14 @@ public struct SBKArtist: Decodable {
     public let url: URL?
     /// An image of the artist, if available.
     public var image: SBKImage?
+    /// A flag indicating whether the artist is currently on tour.
+    public var isOnTour: Bool?
+    /// The tags associated with the artist.
+    public var tags: [SBKTag]?
+    /// The Wikipedia content for the artist.
+    public var wiki: SBKWiki?
+    /// The list of similar artists for the artist.
+    public var similarArtists: [SBKArtist]?
     
     public let streamable: String?
     internal let artistText: String?
@@ -68,5 +76,36 @@ public struct SBKArtist: Decodable {
         self.streamable = streamable
         self.image = SBKImage(response: image)
         self.artistText = artistText
+    }
+    
+    internal init(getInfoData: SBKArtistGetInfoRequestResponse) {
+        self.name = getInfoData.artist.name
+        self.playcount = Int(optionalString: getInfoData.artist.stats?.playcount)
+        self.listeners = Int(optionalString: getInfoData.artist.stats?.listeners)
+        self.musicBrainzID = UUID(optionalString: getInfoData.artist.mbid)
+        self.url = URL(optionalString: getInfoData.artist.url)
+        self.streamable = getInfoData.artist.streamable
+        self.image = SBKImage(response: getInfoData.artist.image)
+        self.tags = getInfoData.artist.tags?.tag
+        self.wiki = getInfoData.artist.bio
+        self.similarArtists = getInfoData.artist.similar?.sbkArtist
+        self.artistText = nil
+        
+        if let onTourInt = Int(optionalString: getInfoData.artist.ontour) {
+            self.isOnTour = Bool(integer: onTourInt)
+        } else {
+            self.isOnTour = nil
+        }
+    }
+    
+    internal init(similarArtist: SBKArtistGetInfoSimilarArtist) {
+        self.name = similarArtist.name
+        self.url = URL(string: similarArtist.url)
+        self.image = similarArtist.image
+        self.playcount = nil
+        self.listeners = nil
+        self.musicBrainzID = nil
+        self.streamable = nil
+        self.artistText = nil
     }
 }
