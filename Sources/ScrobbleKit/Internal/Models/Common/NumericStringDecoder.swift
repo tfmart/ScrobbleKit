@@ -9,13 +9,13 @@ import Foundation
 
 struct IntegerStringDecoder: Decodable {
     var intValue: Int?
-
-        init(from decoder: Decoder) throws {
-            let container = try decoder.singleValueContainer()
-            if let stringValue = try? container.decode(String.self) {
-                self.intValue = Int(stringValue)
-            } else {
-                self.intValue = try? container.decode(Int.self)
-            }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let stringValue = try? container.decode(String.self) {
+            self.intValue = Int(stringValue)
+        } else {
+            self.intValue = try? container.decode(Int.self)
         }
+    }
 }
