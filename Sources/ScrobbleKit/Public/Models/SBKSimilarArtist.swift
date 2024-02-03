@@ -9,13 +9,9 @@ import Foundation
 
 /// Represents an artist that is similar to the one returned by the Last.fm API.
 public struct SBKSimilarArtist: Decodable {
-    /// The name of the similar artist.
-    public var name: String
-    /// The MusicBrainz ID associated with the artist. This is an optional property.
-    public var musicBrainzID: String?
-    /// The Last.fm URL for the similar artist.
-    public var url: String
-    
+    internal var name: String
+    internal var musicBrainzID: String?
+    internal var url: String
     internal var matchString: String
     internal var imageResponse: [SBKImageResponse]?
     
@@ -27,13 +23,16 @@ public struct SBKSimilarArtist: Decodable {
         case imageResponse = "image"
     }
     
-    /// The image for the similar artist, if available.
-    var image: SBKImage? {
-        SBKImage(response: imageResponse)
+    /// The artist that this similar artist represents
+    public var artist: SBKArtist {
+        return SBKArtist(name: name,
+        musicBrainzID: musicBrainzID,
+                         url: url,
+        image: imageResponse)
     }
     
     /// The match value for the similarity between the original artist and the similar artist, as a percentage (from 0.0 to 1.0).
-    var match: Double? {
+    public var match: Double? {
         return Double(matchString)
     }
 }
