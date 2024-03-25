@@ -13,7 +13,7 @@ import Foundation
 public struct SBKTag: Decodable {
     
     /// The URL for the tag on the Last.fm website.
-    public let url: String?
+    public let url: URL?
     
     /// The name of the tag.
     public let name: String
@@ -35,14 +35,14 @@ public struct SBKTag: Decodable {
     public init(from decoder: Decoder) throws {
         let container: KeyedDecodingContainer<SBKTag.CodingKeys> = try decoder.container(keyedBy: SBKTag.CodingKeys.self)
         
-        self.url = try container.decodeIfPresent(String.self, forKey: SBKTag.CodingKeys.url)
+        self.url = try container.decodeIfPresent(URL.self, forKey: SBKTag.CodingKeys.url)
         self.name = try container.decode(String.self, forKey: SBKTag.CodingKeys.name)
         self.reach = try container.decodeIfPresent(Int.self, forKey: SBKTag.CodingKeys.reach)
         self.count = try? container.decodeIfPresent(Int.self, forKey: SBKTag.CodingKeys.count)
         self.wiki = try container.decodeIfPresent(SBKWiki.self, forKey: SBKTag.CodingKeys.wiki)
     }
     
-    internal init(url: String? = nil, name: String, reach: Int? = nil, count: Int? = nil, wiki: SBKWiki? = nil) {
+    internal init(url: URL? = nil, name: String, reach: Int? = nil, count: Int? = nil, wiki: SBKWiki? = nil) {
         self.url = url
         self.name = name
         self.reach = reach
