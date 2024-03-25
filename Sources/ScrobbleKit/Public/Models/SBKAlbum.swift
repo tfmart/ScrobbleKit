@@ -18,7 +18,7 @@ public struct SBKAlbum: Decodable {
     /// The playcount of the album.
     public var playcount: Int?
     /// The URL of the album on Last.fm.
-    public var url: String?
+    public var url: URL?
     /// The number of listeners for the album.
     public var listeners: Int?
     /// The wiki information associated with the album.
@@ -81,7 +81,7 @@ public struct SBKAlbum: Decodable {
     internal init(topAlbumArtist: SBKArtistTopAlbum) {
         self.artist = topAlbumArtist.artist.name
         self.name = topAlbumArtist.name
-        self.url = topAlbumArtist.url
+        self.url = URL(optionalString: topAlbumArtist.url)
         self.musicBrainzID = UUID(optionalString: topAlbumArtist.mbid)
         self.playcount = topAlbumArtist.playcount
         self.image = topAlbumArtist.image
@@ -103,7 +103,7 @@ public struct SBKAlbum: Decodable {
         self.playcount = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKAlbum.CodingKeys.playcount)?.intValue
         self.image = try container.decodeIfPresent([SBKImageResponse].self, forKey: SBKAlbum.CodingKeys.image)
         self.tracks = try container.decodeIfPresent(SBKAlbumTracksRequestResponseList.self, forKey: SBKAlbum.CodingKeys.tracks)
-        self.url = try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.url)
+        self.url = try container.decodeIfPresent(URL.self, forKey: SBKAlbum.CodingKeys.url)
         self.listeners = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKAlbum.CodingKeys.listeners)?.intValue
         self.wiki = try container.decodeIfPresent(SBKWiki.self, forKey: SBKAlbum.CodingKeys.wiki)
         
