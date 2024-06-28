@@ -9,13 +9,13 @@ import Foundation
 
 extension SBKManager {
 
-    public func scrobble(track: String, artist: String, album: String?) async throws -> SBKScrobbleResponse {
+    public func scrobble(track: String, artist: String, album: String?, date: Date = Date()) async throws -> SBKScrobbleResponse {
         guard let sessionKey else { throw SBKClientError.missingSessionKey }
         let service = ScrobbleService(
             artist: artist,
             track: track,
             album: album,
-            date: Date(),
+            date: date,
             sessionKey: sessionKey,
             apiKey: self.apiKey,
             secretKey: self.secret
@@ -28,7 +28,7 @@ extension SBKManager {
         }
     }
     
-    public func scrobble(track: String, artist: String, album: String?, _ completion: ((SBKScrobbleResponse?, Error?) -> Void)? = nil) {
+    public func scrobble(track: String, artist: String, album: String?, date: Date = Date(), _ completion: ((SBKScrobbleResponse?, Error?) -> Void)? = nil) {
         guard let sessionKey else {
             completion?(nil, SBKClientError.missingSessionKey)
             return
@@ -37,7 +37,7 @@ extension SBKManager {
             artist: artist,
             track: track,
             album: album,
-            date: Date(),
+            date: date,
             sessionKey: sessionKey,
             apiKey: self.apiKey,
             secretKey: self.secret
