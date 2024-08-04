@@ -20,6 +20,8 @@ public extension SBKManager {
      - Returns: An array of `SBKTaggedItem` representing the top tracks.
      
      - Throws: An error of type `SBKError` if the request fails.
+     
+     - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/tag.getTopTracks).
      */
     func getTopTracks(forTag tag: String, limit: Int = 50, page: Int = 1) async throws -> [SBKTaggedItem] {
         let service = TagGetTopTracksService(tag: tag, limit: limit, page: page, apiKey: apiKey, secretKey: secret)
