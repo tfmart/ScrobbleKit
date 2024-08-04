@@ -7,12 +7,14 @@
 
 import Foundation
 
+import Foundation
+
 struct TagGetTopArtistsService: SBKService {
     typealias ResponseType = TagTopArtistsResponse
     
-    let tag: String
-    let limit: Int
-    let page: Int
+    var tag: String
+    var limit: Int
+    var page: Int
     var apiKey: String
     var secretKey: String
     
@@ -36,5 +38,19 @@ struct TagGetTopArtistsService: SBKService {
 }
 
 struct TagTopArtistsResponse: Decodable {
-    let artists: [SBKTaggedItem]
+    let artists: [SBKArtist]
+    
+    enum CodingKeys: String, CodingKey {
+        case artists = "topartists"
+    }
+    
+    struct TopArtists: Decodable {
+        let artist: [SBKArtist]
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let topArtists = try container.decode(TopArtists.self, forKey: .artists)
+        self.artists = topArtists.artist
+    }
 }

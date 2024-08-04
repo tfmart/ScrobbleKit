@@ -7,6 +7,8 @@
 
 import Foundation
 
+import Foundation
+
 struct TagGetTopTagsService: SBKService {
     typealias ResponseType = TagTopTagsResponse
     
@@ -25,4 +27,18 @@ struct TagGetTopTagsService: SBKService {
 
 struct TagTopTagsResponse: Decodable {
     let tags: [SBKTag]
+    
+    enum CodingKeys: String, CodingKey {
+        case tags = "toptags"
+    }
+    
+    struct TopTags: Decodable {
+        let tag: [SBKTag]
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let topTags = try container.decode(TopTags.self, forKey: .tags)
+        self.tags = topTags.tag
+    }
 }

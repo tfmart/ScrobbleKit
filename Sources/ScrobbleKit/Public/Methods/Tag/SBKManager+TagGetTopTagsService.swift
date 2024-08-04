@@ -8,7 +8,7 @@ public extension SBKManager {
      
      - Throws: An error of type `SBKError` if the request fails.
      
-     - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/tag.getTopTags).
+     - Note: See [Last.fm's tag.getTopTags documentation](https://www.last.fm/api/show/tag.getTopTags) for more information.
      */
     func getTopTags() async throws -> [SBKTag] {
         let service = TagGetTopTagsService(apiKey: apiKey, secretKey: secret)
