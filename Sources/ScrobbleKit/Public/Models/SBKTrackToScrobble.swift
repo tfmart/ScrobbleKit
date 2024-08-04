@@ -42,7 +42,7 @@ public struct SBKTrackToScrobble {
     public init(
         artist: String,
         track: String,
-        timestamp: Date,
+        timestamp: Date = Date(),
         album: String? = nil,
         albumArtist: String? = nil,
         trackNumber: Int? = nil,
