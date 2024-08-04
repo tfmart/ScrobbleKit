@@ -61,3 +61,17 @@ public struct SBKTrackToScrobble {
         self.mbid = mbid
     }
 }
+
+extension SBKTrackToScrobble: Equatable, Hashable {
+    public static func == (lhs: SBKTrackToScrobble, rhs: SBKTrackToScrobble) -> Bool {
+        return lhs.artist == rhs.artist &&
+               lhs.track == rhs.track &&
+               lhs.timestamp == rhs.timestamp
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(artist)
+        hasher.combine(track)
+        hasher.combine(timestamp)
+    }
+}

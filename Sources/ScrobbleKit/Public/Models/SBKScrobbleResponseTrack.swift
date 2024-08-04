@@ -1,5 +1,5 @@
 //
-//  SBKScrobbleResponseTrack.swift
+//  SBKScrobbleResult.swift
 //  
 //
 //  Created by Tomas Martins on 19/02/23.
@@ -7,18 +7,20 @@
 
 import Foundation
 
-/// Represents information about a song that has been attempted to be scrobbled.
-public struct SBKScrobbleResponseTrack {
-    /// The artist of the track for the attempted scrobble.
-    public let artist: String
-    /// The title of the track for the attempted scrobble.
-    public let title: String
-    /// The album of the track for the attempted scrobble. (Optional)
-    public let album: String?
-    /// The timestamp of the scrobble attempt.
-    public let timestamp: String
-    /// A list of fields corrected by Last.fm. If empty, no attributes have been corrected.
-    public let correctedAttributes: [SBKScrobbleResponseAttribute]
-    /// The scrobble status of the track, indicating whether it has been successfully logged or ignored by Last.fm, with an accompanying error message.
-    public let status: SBKScrobbleResponseTrackStatus
+/// Represents the result of a scrobble attempt for a single track.
+public struct SBKScrobbleResult: Equatable {
+    /// The track that was attempted to be scrobbled.
+    public let track: SBKTrackToScrobble
+    /// Indicates whether the scrobble was accepted by Last.fm.
+    public let isAccepted: Bool
+    /// The error that occurred during scrobbling, if any.
+    public let error: SBKScrobbleError?
+    /// The corrected track name, if Last.fm made a correction.
+    public let correctedTrack: String?
+    /// The corrected artist name, if Last.fm made a correction.
+    public let correctedArtist: String?
+    /// The corrected album name, if Last.fm made a correction.
+    public let correctedAlbum: String?
+    /// The corrected album artist name, if Last.fm made a correction.
+    public let correctedAlbumArtist: String?
 }

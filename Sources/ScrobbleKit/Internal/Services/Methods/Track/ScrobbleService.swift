@@ -10,10 +10,7 @@ import Foundation
 struct ScrobbleService: SBKAuthenticatedService {
     typealias ResponseType = SBKScrobbleList
 
-    var artist: String
-    var track: String
-    var album: String?
-    var timestamp: Int
+    var tracks: [SBKTrackToScrobble]
     
     var apiKey: String
     var secretKey: String
@@ -23,19 +20,36 @@ struct ScrobbleService: SBKAuthenticatedService {
     var queries: [URLQueryItem] = []
     var httpMethod: SBKHttpMethod = .post
     
-    init(artist: String, track: String, album: String?, date: Date, sessionKey: String, apiKey: String, secretKey: String) {
-        self.artist = artist
-        self.track = track
-        self.album = album
-        self.timestamp = Int(date.timeIntervalSince1970)
+    init(tracks: [SBKTrackToScrobble], sessionKey: String, apiKey: String, secretKey: String) {
+        self.tracks = tracks
         self.sessionKey = sessionKey
         self.apiKey = apiKey
         self.secretKey = secretKey
-        self.queries = [
-            .init(name: "artist", value: artist),
-            .init(name: "track", value: track),
-            .init(name: "album", value: album),
-            .init(name: "timestamp", value: "\(timestamp)")
-        ]
+        
+        for (index, track) in tracks.enumerated() {
+            queries.append(contentsOf: [
+                .init(name: "artist[\(index)]", value: track.artist),
+                .init(name: "track[\(index)]", value: track.track),
+                .init(name: "timestamp[\(index)]", value: "\(Int(track.timestamp.timeIntervalSince1970))")
+            ])
+            if let album = track.album {
+                queries.append(.init(name: "album[\(index)]", value: album))
+            }
+            if let albumArtist = track.albumArtist {
+                queries.append(.init(name: "albumArtist[\(index)]", value: albumArtist))
+            }
+            if let trackNumber = track.trackNumber {
+                queries.append(.init(name: "trackNumber[\(index)]", value: "\(trackNumber)"))
+            }
+            if let duration = track.duration {
+                queries.append(.init(name: "duration[\(index)]", value: "\(duration)"))
+            }
+            if let chosenByUser = track.chosenByUser {
+                queries.append(.init(name: "chosenByUser[\(index)]", value: chosenByUser ? "1" : "0"))
+            }
+            if let mbid = track.mbid {
+                queries.append(.init(name: "mbid[\(index)]", value: mbid))
+            }
+        }
     }
 }
