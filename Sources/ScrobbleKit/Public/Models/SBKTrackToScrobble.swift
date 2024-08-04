@@ -23,8 +23,6 @@ public struct SBKTrackToScrobble {
     public let trackNumber: Int?
     /// The length of the track in seconds (optional).
     public let duration: Int?
-    /// The stream id for this track received from the radio.getPlaylist service, if scrobbling Last.fm radio (optional).
-    public let streamId: String?
     /// Whether the user chose this song (optional). If not specified, assumes the user chose the song.
     public let chosenByUser: Bool?
     /// The MusicBrainz Track ID (optional).
@@ -39,7 +37,6 @@ public struct SBKTrackToScrobble {
     ///   - albumArtist: The album artist, if different from the track artist (optional).
     ///   - trackNumber: The track number on the album (optional).
     ///   - duration: The length of the track in seconds (optional).
-    ///   - streamId: The stream id for the track if scrobbling Last.fm radio (optional).
     ///   - chosenByUser: Whether the user chose this song (optional).
     ///   - mbid: The MusicBrainz Track ID (optional).
     public init(
@@ -50,7 +47,6 @@ public struct SBKTrackToScrobble {
         albumArtist: String? = nil,
         trackNumber: Int? = nil,
         duration: Int? = nil,
-        streamId: String? = nil,
         chosenByUser: Bool? = nil,
         mbid: String? = nil
     ) {
@@ -61,7 +57,6 @@ public struct SBKTrackToScrobble {
         self.albumArtist = albumArtist
         self.trackNumber = trackNumber
         self.duration = duration
-        self.streamId = streamId
         self.chosenByUser = chosenByUser
         self.mbid = mbid
     }
