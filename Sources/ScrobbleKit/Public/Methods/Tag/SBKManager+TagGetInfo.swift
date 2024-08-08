@@ -13,7 +13,7 @@ public extension SBKManager {
      
      - Parameters:
         - tag: The tag name.
-        - language: The language to return the wiki in, expressed as an ISO 639 alpha-2 code. (Optional)
+        - language: The language to return the wiki in, expressed as an ISO 639 alpha-2 code. The default value is ``SBKLanguageCode.english`.
      
      - Returns: An `SBKTag` object containing the tag's metadata.
      
@@ -21,7 +21,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's tag.getInfo documentation](https://www.last.fm/api/show/tag.getInfo) for more information.
      */
-    func getInfo(forTag tag: String, language: String? = nil) async throws -> SBKTag {
+    func getInfo(forTag tag: String, language: SBKLanguageCode = .english) async throws -> SBKTag {
         let service = TagGetInfoService(tag: tag, language: language, apiKey: apiKey, secretKey: secret)
         let response = try await service.start()
         return response.tag
