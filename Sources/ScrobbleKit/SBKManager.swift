@@ -8,20 +8,38 @@
 import Foundation
 import Combine
 
+/// The main class for interacting with the Last.fm API.
 public class SBKManager: ObservableObject {
+    /// The API key for authenticating with Last.fm.
     internal let apiKey: String
-    internal let secret: String
-    internal var sessionKey: String?
     
+    /// The secret key for authenticating with Last.fm.
+    internal let secret: String
+    
+    /// The session key for authenticated requests. This is set after a successful login.
+    @Published public private(set) var sessionKey: String?
+    
+    /// Creates a new instance of the SBKManager.
+    /// - Parameters:
+    ///   - apiKey: The API key obtained from Last.fm.
+    ///   - secret: The secret key obtained from Last.fm.
     public init(apiKey: String, secret: String) {
         self.apiKey = apiKey
         self.secret = secret
     }
     
+    /// Sets the session key for authenticated requests.
+    /// - Parameter session: The session key to set.
     public func setSessionKey(_ session: String) {
         self.sessionKey = session
     }
     
+    /// Starts a new session with Last.fm using the provided credentials.
+    /// - Parameters:
+    ///   - username: The Last.fm username.
+    ///   - password: The Last.fm password.
+    /// - Returns: The session information if successful.
+    /// - Throws: An error if the authentication fails.
     @discardableResult
     public func startSession(username: String, password: String) async throws -> SBKSessionResponseInfo {
         let service = AuthSessionService(username: username,

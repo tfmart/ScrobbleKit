@@ -1,4 +1,4 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -8,8 +8,10 @@ let package = Package(
     platforms: [
         .iOS(.v13),
         .macOS(.v10_15),
+        .macCatalyst(.v13),
         .watchOS(.v6),
-        .tvOS(.v13)
+        .tvOS(.v13),
+        .visionOS(.v1)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -18,7 +20,7 @@ let package = Package(
             targets: ["ScrobbleKit"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-docc-plugin", branch: "main")
+        .package(url: "https://github.com/swiftlang/swift-docc-plugin", from: "1.1.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
