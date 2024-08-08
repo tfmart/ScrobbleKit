@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct TagGetInfoService: SBKService {
     typealias ResponseType = TagGetInfoResponse
     

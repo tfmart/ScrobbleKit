@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct TagGetWeeklyChartListService: SBKService {
     typealias ResponseType = TagGetWeeklyChartListResponse
     

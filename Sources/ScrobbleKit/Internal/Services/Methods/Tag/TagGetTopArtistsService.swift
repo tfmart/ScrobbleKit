@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct TagGetTopArtistsService: SBKService {
     typealias ResponseType = TagTopArtistsResponse
     
