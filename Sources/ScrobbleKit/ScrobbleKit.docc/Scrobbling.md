@@ -41,6 +41,7 @@ do {
 } catch {
     // Handle scrobbling error
 }
+```
 
 ### Scrobbling Multiple Tracks
 
@@ -108,4 +109,3 @@ if let error = manager.errorFor(tracks[1], in: response) {
 ```
 
 These methods provide a quick way to check if the single track was scrobbled successfully or if there was an error.
-```
