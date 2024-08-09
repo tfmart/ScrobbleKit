@@ -7,28 +7,39 @@
 
 import Foundation
 
+/// Represents client-side errors that can occur when using ScrobbleKit.
 public enum SBKClientError: Error, LocalizedError {
+    /// Indicates that a session key is required but not available.
+    ///
+    /// - Call the authentication method to obtain a valid session key before performing this action.
     case missingSessionKey
-    case badURL
-    case failedToDecodeResponse
-    case overLimitPerPage
-    case noTracksToScrobble
-    case tooManyTracks
     
+    /// Indicates that the provided URL is not valid.
+    ///
+    /// -  Check the API endpoint URL and ensure all parameters are properly encoded.
+    case badURL
+    
+    /// Indicates that the response from the Last.fm API could not be decoded.
+    ///
+    /// - Check if you're using the latest version of ScrobbleKit. If the issue persists, please [file an issue on the package's GitHub repository](https://github.com/tfmart/ScrobbleKit/issues/new).
+    case failedToDecodeResponse
+    
+    /// Indicates that the requested number of items per page exceeds the allowed limit.
+    ///
+    /// - Reduce the 'limit' parameter in your request. The maximum allowed value for each specific API method can be found on it's documentation.
+    case overLimitPerPage
+    
+    /// A localized description of the error.
     public var errorDescription: String? {
         switch self {
         case .missingSessionKey:
-            return NSLocalizedString("Make sure you've signed-in with a Last.fm account before performing this action", comment: "")
+            return NSLocalizedString("A valid session key is required. Make sure you've signed in with a Last.fm account before performing this action.", comment: "")
         case .badURL:
-            return NSLocalizedString("The provided URL is not valid", comment: "")
+            return NSLocalizedString("The provided URL is not valid. Please check the URL and try again.", comment: "")
         case .failedToDecodeResponse:
-            return NSLocalizedString("Could not read data. Please try again later", comment: "")
+            return NSLocalizedString("Failed to decode the response from Last.fm. The API might have changed or returned unexpected data.", comment: "")
         case .overLimitPerPage:
-            return NSLocalizedString("Cannot fetch this amount of data per page. Please, reduce the amount of data beign read", comment: "")
-        case .noTracksToScrobble:
-            return NSLocalizedString("No tracks provided for scrobbling", comment: "")
-        case .tooManyTracks:
-            return NSLocalizedString("Too many tracks provided. Maximum is 50 tracks per request", comment: "")
+            return NSLocalizedString("The requested number of items per page exceeds the allowed limit. Please reduce the number of items requested.", comment: "")
         }
     }
 }
