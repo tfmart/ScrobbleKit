@@ -24,18 +24,15 @@ public extension SBKManager {
         let response = try await service.start()
         let chartList = response.weeklyChartList
         return chartList.compactMap { chartTag in
-            guard let fromText = chartTag.from, let toText = chartTag.to else { return nil }
-            var fromDate: Date?
-            if let fromText = chartTag.from, let fromDateDouble = Double(fromText) {
-                fromDate = Date(timeIntervalSince1970: fromDateDouble)
-            }
+            guard let fromText = chartTag.from, let toText = chartTag.to,
+                  let fromDateDouble = Double(fromText), let toDateDouble = Double(toText) else { return nil }
             
-            var toDate: Date?
-            if let toText = chartTag.to, let toDateDouble = Double(toText) {
-                toDate = Date(timeIntervalSince1970: toDateDouble)
-            }
+            let fromDate = Date(timeIntervalSince1970: fromDateDouble)
+            let toDate = Date(timeIntervalSince1970: toDateDouble)
             
-            return SBKTag(name: tag, from: fromDate, to: toDate)
+            let url = try? SBKURLBuilder.url(forTag: tag)
+            
+            return SBKTag(name: tag, url: url, from: fromDate, to: toDate)
         }
     }
 }
