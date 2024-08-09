@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Represents countries supported by Last.fm API, using ISO 3166-1 country names.
 public enum SBKCountry: String, CaseIterable {
     case afghanistan = "Afghanistan"
     case albania = "Albania"
@@ -237,5 +238,26 @@ public enum SBKCountry: String, CaseIterable {
     case yemen = "Yemen"
     case zambia = "Zambia"
     case zimbabwe = "Zimbabwe"
+    
+    /// Returns an `SBKCountry` instance based on the provided locale's region.
+    ///
+    /// This function attempts to create an `SBKCountry` instance that corresponds
+    /// to the country or region of the provided locale. If the locale's region
+    /// doesn't match any of the predefined countries, it returns `nil`.
+    ///
+    /// - Parameter locale: The locale to use for determining the country. Defaults to `Locale.current`.
+    /// - Returns: An `SBKCountry` instance if the locale's region matches a supported country, otherwise `nil`.
+    public static func from(locale: Locale = .current) -> SBKCountry? {
+        // Get the region code using a method compatible with earlier iOS versions
+        let regionCode = locale.regionCode ?? locale.identifier.components(separatedBy: "_").last ?? ""
+        
+        // Convert region code to full country name
+        guard let countryName = locale.localizedString(forRegionCode: regionCode) else {
+            return nil
+        }
+        
+        // Find matching SBKCountry case
+        return SBKCountry.allCases.first { $0.rawValue.lowercased() == countryName.lowercased() }
+    }
 }
 
