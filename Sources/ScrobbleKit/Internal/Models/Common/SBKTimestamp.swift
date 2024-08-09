@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SBKTimestamp: Decodable {
+struct SBKTimestamp: Decodable {
     public let timestamp: String
     public let date: String
     
