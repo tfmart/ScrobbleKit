@@ -39,7 +39,7 @@ struct TagTopTracksResponse: Decodable {
     let tracks: [SBKTrack]
     
     enum CodingKeys: String, CodingKey {
-        case tracks = "toptracks"
+        case tracks = "tracks"
     }
     
     struct TopTracks: Decodable {

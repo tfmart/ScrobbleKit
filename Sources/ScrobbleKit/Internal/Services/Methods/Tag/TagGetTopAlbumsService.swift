@@ -46,10 +46,6 @@ struct TagTopAlbumsResponse: Decodable {
         case albums = "albums"
     }
     
-    struct TopAlbums: Decodable {
-        let album: [TagTopAlbumsList]
-    }
-    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let topAlbums = try container.decode(TagTopAlbumsList.self, forKey: .albums)
