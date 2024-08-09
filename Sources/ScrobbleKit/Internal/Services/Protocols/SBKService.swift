@@ -43,6 +43,7 @@ internal extension SBKService {
                                                              value: signature)]
         urlComponents.queryItems = queriesWithSignature
         urlComponents.percentEncodedQuery = urlComponents.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        print(urlComponents.url)
         return urlComponents.url
     }
     

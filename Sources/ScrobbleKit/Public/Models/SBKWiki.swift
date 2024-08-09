@@ -20,12 +20,13 @@ public struct SBKWiki: Decodable {
     
     /// The date and time the wiki entry was published, or `nil` if the date couldn't be parsed.
     public var published: Date? {
+        guard let publishedString else { return nil }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM yyyy, HH:mm"
         return dateFormatter.date(from: publishedString)
     }
     
-    private let publishedString: String
+    private let publishedString: String?
     
     enum CodingKeys: String, CodingKey {
         case summary

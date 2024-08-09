@@ -36,19 +36,23 @@ struct TagGetTopAlbumsService: SBKService {
 }
 
 struct TagTopAlbumsResponse: Decodable {
+    struct TagTopAlbumsList: Decodable {
+        let album: [SBKAlbum]
+    }
+    
     let albums: [SBKAlbum]
     
     enum CodingKeys: String, CodingKey {
-        case albums = "topalbums"
+        case albums = "albums"
     }
     
     struct TopAlbums: Decodable {
-        let album: [SBKAlbum]
+        let album: [TagTopAlbumsList]
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let topAlbums = try container.decode(TopAlbums.self, forKey: .albums)
+        let topAlbums = try container.decode(TagTopAlbumsList.self, forKey: .albums)
         self.albums = topAlbums.album
     }
 }
