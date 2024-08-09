@@ -9,7 +9,7 @@ import Foundation
 
 public struct SBKScrobbledTrack: Decodable {
     public let track: SBKTrack
-    public let date: SBKTimestamp
+    public let date: Date?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -32,6 +32,11 @@ public struct SBKScrobbledTrack: Decodable {
             artist: artist,
             url: URL(string: url)
         )
-        self.date = try container.decode(SBKTimestamp.self, forKey: .date)
+        let timestamp = try container.decode(SBKTimestamp.self, forKey: .date)
+        if let timeInterval = TimeInterval(timestamp.timestamp) {
+            self.date = Date(timeIntervalSince1970: timeInterval)
+        } else {
+            self.date = nil
+        }
     }
 }
