@@ -29,6 +29,16 @@ public enum SBKClientError: Error, LocalizedError {
     /// - Reduce the 'limit' parameter in your request. The maximum allowed value for each specific API method can be found on it's documentation.
     case overLimitPerPage
     
+    /// Indicates that there are no tracks available to scrobble.
+    ///
+    /// - Ensure that you have provided at least one track to scrobble before making the API call.
+    case noTracksToScrobble
+    
+    /// Indicates that too many tracks were provided for scrobbling in a single request.
+    ///
+    /// - Reduce the number of tracks you're trying to scrobble in a single request. Consider splitting the tracks into multiple requests if necessary.
+    case tooManyTracks
+    
     /// A localized description of the error.
     public var errorDescription: String? {
         switch self {
@@ -40,6 +50,10 @@ public enum SBKClientError: Error, LocalizedError {
             return NSLocalizedString("Failed to decode the response from Last.fm. The API might have changed or returned unexpected data.", comment: "")
         case .overLimitPerPage:
             return NSLocalizedString("The requested number of items per page exceeds the allowed limit. Please reduce the number of items requested.", comment: "")
+        case .noTracksToScrobble:
+            return NSLocalizedString("No tracks were provided to scrobble. Please ensure you have at least one track before making the scrobble request.", comment: "")
+        case .tooManyTracks:
+            return NSLocalizedString("Too many tracks were provided for scrobbling in a single request. Please reduce the number of tracks or split them into multiple requests.", comment: "")
         }
     }
 }
