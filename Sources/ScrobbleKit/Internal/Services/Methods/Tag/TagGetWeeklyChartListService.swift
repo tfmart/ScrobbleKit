@@ -30,14 +30,23 @@ struct TagGetWeeklyChartListService: SBKService {
 }
 
 struct TagGetWeeklyChartListResponse: Decodable {
-    let weeklyChartList: [SBKTag]
+    let weeklyChartList: [WeeklyChartTag]
     
     enum CodingKeys: String, CodingKey {
         case weeklyChartList = "weeklychartlist"
     }
     
     struct WeeklyChartList: Decodable {
-        let chart: [SBKTag]
+        let chart: [WeeklyChartTag]
+    }
+    
+    struct WeeklyChartTag: Decodable {
+        var text, from, to: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case text = "#text"
+            case from, to
+        }
     }
     
     init(from decoder: Decoder) throws {
