@@ -13,7 +13,7 @@ public struct SBKTag: Decodable {
     public let name: String
     
     /// The URL of the tag's page on Last.fm.
-    public let url: String?
+    public let url: URL?
     
     /// The number of users that have used this tag.
     public let reach: Int?
@@ -49,7 +49,8 @@ public struct SBKTag: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         name = try container.decode(String.self, forKey: .name)
-        url = try container.decodeIfPresent(String.self, forKey: .url)
+        let urlString = try container.decodeIfPresent(String.self, forKey: .url)
+        url = URL(optionalString: urlString)
         reach = try container.decodeIfPresent(Int.self, forKey: .reach)
         taggings = try container.decodeIfPresent(Int.self, forKey: .taggings)
         streamable = try container.decodeIfPresent(Bool.self, forKey: .streamable)
@@ -70,7 +71,7 @@ public struct SBKTag: Decodable {
     
     internal init(
         name: String,
-        url: String? = nil,
+        url: URL? = nil,
         reach: Int? = nil,
         taggings: Int? = nil,
         streamable: Bool? = nil,
