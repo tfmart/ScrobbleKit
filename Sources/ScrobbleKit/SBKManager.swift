@@ -50,4 +50,14 @@ public class SBKManager: ObservableObject {
         self.sessionKey = result.info.key
         return result.info
     }
+    
+    /// Signs the user out of their Last.fm account.
+    ///
+    /// This method clears the current session key, effectively ending the user's authenticated session with Last.fm.
+    /// After calling this method, any API calls that require authentication will fail until the user signs in again.
+    ///
+    /// - Note: This method does not perform any network operations. It only clears the local session data.
+    public func signOut() {
+        self.sessionKey = nil
+    }
 }
