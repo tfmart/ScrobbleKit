@@ -51,6 +51,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's artist.getTags documentation](https://www.last.fm/api/show/artist.getTags) for more information.
      */
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func getTags(forArtist searchMethod: SBKArtistSearchMethod,
                        user: String? = nil,
                        autocorrect: Bool,

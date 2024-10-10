@@ -50,6 +50,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getTopTags documentation](https://www.last.fm/api/show/user.getTopTags) for more information.
      */
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func getTopTags(forUser user: String, limit: Int? = nil, completion: ((SBKSearchResult<SBKTag>?, Error?) -> Void)?) {
         let service = UserGetTopTagsService(
             user: user,

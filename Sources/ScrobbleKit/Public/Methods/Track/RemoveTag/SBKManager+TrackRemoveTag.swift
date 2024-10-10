@@ -47,6 +47,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's track.removeTag documentation](https://www.last.fm/api/show/track.removeTag) for more information.
      */
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func removeTag(fromTrack track: String, artist: String, tag: String, completion: ((Bool, Error?) -> Void)?) {
         guard let sessionKey = sessionKey else {
             completion?(false, SBKClientError.missingSessionKey)

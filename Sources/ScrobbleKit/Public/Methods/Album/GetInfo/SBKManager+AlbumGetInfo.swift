@@ -52,6 +52,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's album.addTags documentation](https://www.last.fm/api/show/album.getInfo) for more information.
      */
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func getInfo(forAlbum searchMethod: SBKAlbumSearchMethod,
                  autoCorrect: Bool = true,
                  username: String? = nil,

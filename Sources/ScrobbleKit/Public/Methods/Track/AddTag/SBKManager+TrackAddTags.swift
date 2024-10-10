@@ -47,6 +47,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's track.addTags documentation](https://www.last.fm/api/show/track.addTags) for more information.
      */
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func addTags(toTrack track: String, artist: String, tags: [String], completion: ((Bool, Error?) -> Void)?) {
         guard let sessionKey = sessionKey else {
             completion?(false, SBKClientError.missingSessionKey)

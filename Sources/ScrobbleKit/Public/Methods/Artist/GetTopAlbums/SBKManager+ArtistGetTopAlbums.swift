@@ -40,6 +40,7 @@ public extension SBKManager {
         return response.topAlbums.albums.map({ SBKAlbum(topAlbumArtist: $0) })
     }
     
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func getTopAlbums(
         forArtist searchMethod: SBKArtistSearchMethod,
         limit: Int = 50,

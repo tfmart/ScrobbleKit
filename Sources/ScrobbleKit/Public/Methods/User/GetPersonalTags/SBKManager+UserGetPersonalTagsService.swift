@@ -152,6 +152,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getPersonalTags documentation](https://www.last.fm/api/show/user.getPersonalTags) for more information.
      */
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func getPersonalTagsForArtists(fromUser user: String, tag: String, limit: Int = 50, page: Int = 1, completion: ((SBKSearchResult<SBKArtist>?, Error?) -> Void)?) {
         Task {
             do {
@@ -175,6 +176,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getPersonalTags documentation](https://www.last.fm/api/show/user.getPersonalTags) for more information.
      */
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func getPersonalTagsForTracks(fromUser user: String, tag: String, limit: Int = 50, page: Int = 1, completion: ((SBKSearchResult<SBKTrack>?, Error?) -> Void)?) {
         Task {
             do {
@@ -198,6 +200,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getPersonalTags documentation](https://www.last.fm/api/show/user.getPersonalTags) for more information.
      */
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func getPersonalTagsForAlbums(fromUser user: String, tag: String, limit: Int = 50, page: Int = 1, completion: ((SBKSearchResult<SBKAlbum>?, Error?) -> Void)?) {
         Task {
             do {

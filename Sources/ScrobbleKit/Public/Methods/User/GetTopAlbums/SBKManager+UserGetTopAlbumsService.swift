@@ -62,6 +62,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getTopAlbums documentation](https://www.last.fm/api/show/user.getTopAlbums) for more information.
      */
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func getUserTopAlbums(forUser user: String, period: SBKSearchPeriod = .overall, limit: Int = 50, page: Int = 1, completion: ((SBKSearchResult<SBKAlbum>?, Error?) -> Void)?) {
         let service = UserGetTopAlbumsService(
             user: user,

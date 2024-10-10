@@ -50,6 +50,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getFriends documentation](https://www.last.fm/api/show/user.getFriends) for more information.
      */
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func getFriends(for user: String, recentTracks: Bool = false, limit: Int = 50, page: Int = 1, completion: (([SBKUser]?, Error?) -> Void)?) {
         let service = UserGetFriendsService(
             user: user,

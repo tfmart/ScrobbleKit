@@ -25,6 +25,7 @@ public extension SBKManager {
     /// - Parameters:
     ///   - artist: The artist name to correct.
     ///   - completion: A closure that will be called with the corrected artist name or an error, once the operation has completed.
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func getCorrectedArtistName(_ artist: String, _ completion: ((SBKArtist?, Error?) -> Void)?) {
         let service = ArtistGetCorrectionService(artist: artist, apiKey: apiKey, secretKey: secret)
         service.start { response, error in

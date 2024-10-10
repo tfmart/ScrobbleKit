@@ -38,6 +38,7 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/chart.getTopTags).
      */
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func getTagsChart(page: Int = 1, limit: Int = 50, _ completion: (([SBKTag]?, Error?) -> Void)?) {
         let service = ChartGetTopTagsService(page: page, limit: limit, apiKey: apiKey, secretKey: secret)
         service.start { response, error in

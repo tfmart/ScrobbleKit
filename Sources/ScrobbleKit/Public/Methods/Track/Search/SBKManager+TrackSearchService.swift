@@ -50,6 +50,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's track.search documentation](https://www.last.fm/api/show/track.search) for more information.
      */
+    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
     func search(track: String, artist: String? = nil, limit: Int = 30, page: Int = 0, completion: (([SBKTrack]?, Error?) -> Void)?) {
         let service = TrackSearchService(
             track: track,
