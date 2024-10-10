@@ -1,50 +1,77 @@
 # ScrobbleKit
 
-ScrobbleKit is a Swift library designed to simplify interactions with the [Last.fm API](https://www.last.fm/api) on Apple platforms
+ScrobbleKit is a modern Swift library designed to simplify interactions with the [Last.fm API](https://www.last.fm/api) on Apple platforms. It provides a clean, async/await-based interface for seamless integration with your Swift apps.
 
-# Getting Started
 
-To begin using ScrobbleKit, create an instance of SBKManager by providing your [API and Secret key from Last.fm](https://www.last.fm/api/account/create)
+## Getting Started
+
+To begin using ScrobbleKit, you'll need to create an instance of `SBKManager` by providing your [API and Secret key from Last.fm](https://www.last.fm/api/account/create).
 
 ```swift
 import ScrobbleKit
 
-let manager = SBKManager(apiKey: API_KEY,
-                         secret: SECRET_KEY)
+let manager = SBKManager(apiKey: "YOUR_API_KEY", secret: "YOUR_SECRET_KEY")
 ```
 
-You can utilize the available API methods through the manager, which supports both async/await and completion handler-based approaches.
+## Usage
 
-### Async/Await
+ScrobbleKit supports async/await for all API methods. Here's an example of how to fetch album information:
+
 ```swift
 do {
     let album = try await manager.getInfo(forAlbum: .albumArtist(album: "Random Access Memories",
                                                                  artist: "Daft Punk"))
-    // Use 'album' here
+    print("Album name: \(album.name)")
+    print("Artist: \(album.artist)")
+    print("Tracks: \(album.tracklist.count)")
 } catch {
-    // Handle error
+    print("Error fetching album info: \(error)")
 }
 ```
 
-### Completion Handler
+## Authentication
+
+For methods requiring authentication, you'll need to start a session:
+
 ```swift
-manager.getInfo(forAlbum: .albumArtist(album: "Random Access Memories",
-                                       artist: "Daft Punk"))
-{ album, error in
-    if let album = album {
-        // Use 'album' here
-    } else if let error = error {
-        // Handle error
-    }
+do {
+    let session = try await manager.startSession(username: "YOUR_USERNAME", password: "YOUR_PASSWORD")
+    print("Authenticated as: \(session.name)")
+} catch {
+    print("Authentication failed: \(error)")
 }
-
 ```
 
-For more detailed information on API methods available through ScrobbleKit, check out the [full documentation](https://tfmart.github.io/ScrobbleKit/documentation/scrobblekit/)
+## Documentation
 
-# Requirements
+For detailed information on all available API methods and models, check out the [full documentation](https://tfmart.github.io/ScrobbleKit/documentation/scrobblekit/).
 
-- iOS 13.0 or later
-- macOS Catalina or later
-- watchOS 6.0 or later 
-- tvOS 13.0 or later
+## Requirements
+
+- iOS 13.0+
+- macOS 10.15+
+- watchOS 6.0+
+- tvOS 13.0+
+- Swift 5.5+
+
+## Installation
+
+### Swift Package Manager
+
+Add the following to your `Package.swift` file:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/tfmart/ScrobbleKit.git", from: "0.1.0")
+]
+```
+
+Or add it directly in Xcode using File > Add Packages > Search or Enter Package URL.
+
+## Contributing
+
+Contributions to ScrobbleKit are welcome! Please feel free to submit a Pull Request or to open an Issue.
+
+## License
+
+ScrobbleKit is available under the MIT license. See the LICENSE file for more info.
