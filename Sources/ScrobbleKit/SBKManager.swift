@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 /// The main class for interacting with the Last.fm API.
-public class SBKManager: ObservableObject {
+public actor SBKManager: Sendable, ObservableObject {
     /// The API key for authenticating with Last.fm.
     internal let apiKey: String
     
