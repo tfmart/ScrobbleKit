@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents information about an artist retrieved from Last.fm, providing details such as name, playcount, and images.
-public struct SBKArtist: Decodable {
+public struct SBKArtist: Sendable, Decodable {
     /// The name of the artist.
     public let name: String
     /// The playcount of the artist.

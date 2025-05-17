@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SBKService: Sendable {
+protocol SBKService {
     associatedtype ResponseType: Decodable & Sendable
     typealias CompletionType = ((ResponseType?, Error?) -> Void)?
     var sbkMethod: SBKMethod { get }

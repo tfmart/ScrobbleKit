@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a track to be scrobbled to Last.fm.
-public struct SBKTrackToScrobble {
+public struct SBKTrackToScrobble: Sendable {
     /// The artist name.
     public let artist: String
     /// The track name.

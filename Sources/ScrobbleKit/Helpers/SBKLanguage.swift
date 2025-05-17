@@ -41,7 +41,7 @@ import Foundation
  * `thai` - Thai (`th`)
  * `indonesian` - Indonesian (`id`)
  */
-public enum SBKLanguageCode: String {
+public enum SBKLanguageCode: String, Sendable {
     /// English
     ///
     /// Language code: **en**
