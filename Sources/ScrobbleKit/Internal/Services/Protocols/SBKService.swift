@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol SBKService {
-    associatedtype ResponseType: Decodable
+protocol SBKService: Sendable {
+    associatedtype ResponseType: Decodable & Sendable
     typealias CompletionType = ((ResponseType?, Error?) -> Void)?
     var sbkMethod: SBKMethod { get }
     var queries: [URLQueryItem] { get set }

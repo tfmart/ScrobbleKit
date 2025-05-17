@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TrackGetSimilarService: SBKService {
+final class TrackGetSimilarService: SBKService {
     var apiKey: String
     var secretKey: String
     
