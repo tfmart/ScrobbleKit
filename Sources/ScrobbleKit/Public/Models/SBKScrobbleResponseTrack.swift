@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the result of a scrobble attempt for a single track.
-public struct SBKScrobbleResult: Equatable {
+public struct SBKScrobbleResult: Sendable, Equatable {
     /// The track that was attempted to be scrobbled.
     public let track: SBKTrackToScrobble
     /// Indicates whether the scrobble was accepted by Last.fm.

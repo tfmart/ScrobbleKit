@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the different methods available for searching a track on Last.fm.
-public enum SBKTrackSearchMethod {
+public enum SBKTrackSearchMethod: Sendable {
     /// Search for a track by its name and artist.
     ///
     /// - Parameters:

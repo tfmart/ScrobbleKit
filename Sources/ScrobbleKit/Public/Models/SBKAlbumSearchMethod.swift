@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the different methods available for searching an album on Last.fm.
-public enum SBKAlbumSearchMethod {
+public enum SBKAlbumSearchMethod: Sendable {
     /// Search for an album by its name and artist.
     ///
     /// - Parameters:

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a user on Last.fm, providing various details about their profile and activity.
-public struct SBKUser {
+public struct SBKUser: Sendable {
     /// The username of the Last.fm user.
     public var username: String
     

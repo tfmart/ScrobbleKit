@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a track that is similar to another track, as determined by Last.fm.
-public struct SBKSimilarTrack {
+public struct SBKSimilarTrack: Sendable {
     /// The track that this similar track represents.
     public var track: SBKTrack
     

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the result of a Last.fm search.
-public struct SBKSearchResult<Model: Decodable> {
+public struct SBKSearchResult<Model: Decodable & Sendable>: Sendable {
     /// The list of results retrieved from the search.
     public var results: [Model]
     /// The dictionary containing search terms and their corresponding values.
