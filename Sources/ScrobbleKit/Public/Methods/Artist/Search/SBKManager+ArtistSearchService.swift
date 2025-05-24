@@ -37,42 +37,4 @@ public extension SBKManager {
         let response = try await service.start()
         return response.results.matches.artists
     }
-    
-    /**
-     Searches for artists similar to the given query.
-     
-     - Parameters:
-     - query: The search query.
-     - limit: The maximum number of results to return.
-     - page: The page number of results to return.
-     - completion: A closure to be executed when the search is complete. It returns an optional array of ``SBKArtist`` objects representing the search results and an optional error.
-     
-     - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/artist.search).
-     */
-    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
-    func search(
-        artist query: String,
-        limit: Int = 50,
-        page: Int = 1,
-        _ completion: (([SBKArtist]?, Error?) -> Void)?
-    ) {
-        let service = ArtistSearchService(
-            query,
-            limit: limit,
-            page: page,
-            apiKey: apiKey,
-            secretKey: secret
-        )
-        service.start { response, error in
-            guard error == nil else {
-                completion?(nil, error)
-                return
-            }
-            guard let response else {
-                completion?(nil, SBKClientError.failedToDecodeResponse)
-                return
-            }
-            completion?(response.results.matches.artists, nil)
-        }
-    }
 }

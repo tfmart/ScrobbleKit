@@ -35,7 +35,7 @@ struct TagGetTopAlbumsService: SBKService {
     }
 }
 
-struct TagTopAlbumsResponse: Decodable {
+struct TagTopAlbumsResponse: Sendable, Decodable {
     struct TagTopAlbumsList: Decodable {
         let album: [SBKAlbum]
     }

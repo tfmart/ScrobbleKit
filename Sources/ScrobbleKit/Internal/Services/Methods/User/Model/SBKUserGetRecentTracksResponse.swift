@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct SBKUserGetRecentTracksResponse: Decodable {
+struct SBKUserGetRecentTracksResponse: Decodable, Sendable {
     var recenttracks: SBKUserGetRecentTracksResult
 }
 
-struct SBKUserGetRecentTracksResult: Decodable {
+struct SBKUserGetRecentTracksResult: Decodable, Sendable {
     let tracks: [SBKScrobbledTrack]
     let attributes: SBKUserGetRecentTracksAttributes
     

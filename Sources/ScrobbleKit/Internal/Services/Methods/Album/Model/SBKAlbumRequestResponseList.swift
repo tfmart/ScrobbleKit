@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SBKAlbumRequestResponseList: Decodable {
+struct SBKAlbumRequestResponseList: Decodable, Sendable {
     var album: SBKAlbum
 }
 

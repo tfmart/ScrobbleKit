@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents information from an album in Last.fm, providing details such as name, artist, playcount, and tags.
-public struct SBKAlbum: Decodable {
+public struct SBKAlbum: Decodable, Sendable {
     /// The name of the album.
     public var name: String
     /// The artist associated with the album.

@@ -35,7 +35,7 @@ struct TagGetTopTracksService: SBKService {
     }
 }
 
-struct TagTopTracksResponse: Decodable {
+struct TagTopTracksResponse: Sendable, Decodable {
     let tracks: [SBKTrack]
     
     enum CodingKeys: String, CodingKey {
