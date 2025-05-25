@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 protocol SBKService: Sendable {
     associatedtype ResponseType: Decodable & Sendable
