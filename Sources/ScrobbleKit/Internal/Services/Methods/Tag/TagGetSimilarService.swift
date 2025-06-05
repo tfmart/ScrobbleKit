@@ -29,14 +29,14 @@ struct TagGetSimilarService: SBKService {
     }
 }
 
-struct TagSimilarResponse: Decodable {
+struct TagSimilarResponse: Decodable, Sendable {
     let similarTags: [SBKTag]
     
     enum CodingKeys: String, CodingKey {
         case similarTags = "similartags"
     }
     
-    struct SimilarTags: Decodable {
+    struct SimilarTags: Decodable, Sendable {
         let tag: [SBKTag]
     }
     

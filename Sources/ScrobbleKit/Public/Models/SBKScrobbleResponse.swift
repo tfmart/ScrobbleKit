@@ -7,10 +7,8 @@
 
 import Foundation
 
-import Foundation
-
 /// Represents the response from a scrobble request to Last.fm.
-public struct SBKScrobbleResponse {
+public struct SBKScrobbleResponse: Sendable {
     /// The results for each track that was attempted to be scrobbled.
     public let results: [SBKScrobbleResult]
     /// The number of tracks that were successfully scrobbled.

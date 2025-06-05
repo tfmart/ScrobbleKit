@@ -20,9 +20,9 @@ struct UserGetRecentTracksService: SBKService {
     init(user: String,
          limit: Int = 50,
          page: Int = 1,
-         from: TimeInterval? = nil,
+         from: Date? = nil,
          extended: Bool? = nil,
-         to: TimeInterval? = nil,
+         to: Date? = nil,
          apiKey: String,
          secretKey: String) {
         self.apiKey = apiKey
@@ -34,16 +34,16 @@ struct UserGetRecentTracksService: SBKService {
             .init(name: "page", numericValue: page)
         ]
         
-        if let fromTimestamp = from {
-            queryItems.append(.init(name: "from", numericValue: Int(fromTimestamp)))
+        if let fromDate = from {
+            queryItems.append(.init(name: "from", numericValue: Int(fromDate.timeIntervalSince1970)))
         }
         
         if let extendedData = extended {
             queryItems.append(.init(name: "extended", bool: extendedData))
         }
         
-        if let toTimestamp = to {
-            queryItems.append(.init(name: "to", numericValue: Int(toTimestamp)))
+        if let toDate = to {
+            queryItems.append(.init(name: "to", numericValue: Int(toDate.timeIntervalSince1970)))
         }
         
         queries = queryItems

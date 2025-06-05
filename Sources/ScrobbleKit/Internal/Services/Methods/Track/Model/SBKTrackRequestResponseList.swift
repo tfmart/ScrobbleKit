@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct SBKTrackRequestResponseList: Decodable {
+struct SBKTrackRequestResponseList: Decodable, Sendable {
     var track: SBKTrack
 }

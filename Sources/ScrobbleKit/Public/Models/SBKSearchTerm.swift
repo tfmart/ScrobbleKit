@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the search terms available for Last.fm searches.
-public enum SBKSearchTerm {
+public enum SBKSearchTerm: Sendable {
     case artist
     case user
     case tag

@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct SBKAlbumRequestResponseList: Decodable {
+struct SBKAlbumRequestResponseList: Decodable, Sendable {
     var album: SBKAlbum
 }
 
 // MARK: - Tags
-struct SBKTagRequestResponse: Decodable {
+struct SBKTagRequestResponse: Decodable, Sendable {
     var tags: SBKTagRequestResponseList
 }
 
-struct SBKTagRequestResponseList: Decodable {
+struct SBKTagRequestResponseList: Decodable, Sendable {
     var tag: [SBKTag]?
     
     enum CodingKeys: CodingKey {
@@ -39,7 +39,7 @@ struct SBKTagRequestResponseList: Decodable {
 }
 
 // MARK: - Tracks
-struct SBKAlbumTracksRequestResponseList: Decodable {
+struct SBKAlbumTracksRequestResponseList: Decodable, Sendable {
     var track: [SBKAlbumTrack]
     
     enum CodingKeys: CodingKey {
@@ -57,7 +57,7 @@ struct SBKAlbumTracksRequestResponseList: Decodable {
 }
 
 // MARK: - Track
-struct SBKAlbumTrack: Codable {
+struct SBKAlbumTrack: Codable, Sendable {
     var streamable: SBKAlbumTrackStreamable
     var duration: Int?
     var url: String
@@ -73,19 +73,19 @@ struct SBKAlbumTrack: Codable {
 }
 
 // MARK: - ArtistClass
-struct SBKAlbumTrackArtist: Codable {
+struct SBKAlbumTrackArtist: Codable, Sendable {
     var url: String
     var name: String
     var mbid: String
 }
 
 // MARK: - Attr
-struct SBKAlbumTrackAttribute: Codable {
+struct SBKAlbumTrackAttribute: Codable, Sendable {
     var rank: Int
 }
 
 // MARK: - Streamable
-struct SBKAlbumTrackStreamable: Codable {
+struct SBKAlbumTrackStreamable: Codable, Sendable {
     var fulltrack, text: String
 
     enum CodingKeys: String, CodingKey {

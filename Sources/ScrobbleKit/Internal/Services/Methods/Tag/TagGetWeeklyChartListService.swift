@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct TagGetWeeklyChartListService: SBKService {
     typealias ResponseType = TagGetWeeklyChartListResponse
     
@@ -31,15 +29,24 @@ struct TagGetWeeklyChartListService: SBKService {
     }
 }
 
-struct TagGetWeeklyChartListResponse: Decodable {
-    let weeklyChartList: [SBKTag]
+struct TagGetWeeklyChartListResponse: Decodable, Sendable {
+    let weeklyChartList: [WeeklyChartTag]
     
     enum CodingKeys: String, CodingKey {
         case weeklyChartList = "weeklychartlist"
     }
     
-    struct WeeklyChartList: Decodable {
-        let chart: [SBKTag]
+    struct WeeklyChartList: Decodable, Sendable {
+        let chart: [WeeklyChartTag]
+    }
+    
+    struct WeeklyChartTag: Decodable, Sendable {
+        var text, from, to: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case text = "#text"
+            case from, to
+        }
     }
     
     init(from decoder: Decoder) throws {

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents an artist that is similar to the one returned by the Last.fm API.
-public struct SBKSimilarArtist: Decodable {
+public struct SBKSimilarArtist: Decodable, Sendable {
     internal var name: String
     internal var musicBrainzID: String?
     internal var url: String

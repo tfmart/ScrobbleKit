@@ -37,40 +37,4 @@ public extension SBKManager {
         let response = try await service.start()
         return response.topartists.artist
     }
-    
-    /**
-     Retrieves the top artists for a specific geographic location.
-     
-     - Parameters:
-     - country: The two-letter country code for the desired location.
-     - limit: The maximum number of results to return (default value is 50).
-     - completion: A closure to be executed when the request is complete. It returns an optional array of ``SBKArtist`` objects representing the search results and an optional error.
-     
-     - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/geo.getTopArtists).
-     */
-    func getTopArtists(
-        forCountry country: SBKCountry,
-        limit: Int = 50,
-        page: Int = 1,
-        completion: (([SBKArtist]?, Error?) -> Void)?
-    ) {
-        let service = GeoGetTopArtistsService(
-            country: country,
-            limit: limit,
-            page: page,
-            apiKey: apiKey,
-            secretKey: secret
-        )
-        service.start { response, error in
-            guard error == nil else {
-                completion?(nil, error)
-                return
-            }
-            guard let response = response else {
-                completion?(nil, SBKClientError.failedToDecodeResponse)
-                return
-            }
-            completion?(response.topartists.artist, nil)
-        }
-    }
 }

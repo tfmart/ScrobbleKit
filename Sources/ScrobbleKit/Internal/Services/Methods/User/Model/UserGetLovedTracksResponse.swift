@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct _UserGetLovedTracksResponse: Decodable {
+struct _UserGetLovedTracksResponse: Decodable, Sendable {
     let lovedtracks: _UserLovedTracksList
 }
 
-struct _UserLovedTracksList: Decodable {
+struct _UserLovedTracksList: Decodable, Sendable {
     let track: [_UserLovedTrack]
     let attributes: _UserLovedTracksAttributes
     
@@ -21,7 +21,7 @@ struct _UserLovedTracksList: Decodable {
     }
 }
 
-struct _UserLovedTrack: Decodable {
+struct _UserLovedTrack: Decodable, Sendable {
     let artist: SBKArtist
     let date: SBKTimestamp
     let name: String
@@ -30,7 +30,7 @@ struct _UserLovedTrack: Decodable {
     let image: [SBKImageResponse]
 }
 
-struct _UserLovedTracksAttributes: Decodable {
+struct _UserLovedTracksAttributes: Decodable, Sendable {
     let user: String
     let totalPages: String
     let page: String

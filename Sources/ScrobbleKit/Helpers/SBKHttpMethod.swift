@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SBKHttpMethod: String {
+public enum SBKHttpMethod: String, Sendable {
     case `get` = "GET"
     case post = "POST"
     case put = "PUT"

@@ -6,9 +6,12 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
-protocol SBKService {
-    associatedtype ResponseType: Decodable
+protocol SBKService: Sendable {
+    associatedtype ResponseType: Decodable & Sendable
     typealias CompletionType = ((ResponseType?, Error?) -> Void)?
     var sbkMethod: SBKMethod { get }
     var queries: [URLQueryItem] { get set }
@@ -19,7 +22,6 @@ protocol SBKService {
     
     var completedQueries: [URLQueryItem] { get }
 
-    func start(_ completion: CompletionType)
     func start() async throws -> ResponseType
 }
 
@@ -102,27 +104,6 @@ internal extension SBKService {
 
 // MARK: Default start() implementations
 extension SBKService {
-    func start(_ completion: CompletionType) {
-        guard let url = url else {
-            completion?(nil, SBKClientError.badURL)
-            return
-        }
-        var request = URLRequest(url: url)
-        request.httpMethod = httpMethod.rawValue
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                completion?(nil, error)
-                return
-            }
-            do {
-                let model = try self.parse(data)
-                completion?(model, nil)
-            } catch {
-                completion?(nil, error)
-            }
-        }.resume()
-    }
-    
     func start() async throws -> ResponseType {
         guard let url = url else {
             throw SBKClientError.badURL

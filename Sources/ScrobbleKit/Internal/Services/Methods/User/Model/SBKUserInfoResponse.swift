@@ -7,21 +7,53 @@
 
 import Foundation
 
-public struct SBKUser {
+/// Represents a user on Last.fm, providing various details about their profile and activity.
+public struct SBKUser: Sendable {
+    /// The username of the Last.fm user.
     public var username: String
+    
+    /// The real name of the user, if provided.
     public var realName: String?
+    
+    /// The profile image of the user.
     public var image: SBKImage?
+    
+    /// The country of the user, if provided.
     public var country: String?
+    
+    /// The age of the user, if provided.
     public var age: String?
+    
+    /// Indicates whether the user has a Last.fm Pro account.
     public var isPro: Bool
+    
+    /// The total number of tracks played by the user.
     public var playcount: Int
+    
+    /// The number of unique artists in the user's library.
     public var artistCount: String?
+    
+    /// The number of playlists created by the user.
     public var playlistsCount: Int?
+    
+    /// The bootstrap value for the user, if available.
     public var bootstrap: String?
+    
+    /// The gender of the user, if provided.
     public var gender: String?
+    
+    /// The URL of the user's Last.fm profile.
     public var url: String
+    
+    /// The type of the user account.
     public var type: String?
+    
+    /// The date when the user joined Last.fm.
     public var memberSince: Date
+    
+    /// Initializes a new `SBKUser` instance from a Last.fm API response.
+    ///
+    /// - Parameter response: The API response containing user information.
     
     init(from response: SBKUserInfoDataResponse) {
         self.username = response.name
@@ -45,11 +77,11 @@ public struct SBKUser {
     }
 }
 
-struct SBKUserInfoResponse: Decodable {
+struct SBKUserInfoResponse: Decodable, Sendable {
     var user: SBKUserInfoDataResponse
 }
 
-struct SBKUserInfoDataResponse: Decodable {
+struct SBKUserInfoDataResponse: Decodable, Sendable {
     let name: String
     let realName: String?
     let imageURL: [SBKImageResponse]?
@@ -82,7 +114,7 @@ struct SBKUserInfoDataResponse: Decodable {
         case type
     }
     
-    struct SBKRegisteredInfo: Decodable {
+    struct SBKRegisteredInfo: Decodable, Sendable {
         let unixTime: Date
         let timeString: String
         

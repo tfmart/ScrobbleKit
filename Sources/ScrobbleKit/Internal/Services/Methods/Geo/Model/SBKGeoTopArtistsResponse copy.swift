@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct SBKGeoTopArtistsResponse: Decodable {
+struct SBKGeoTopArtistsResponse: Decodable, Sendable {
     var topartists: SBKGeoTopArtistsList
 }
 
-struct SBKGeoTopArtistsList: Decodable {
+struct SBKGeoTopArtistsList: Decodable, Sendable {
     let artist: [SBKArtist]
 }

@@ -22,6 +22,17 @@ public extension SBKManager {
     func getWeeklyChartList(forTag tag: String) async throws -> [SBKTag] {
         let service = TagGetWeeklyChartListService(tag: tag, apiKey: apiKey, secretKey: secret)
         let response = try await service.start()
-        return response.weeklyChartList
+        let chartList = response.weeklyChartList
+        return chartList.compactMap { chartTag in
+            guard let fromText = chartTag.from, let toText = chartTag.to,
+                  let fromDateDouble = Double(fromText), let toDateDouble = Double(toText) else { return nil }
+            
+            let fromDate = Date(timeIntervalSince1970: fromDateDouble)
+            let toDate = Date(timeIntervalSince1970: toDateDouble)
+            
+            let url = try? SBKURLBuilder.url(forTag: tag)
+            
+            return SBKTag(name: tag, url: url, from: fromDate, to: toDate)
+        }
     }
 }

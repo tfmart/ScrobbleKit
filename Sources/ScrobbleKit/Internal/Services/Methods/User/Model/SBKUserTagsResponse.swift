@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct SBKUserTagsResponse: Decodable {
+struct SBKUserTagsResponse: Decodable, Sendable {
     var taggings: SBKUserTagsList
 }
 
-struct SBKUserTagsList: Decodable {
+struct SBKUserTagsList: Decodable, Sendable {
     var tracks: SBKUserTagsListResults?
     var albums: SBKUserTagsListResults?
     var artists: SBKUserTagsListResults?
@@ -23,7 +23,7 @@ struct SBKUserTagsList: Decodable {
     }
 }
 
-struct SBKUserTagsListResults: Decodable {
+struct SBKUserTagsListResults: Decodable, Sendable {
     var track: [SBKTrack]?
     var album: [SBKAlbum]?
     var artist: [SBKArtist]?

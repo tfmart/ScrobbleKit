@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct SBKAlbumSearchResultListResponse: Decodable {
+struct SBKAlbumSearchResultListResponse: Decodable, Sendable {
     var album: [SBKAlbum]?
 }

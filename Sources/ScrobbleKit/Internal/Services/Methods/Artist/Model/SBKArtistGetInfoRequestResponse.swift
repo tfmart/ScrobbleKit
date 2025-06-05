@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct SBKArtistGetInfoRequestResponse: Decodable {
+struct SBKArtistGetInfoRequestResponse: Decodable, Sendable {
     var artist: SBKArtistGetInfoProperties
 }
 
-struct SBKArtistGetInfoProperties: Decodable {
+struct SBKArtistGetInfoProperties: Decodable, Sendable {
     var name: String
     var mbid: String?
     var image: [SBKImageResponse]?
@@ -24,12 +24,12 @@ struct SBKArtistGetInfoProperties: Decodable {
     var bio: SBKWiki?
 }
 
-struct SBKArtistGetInfoPropertiesStats: Decodable {
+struct SBKArtistGetInfoPropertiesStats: Decodable, Sendable {
     var listeners: String
     var playcount: String
 }
 
-struct SBKArtistGetInfoSimilarResponse: Decodable {
+struct SBKArtistGetInfoSimilarResponse: Decodable, Sendable {
     var artist: [SBKArtistGetInfoSimilarArtist]
     
     var sbkArtist: [SBKArtist] {

@@ -19,24 +19,4 @@ public extension SBKManager {
         let response = try await service.start()
         return response.corrections.correction.result
     }
-    
-    /// Checks whether the supplied artist has a correction to a canonical artist
-    ///
-    /// - Parameters:
-    ///   - artist: The artist name to correct.
-    ///   - completion: A closure that will be called with the corrected artist name or an error, once the operation has completed.
-    func getCorrectedArtistName(_ artist: String, _ completion: ((SBKArtist?, Error?) -> Void)?) {
-        let service = ArtistGetCorrectionService(artist: artist, apiKey: apiKey, secretKey: secret)
-        service.start { response, error in
-            guard error == nil else {
-                completion?(nil, error)
-                return
-            }
-            guard let correctedName = response?.corrections.correction.result else {
-                completion?(nil, SBKClientError.failedToDecodeResponse)
-                return
-            }
-            completion?(correctedName, nil)
-        }
-    }
 }

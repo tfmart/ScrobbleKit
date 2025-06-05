@@ -7,13 +7,11 @@
 
 import Foundation
 
-import Foundation
-
 struct TagGetInfoService: SBKService {
     typealias ResponseType = TagGetInfoResponse
     
     var tag: String
-    var language: String?
+    var language: SBKLanguageCode
     var apiKey: String
     var secretKey: String
     
@@ -21,7 +19,7 @@ struct TagGetInfoService: SBKService {
     var queries: [URLQueryItem]
     var httpMethod: SBKHttpMethod = .get
     
-    init(tag: String, language: String?, apiKey: String, secretKey: String) {
+    init(tag: String, language: SBKLanguageCode, apiKey: String, secretKey: String) {
         self.tag = tag
         self.language = language
         self.apiKey = apiKey
@@ -30,12 +28,10 @@ struct TagGetInfoService: SBKService {
         self.queries = [
             .init(name: "tag", value: tag)
         ]
-        if let language = language {
-            self.queries.append(.init(name: "lang", value: language))
-        }
+        self.queries.append(.init(name: "lang", value: language.rawValue))
     }
 }
 
-struct TagGetInfoResponse: Decodable {
+struct TagGetInfoResponse: Decodable, Sendable {
     let tag: SBKTag
 }

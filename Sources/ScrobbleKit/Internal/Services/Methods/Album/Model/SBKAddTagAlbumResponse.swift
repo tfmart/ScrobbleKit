@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct SBKAddTagAlbumResponse: Decodable {
+struct SBKAddTagAlbumResponse: Decodable, Sendable {
     let tags: SBKTagRequestResponseList
 }

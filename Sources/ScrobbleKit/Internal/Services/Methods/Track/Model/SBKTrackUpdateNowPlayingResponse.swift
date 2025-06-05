@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct SBKTrackUpdateNowPlayingResponse: Decodable {
+struct SBKTrackUpdateNowPlayingResponse: Decodable, Sendable {
     let nowPlaying: NowPlaying
     
     enum CodingKeys: String, CodingKey {
         case nowPlaying = "nowplaying"
     }
     
-    struct NowPlayingCorrectedInfo: Decodable {
+    struct NowPlayingCorrectedInfo: Decodable, Sendable {
         var corrected: String
         var text: String
         
@@ -24,7 +24,7 @@ struct SBKTrackUpdateNowPlayingResponse: Decodable {
         }
     }
     
-    struct NowPlaying: Decodable {
+    struct NowPlaying: Decodable, Sendable {
         let track: NowPlayingCorrectedInfo
         let artist: NowPlayingCorrectedInfo
         let album: NowPlayingCorrectedInfo
@@ -36,7 +36,7 @@ struct SBKTrackUpdateNowPlayingResponse: Decodable {
         }
     }
     
-    struct IgnoredMessage: Decodable {
+    struct IgnoredMessage: Decodable, Sendable {
         let code: SBKTrackUpdateNowPlayingCode?
         
         enum CodingKeys: String, CodingKey {

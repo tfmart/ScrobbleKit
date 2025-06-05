@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct SBKLibraryGetArtistsResponse: Decodable {
+struct SBKLibraryGetArtistsResponse: Decodable, Sendable {
     let artists: SBKLibraryGetArtistsList
 }
 
-struct SBKLibraryGetArtistsList: Decodable {
+struct SBKLibraryGetArtistsList: Decodable, Sendable {
     let artist: [SBKArtist]
 }
 

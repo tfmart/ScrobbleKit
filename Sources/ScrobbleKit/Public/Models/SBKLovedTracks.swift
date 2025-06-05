@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents information about an user's Loved Tracks list.
-public struct SBKLovedTracks {
+public struct SBKLovedTracks: Sendable {
     /// The attributes of the current query
     public let searchAttributes: SBKSearchAttributes
     /// The list of tracks in the list.

@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct TagGetTopTagsService: SBKService {
     typealias ResponseType = TagTopTagsResponse
     
@@ -25,14 +23,14 @@ struct TagGetTopTagsService: SBKService {
     }
 }
 
-struct TagTopTagsResponse: Decodable {
+struct TagTopTagsResponse: Decodable, Sendable {
     let tags: [SBKTag]
     
     enum CodingKeys: String, CodingKey {
         case tags = "toptags"
     }
     
-    struct TopTags: Decodable {
+    struct TopTags: Decodable, Sendable {
         let tag: [SBKTag]
     }
     

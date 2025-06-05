@@ -1,0 +1,18 @@
+//
+//  SBKTimestamp.swift
+//  
+//
+//  Created by Tomas Martins on 26/08/23.
+//
+
+import Foundation
+
+struct SBKTimestamp: Decodable, Sendable {
+    public let timestamp: String
+    public let date: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case timestamp = "uts"
+        case date = "#text"
+    }
+}

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SBKArtistGetTopAlbumsResponse: Decodable {
+struct SBKArtistGetTopAlbumsResponse: Decodable, Sendable {
     let topAlbums: SBKArtistGetTopAlbumsList
     
     enum CodingKeys: String, CodingKey {
@@ -15,7 +15,7 @@ struct SBKArtistGetTopAlbumsResponse: Decodable {
     }
 }
 
-struct SBKArtistGetTopAlbumsList: Decodable {
+struct SBKArtistGetTopAlbumsList: Decodable, Sendable {
     let albums: [SBKArtistTopAlbum]
     
     enum CodingKeys: String, CodingKey {
@@ -23,7 +23,7 @@ struct SBKArtistGetTopAlbumsList: Decodable {
     }
 }
 
-struct SBKArtistTopAlbum: Decodable {
+struct SBKArtistTopAlbum: Decodable, Sendable {
     var name: String
     var url: String
     var playcount: Int
@@ -32,7 +32,7 @@ struct SBKArtistTopAlbum: Decodable {
     var artist: SBKArtistTopAlbumArtist
 }
 
-struct SBKArtistTopAlbumArtist: Decodable {
+struct SBKArtistTopAlbumArtist: Decodable, Sendable {
     var name: String
     var mbid: String?
     var url: String

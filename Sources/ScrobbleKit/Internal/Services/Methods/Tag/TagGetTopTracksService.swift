@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct TagGetTopTracksService: SBKService {
     typealias ResponseType = TagTopTracksResponse
     
@@ -37,14 +35,14 @@ struct TagGetTopTracksService: SBKService {
     }
 }
 
-struct TagTopTracksResponse: Decodable {
+struct TagTopTracksResponse: Sendable, Decodable {
     let tracks: [SBKTrack]
     
     enum CodingKeys: String, CodingKey {
-        case tracks = "toptracks"
+        case tracks = "tracks"
     }
     
-    struct TopTracks: Decodable {
+    struct TopTracks: Decodable, Sendable {
         let track: [SBKTrack]
     }
     

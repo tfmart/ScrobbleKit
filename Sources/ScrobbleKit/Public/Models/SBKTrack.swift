@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents information about a track retrieved from Last.fm.
-public struct SBKTrack: Decodable {
+public struct SBKTrack: Decodable, Sendable {
     /// The name of the track.
     public var name: String
     /// The MusicBrainz ID of the track, if available.

@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct SBKTrackSearchResultListResponse: Decodable {
+struct SBKTrackSearchResultListResponse: Decodable, Sendable {
     var track: [SBKTrack]?
 }

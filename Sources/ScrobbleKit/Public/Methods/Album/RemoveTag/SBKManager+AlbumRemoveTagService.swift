@@ -32,39 +32,4 @@ public extension SBKManager {
         _ = try await service.start()
         return true
     }
-    
-    /**
-      Remove a user's tag from an album on Last.fm API.
-
-      - Parameter album: The name of the album.
-      - Parameter artist: The name of the artist.
-      - Parameter tag: The tag to remove from the album.
-      - Parameter completion: A completion block to be called with the result of the operation.
-
-      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/album.removeTag).
-    */
-    func removeTag(fromAlbum album: String, artist: String, tag: String, _ completion: ((Bool, Error?) -> Void)?) {
-        guard let sessionKey else {
-            completion?(false, SBKClientError.missingSessionKey)
-            return
-        }
-        let service = RemoveTagService(
-            to: .album(album, artist: artist),
-            tag: tag,
-            apiKey: apiKey,
-            secretKey: secret,
-            sessionKey: sessionKey
-        )
-        service.start { response, error in
-            guard error == nil else {
-                completion?(false, error)
-                return
-            }
-            guard response != nil else {
-                completion?(false, SBKClientError.failedToDecodeResponse)
-                return
-            }
-            completion?(true, nil)
-        }
-    }
 }
