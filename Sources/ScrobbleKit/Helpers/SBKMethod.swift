@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SBKMethod: String {
+enum SBKMethod: String, Sendable {
     // Auth
     case getSession = "auth.getMobileSession"
     case getToken = "auth.getToken"

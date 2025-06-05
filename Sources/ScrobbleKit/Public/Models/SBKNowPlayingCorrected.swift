@@ -10,11 +10,11 @@ import Foundation
 /**
  A struct representing the corrected information after a track update now playing request.
  */
-public struct SBKNowPlayingCorrected {
+public struct SBKNowPlayingCorrected: Sendable {
     /**
      Enum representing the types of corrected information.
      */
-    public enum SBKNowPlayingInfo {
+    public enum SBKNowPlayingInfo: Sendable {
         case track
         case artist
         case album

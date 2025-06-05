@@ -6,20 +6,30 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
+#endif
 
 /// The main class for interacting with the Last.fm API.
-public class SBKManager: ObservableObject {
+public actor SBKManager: Sendable {
     /// The API key for authenticating with Last.fm.
     internal let apiKey: String
-    
+
     /// The secret key for authenticating with Last.fm.
     internal let secret: String
-    
+
+    #if canImport(Combine)
     /// The session key for authenticated requests. This is set after a successful login.
     @Published public private(set) var sessionKey: String?
-    
-    /// Creates a new instance of the SBKManager.
+    #else
+    /// The session key for authenticated requests. This is set after a successful login.
+    private var _sessionKey: String?
+    /// Returns the current session key if authenticated.
+    public var sessionKey: String? { _sessionKey }
+    #endif
+
+    /// Creates a new instance of the `SBKManager`.
+    ///
     /// - Parameters:
     ///   - apiKey: The API key obtained from Last.fm.
     ///   - secret: The secret key obtained from Last.fm.
@@ -27,14 +37,20 @@ public class SBKManager: ObservableObject {
         self.apiKey = apiKey
         self.secret = secret
     }
-    
+
     /// Sets the session key for authenticated requests.
+    ///
     /// - Parameter session: The session key to set.
     public func setSessionKey(_ session: String) {
+        #if canImport(Combine)
         self.sessionKey = session
+        #else
+        self._sessionKey = session
+        #endif
     }
-    
+
     /// Starts a new session with Last.fm using the provided credentials.
+    ///
     /// - Parameters:
     ///   - username: The Last.fm username.
     ///   - password: The Last.fm password.
@@ -47,10 +63,10 @@ public class SBKManager: ObservableObject {
                                          apiKey: apiKey,
                                          secretKey: secret)
         let result = try await service.start()
-        self.sessionKey = result.info.key
+        setSessionKey(result.info.key)
         return result.info
     }
-    
+
     /// Signs the user out of their Last.fm account.
     ///
     /// This method clears the current session key, effectively ending the user's authenticated session with Last.fm.
@@ -58,6 +74,16 @@ public class SBKManager: ObservableObject {
     ///
     /// - Note: This method does not perform any network operations. It only clears the local session data.
     public func signOut() {
+        #if canImport(Combine)
         self.sessionKey = nil
+        #else
+        self._sessionKey = nil
+        #endif
     }
 }
+
+#if canImport(Combine)
+extension SBKManager:  ObservableObject {
+    
+}
+#endif

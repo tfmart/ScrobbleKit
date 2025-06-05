@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct SBKCorrectedResponse<T: Decodable>: Decodable {
+struct SBKCorrectedResponse<T: Decodable & Sendable>: Decodable, Sendable {
     var corrections: SBKCorrectedResult<T>
 }
 
-struct SBKCorrectedResult<T: Decodable>: Decodable {
+struct SBKCorrectedResult<T: Decodable & Sendable>: Decodable, Sendable {
     var correction: SBKCorrectedResultDetail<T>
 }
 
-struct SBKCorrectedResultDetail<T: Decodable>: Decodable {
+struct SBKCorrectedResultDetail<T: Decodable & Sendable>: Decodable, Sendable {
     var result: T?
     
     enum CodingKeys: CodingKey {

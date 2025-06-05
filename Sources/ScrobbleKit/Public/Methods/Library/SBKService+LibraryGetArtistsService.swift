@@ -25,28 +25,4 @@ public extension SBKManager {
         let response = try await service.start()
         return response.artists.artist
     }
-    
-    /**
-     Returns a list of all the artists in a user's library.
-     
-     - Parameters:
-        - user: The Last.fm username to fetch the library of.
-        - completion: A closure to be executed when the request is complete. It returns an optional array of ``SBKArtist`` objects representing the library and an optional error.
-     
-     - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/library.getArtists).
-     */
-    func getArtistsFromLibrary(from user: String, limit: Int = 50, page: Int = 1, _ completion: (([SBKArtist]?, Error?) -> Void)?) {
-        let service = LibraryGetArtistsService(user: user, limit: limit, page: page, apiKey: apiKey, secret: secret)
-        service.start { response, error in
-            guard error == nil else {
-                completion?(nil, error)
-                return
-            }
-            guard let response else {
-                completion?(nil, SBKClientError.failedToDecodeResponse)
-                return
-            }
-            completion?(response.artists.artist, nil)
-        }
-    }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a tag in the Last.fm ecosystem.
-public struct SBKTag: Decodable {
+public struct SBKTag: Sendable, Decodable {
     /// The name of the tag.
     public let name: String
     

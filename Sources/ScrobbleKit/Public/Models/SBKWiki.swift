@@ -10,7 +10,7 @@ import Foundation
 /**
  A model representing a wiki entry.
  */
-public struct SBKWiki: Decodable {
+public struct SBKWiki: Sendable, Decodable {
     
     /// The summary of the wiki entry.
     public let summary: String

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the time periods available for Last.fm chart and statistic queries.
-public enum SBKSearchPeriod: String {
+public enum SBKSearchPeriod: String, Sendable {
     /// Represents all-time statistics.
     case overall
     

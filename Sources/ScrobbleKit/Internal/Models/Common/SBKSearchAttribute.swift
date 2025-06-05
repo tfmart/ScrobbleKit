@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SBKSearchAttribute: Decodable {
+protocol SBKSearchAttribute: Decodable, Sendable {
     var page: String { get set }
     var perPage: String { get set }
     var totalPages: String { get set }

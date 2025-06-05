@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents search attributes used in Last.fm search queries
-public struct SBKSearchAttributes {
+public struct SBKSearchAttributes: Sendable {
     /// The search term used in the query.
     public let term: String
     /// The total number of pages available.

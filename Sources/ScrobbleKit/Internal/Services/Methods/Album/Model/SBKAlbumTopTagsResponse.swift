@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct SBKAlbumTopTagsResponse: Decodable {
+struct SBKAlbumTopTagsResponse: Decodable, Sendable {
     let toptags: SBKTagRequestResponseList
 }

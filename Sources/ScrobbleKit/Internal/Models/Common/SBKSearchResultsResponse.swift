@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct SBKSearchResultsResponse<T: Decodable>: Decodable {
+struct SBKSearchResultsResponse<T: Decodable & Sendable>: Decodable, Sendable {
     let results: SBKSearchResultsDetails<T>
 }
 
-struct SBKSearchResultsDetails<T: Decodable>: Decodable {
+struct SBKSearchResultsDetails<T: Decodable & Sendable>: Decodable, Sendable {
     let query: SBKSearchQuery
     let totalResults: String
     let startIndex: String

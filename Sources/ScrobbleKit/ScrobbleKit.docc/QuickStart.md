@@ -40,7 +40,7 @@ let manager = SBKManager(apiKey: API_KEY,
                          secret: SECRET_KEY)
 ```
 
-Throughout your app, use this manager class to access Last.fm API methods provided in the library. Since ``SBKManager`` inherits from `ObservableObject`, in a SwiftUI app, share this instance through a `StateObject`:
+Throughout your app, use this manager class to access Last.fm API methods provided in the library. Since ``SBKManager`` is an actor that conditionally conforms to `ObservableObject` when Combine is available, in a SwiftUI app, share this instance through a `StateObject`:
 
 ```swift
 @main
@@ -72,11 +72,9 @@ struct ContentView: View {
 
 ### Calling API methods
 
-To utilize any of the available methods, refer to the list under the ``SBKManager`` documentation. All methods support both Async/Await for modern concurrency data fetching and completion handlers for a more traditional approach.
+To utilize any of the available methods, refer to the list under the ``SBKManager`` documentation. All methods use Swift's modern Async/Await concurrency pattern for safe, efficient data fetching.
 
-For instance, to retrieve information from an album in the Last.fm database, utilize the  ``SBKManager/getInfo(forAlbum:autoCorrect:username:languageCode:)`` method, employing either of the following approaches:
-
-#### Async/Await
+For instance, to retrieve information from an album in the Last.fm database, utilize the  ``SBKManager/getInfo(forAlbum:autoCorrect:username:languageCode:)`` method:
 
 ```swift
 do {
@@ -88,16 +86,4 @@ do {
 }
 ```
 
-#### Completion Handler
-
-```swift
-manager.getInfo(forAlbum: .albumArtist(album: "Random Access Memories",
-                                       artist: "Daft Punk"))
-{ album, error in
-    if let album = album {
-        // Use 'album' here
-    } else if let error = error {
-        // Handle error
-    }
-}
-```
+> Note: Since ``SBKManager`` is an actor, all method calls are inherently thread-safe and must be called with `await`.

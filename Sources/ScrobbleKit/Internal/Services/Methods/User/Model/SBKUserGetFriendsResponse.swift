@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct SBKUserGetFriendsRootObject: Decodable {
+struct SBKUserGetFriendsRootObject: Decodable, Sendable {
     let friends: SBKUserGetFriendsResponse
 }
 
-struct SBKUserGetFriendsResponse: Decodable {
+struct SBKUserGetFriendsResponse: Decodable, Sendable {
     let attributes: SBKUserGetFriendsAttribute
     let friends: [SBKUserInfoDataResponse]
     
@@ -21,7 +21,7 @@ struct SBKUserGetFriendsResponse: Decodable {
     }
 }
 
-struct SBKUserGetFriendsAttribute: Decodable {
+struct SBKUserGetFriendsAttribute: Decodable, Sendable {
     var user: String
     var totalPages: String
     var page: String

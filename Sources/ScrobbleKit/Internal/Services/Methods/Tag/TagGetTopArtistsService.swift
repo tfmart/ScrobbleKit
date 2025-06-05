@@ -35,14 +35,14 @@ struct TagGetTopArtistsService: SBKService {
     }
 }
 
-struct TagTopArtistsResponse: Decodable {
+struct TagTopArtistsResponse: Decodable, Sendable {
     let artists: [SBKArtist]
     
     enum CodingKeys: String, CodingKey {
         case artists = "topartists"
     }
     
-    struct TopArtists: Decodable {
+    struct TopArtists: Decodable, Sendable {
         let artist: [SBKArtist]
     }
     

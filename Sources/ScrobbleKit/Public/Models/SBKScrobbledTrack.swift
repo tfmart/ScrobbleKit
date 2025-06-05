@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SBKScrobbledTrack: Decodable {
+public struct SBKScrobbledTrack: Decodable, Sendable {
     public let track: SBKTrack
     public let date: Date?
     

@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct SBKArtistGetSimilarResponse: Decodable {
+struct SBKArtistGetSimilarResponse: Decodable, Sendable {
     var similarartists: SBKArtistGetSimilarList
 }
 
-struct SBKArtistGetSimilarList: Decodable {
+struct SBKArtistGetSimilarList: Decodable, Sendable {
     var artist: [SBKSimilarArtist]
 }

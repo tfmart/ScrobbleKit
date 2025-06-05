@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SBKSessionResponse: Decodable {
+struct SBKSessionResponse: Sendable, Decodable {
     let info: SBKSessionResponseInfo
     
     enum CodingKeys: String, CodingKey {
@@ -16,7 +16,7 @@ struct SBKSessionResponse: Decodable {
 }
 
 /// Represents the information retrieved after a successful authentication with Last.fm services.
-public class SBKSessionResponseInfo: Decodable {
+public final class SBKSessionResponseInfo: Sendable, Decodable {
     /// The username associated with the authenticated account.
     public let name: String
     /// The session token generated for the current user session.

@@ -19,7 +19,7 @@ let track = SBKTrackToScrobble(
 )
 
 do {
-    let response = try await SBKManager.scrobble(tracks: [track])
+    let response = try await manager.scrobble(tracks: [track])
     
     if response.isCompletelySuccessful {
         print("Track scrobbled successfully!")
@@ -54,7 +54,7 @@ let tracks: [SBKTrackToScrobble] = [
 ]
 
 do {
-    let response = try await SBKManager.scrobble(tracks: tracks)
+    let response = try await manager.scrobble(tracks: tracks)
     
     if response.isCompletelySuccessful {
         print("All tracks scrobbled successfully!")

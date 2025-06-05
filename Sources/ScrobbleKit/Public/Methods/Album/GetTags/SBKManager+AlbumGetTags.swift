@@ -42,45 +42,4 @@ extension SBKManager {
         }
         return tags
     }
-    
-    /**
-     Gets the tags applied by an individual user to an album on Last.fm.
-     
-     To retrieve the list of tags applied to an album by all users use ``getTopTags(forAlbum:autoCorrect:_:)``
-     
-     - Parameters:
-        - searchMethod: The album search method, either by name or by MusicBrainz ID.
-        - autoCorrect: A Boolean value indicating whether to transform misspelled artist names into correct artist names. The default value is `true`.
-        - username: The username for the context of the request. If supplied, the tags of this album applied by the user are included in the response.
-        - completion: A closure to be called with the result of the operation. The closure takes an optional array of ``SBKTag`` objects and an optional error object as its parameters.
-     
-     - Throws: An error of type ``SBKClientError``or ``SBKError`` if the operation fails
-     
-     - Note: See [Last.fm's album.addTags documentation](https://www.last.fm/api/show/album.getTags) for more information.
-     */
-    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
-    public func getTags(forAlbum searchMethod: SBKAlbumSearchMethod,
-                 autoCorrect: Bool = true,
-                 username: String? = nil,
-                 _ completion: (([SBKTag]?, Error?) -> Void)?
-    ) {
-        let service = AlbumGetTagsService(
-            searchMethod: searchMethod,
-            autoCorrect: autoCorrect,
-            username: username,
-            apiKey: apiKey,
-            secretKey: secret
-        )
-        service.start { response, error in
-            guard error == nil else {
-                completion?(nil, error)
-                return
-            }
-            guard let tags = response?.tags.tag else {
-                completion?(nil, SBKClientError.failedToDecodeResponse)
-                return
-            }
-            completion?(tags, nil)
-        }
-    }
 }

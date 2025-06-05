@@ -40,48 +40,4 @@ public extension SBKManager {
             throw error
         }
     }
-    
-    /// Scrobbles multiple tracks to a user's Last.fm profile using a completion handler.
-    ///
-    /// - Parameters:
-    ///   - tracks: An array of `SBKTrackToScrobble` objects representing the tracks to be scrobbled.
-    ///   - completion: A closure to be executed when the scrobbling process completes.
-    ///                 It returns an optional `SBKScrobbleResponse` object and an optional `Error`.
-    ///
-    /// - Note: You can scrobble up to 50 tracks in a single request.
-    ///         The completion handler will be called with an error if the tracks array is empty,
-    ///         contains more than 50 tracks, or if the user is not authenticated.
-    func scrobble(tracks: [SBKTrackToScrobble], _ completion: ((SBKScrobbleResponse?, Error?) -> Void)? = nil) {
-        guard !tracks.isEmpty else {
-            completion?(nil, SBKClientError.noTracksToScrobble)
-            return
-        }
-        
-        if tracks.count > 50 {
-            completion?(nil, SBKClientError.tooManyTracks)
-            return
-        }
-        
-        guard let sessionKey else {
-            completion?(nil, SBKClientError.missingSessionKey)
-            return
-        }
-        let service = ScrobbleService(
-            tracks: tracks,
-            sessionKey: sessionKey,
-            apiKey: self.apiKey,
-            secretKey: self.secret
-        )
-        service.start { list, error in
-            guard error == nil else {
-                completion?(nil, error)
-                return
-            }
-            guard let list else {
-                completion?(nil, SBKClientError.failedToDecodeResponse)
-                return
-            }
-            completion?(SBKScrobbleResponse(list: list), nil)
-        }
-    }
 }

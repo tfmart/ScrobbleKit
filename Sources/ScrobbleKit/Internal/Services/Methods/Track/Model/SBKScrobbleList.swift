@@ -8,12 +8,12 @@
 import Foundation
 
 // MARK: - Root object
-struct SBKScrobbleList: Decodable {
+struct SBKScrobbleList: Decodable, Sendable {
     let scrobbles: SBKScrobbles
 }
 
 // MARK: - Scrobbles object
-struct SBKScrobbles: Decodable {
+struct SBKScrobbles: Decodable, Sendable {
     let scrobbles: [SBKScrobble]
     let attr: SBKAttr
 
@@ -37,12 +37,12 @@ struct SBKScrobbles: Decodable {
 }
 
 // MARK: - Attr object
-struct SBKAttr: Decodable {
+struct SBKAttr: Decodable, Sendable {
     let ignored, accepted: Int
 }
 
 // MARK: - Scrobble object
-struct SBKScrobble: Decodable {
+struct SBKScrobble: Decodable, Sendable {
     let artist: SBKScrobbleAttribute
     let album: SBKScrobbleAttribute
     let track: SBKScrobbleAttribute
@@ -51,7 +51,7 @@ struct SBKScrobble: Decodable {
     let timestamp: String
 }
 
-struct SBKScrobbleAttribute: Decodable {
+struct SBKScrobbleAttribute: Decodable, Sendable {
     let corrected, text: String?
 
     enum CodingKeys: String, CodingKey {
@@ -61,7 +61,7 @@ struct SBKScrobbleAttribute: Decodable {
 }
 
 // MARK: - IgnoredMessage object
-struct SBKIgnoredMessage: Decodable {
+struct SBKIgnoredMessage: Decodable, Sendable {
     let code, text: String
 
     enum CodingKeys: String, CodingKey {

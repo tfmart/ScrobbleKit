@@ -7,4 +7,4 @@
 
 import Foundation
 
-class SBKEmptyResponse: Decodable {}
+final class SBKEmptyResponse: Sendable, Decodable {}

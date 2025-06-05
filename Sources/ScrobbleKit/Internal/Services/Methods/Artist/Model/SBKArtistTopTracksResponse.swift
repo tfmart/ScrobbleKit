@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct SBKArtistTopTracksResponse: Decodable {
+struct SBKArtistTopTracksResponse: Decodable, Sendable {
     var toptracks: SBKArtistTopTracksList
 }
 
-struct SBKArtistTopTracksList: Decodable {
+struct SBKArtistTopTracksList: Decodable, Sendable {
     var track: [SBKTrack]
 }

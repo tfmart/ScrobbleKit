@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a similar artist for an artist.
-struct SBKArtistGetInfoSimilarArtist: Decodable {
+struct SBKArtistGetInfoSimilarArtist: Decodable, Sendable {
     public var name: String
     public var url: String
     private var imageResponse: [SBKImageResponse]?

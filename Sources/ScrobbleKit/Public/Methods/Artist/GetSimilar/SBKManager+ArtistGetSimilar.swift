@@ -36,41 +36,4 @@ public extension SBKManager {
         let response = try await service.start()
         return response.similarartists.artist
     }
-    
-    /**
-     Gets a list of similar artists for the given artist.
-     
-     - Parameters:
-     - artist: The name of the artist to get similar artists for.
-     - limit: The maximum number of similar artists to return.
-     - completion: A closure to be executed when the search is complete. It returns an optional array of ``SBKArtist`` objects representing the similar artists and an optional error.
-     
-     - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/artist.getSimilar).
-     */
-    @available(swift, deprecated: 5.10, obsoleted: 6.0, message: "Completion handler APIs will be removed in a future version; please migrate to the async version of this method")
-    func getSimilarArtists(
-        _ searchMethod: SBKArtistSearchMethod,
-        limit: Int = 50,
-        autoCorrect: Bool = true,
-        _ completion: (([SBKSimilarArtist]?, Error?) -> Void)?
-    ) {
-        let service = ArtistGetSimilarService(
-            searchMethod,
-            limit: limit,
-            autoCorrect: autoCorrect,
-            apiKey: apiKey,
-            secretKey: secret
-        )
-        service.start { response, error in
-            guard error == nil else {
-                completion?(nil, error)
-                return
-            }
-            guard response != nil else {
-                completion?(nil, SBKClientError.failedToDecodeResponse)
-                return
-            }
-            completion?(response?.similarartists.artist, nil)
-        }
-    }
 }

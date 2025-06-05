@@ -10,7 +10,7 @@ import Foundation
 /**
  Represents an image that may be returned from a Last.fm API call.
  */
-public struct SBKImage {
+public struct SBKImage: Sendable {
     /// The URL for the small-sized image.
     public var small: URL?
     

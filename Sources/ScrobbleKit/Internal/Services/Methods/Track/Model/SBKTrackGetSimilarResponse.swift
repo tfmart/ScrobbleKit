@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SBKTrackGetSimilarResponse: Decodable {
+struct SBKTrackGetSimilarResponse: Sendable, Decodable {
     var similarTracks: SBKTrackGetSimilarList
     
     enum CodingKeys: String, CodingKey {
@@ -15,7 +15,7 @@ struct SBKTrackGetSimilarResponse: Decodable {
     }
 }
 
-struct SBKTrackGetSimilarList: Decodable {
+struct SBKTrackGetSimilarList: Sendable, Decodable {
     var tracks: [SBKTrackGetSimilarListTrack]
     
     enum CodingKeys: String, CodingKey {
@@ -23,7 +23,7 @@ struct SBKTrackGetSimilarList: Decodable {
     }
 }
 
-struct SBKTrackGetSimilarListTrack: Decodable {
+struct SBKTrackGetSimilarListTrack: Sendable, Decodable {
     var name: String
     var playcount: Int
     var mbid: String?

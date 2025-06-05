@@ -7,7 +7,7 @@
 
 
 /// Represents possible error cases when scrobbling a track.
-public enum SBKScrobbleError: String, Error {
+public enum SBKScrobbleError: String, Error, Sendable {
     case artistIgnored = "Artist was ignored"
     case trackIgnored = "Track was ignored"
     case timestampTooOld = "Timestamp was too old"
