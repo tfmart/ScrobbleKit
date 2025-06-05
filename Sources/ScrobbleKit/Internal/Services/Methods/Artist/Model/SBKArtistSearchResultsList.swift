@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SBKArtistSearchResultsList: Decodable {
+struct SBKArtistSearchResultsList: Decodable, Sendable {
     let artists: [SBKArtist]
     
     private enum CodingKeys: String, CodingKey {

@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct SBKChartGetTopTracksResponse: Decodable {
+struct SBKChartGetTopTracksResponse: Decodable, Sendable {
     var tracks: SBKArtistTopTracksList
 }

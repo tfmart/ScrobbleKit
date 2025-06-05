@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct SBKChartGetTopTagsResponse: Decodable {
+struct SBKChartGetTopTagsResponse: Decodable, Sendable {
     var toptags: SBKTagRequestResponseList
 }

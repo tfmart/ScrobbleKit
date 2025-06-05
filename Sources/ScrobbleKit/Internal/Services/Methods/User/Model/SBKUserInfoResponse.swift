@@ -77,11 +77,11 @@ public struct SBKUser: Sendable {
     }
 }
 
-struct SBKUserInfoResponse: Decodable {
+struct SBKUserInfoResponse: Decodable, Sendable {
     var user: SBKUserInfoDataResponse
 }
 
-struct SBKUserInfoDataResponse: Decodable {
+struct SBKUserInfoDataResponse: Decodable, Sendable {
     let name: String
     let realName: String?
     let imageURL: [SBKImageResponse]?
@@ -114,7 +114,7 @@ struct SBKUserInfoDataResponse: Decodable {
         case type
     }
     
-    struct SBKRegisteredInfo: Decodable {
+    struct SBKRegisteredInfo: Decodable, Sendable {
         let unixTime: Date
         let timeString: String
         

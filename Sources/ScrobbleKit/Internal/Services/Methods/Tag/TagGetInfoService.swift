@@ -32,6 +32,6 @@ struct TagGetInfoService: SBKService {
     }
 }
 
-struct TagGetInfoResponse: Decodable {
+struct TagGetInfoResponse: Decodable, Sendable {
     let tag: SBKTag
 }

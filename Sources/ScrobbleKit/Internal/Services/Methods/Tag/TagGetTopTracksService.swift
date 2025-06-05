@@ -42,7 +42,7 @@ struct TagTopTracksResponse: Sendable, Decodable {
         case tracks = "tracks"
     }
     
-    struct TopTracks: Decodable {
+    struct TopTracks: Decodable, Sendable {
         let track: [SBKTrack]
     }
     

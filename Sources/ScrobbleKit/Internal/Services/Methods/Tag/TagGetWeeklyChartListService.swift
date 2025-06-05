@@ -29,18 +29,18 @@ struct TagGetWeeklyChartListService: SBKService {
     }
 }
 
-struct TagGetWeeklyChartListResponse: Decodable {
+struct TagGetWeeklyChartListResponse: Decodable, Sendable {
     let weeklyChartList: [WeeklyChartTag]
     
     enum CodingKeys: String, CodingKey {
         case weeklyChartList = "weeklychartlist"
     }
     
-    struct WeeklyChartList: Decodable {
+    struct WeeklyChartList: Decodable, Sendable {
         let chart: [WeeklyChartTag]
     }
     
-    struct WeeklyChartTag: Decodable {
+    struct WeeklyChartTag: Decodable, Sendable {
         var text, from, to: String?
         
         enum CodingKeys: String, CodingKey {

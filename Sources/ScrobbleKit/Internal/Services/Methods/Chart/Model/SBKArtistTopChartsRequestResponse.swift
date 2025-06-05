@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct SBKArtistTopChartsRequestResponse: Decodable {
+struct SBKArtistTopChartsRequestResponse: Decodable, Sendable {
     let artists: SBKArtistListResponse
 }
 
-struct SBKArtistListResponse: Decodable {
+struct SBKArtistListResponse: Decodable, Sendable {
     let artists: [SBKArtist]
     
     enum CodingKeys: String, CodingKey {

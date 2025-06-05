@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SBKUserGetTopAlbumsResponse: Decodable {
+struct SBKUserGetTopAlbumsResponse: Decodable, Sendable {
     let topAlbums: SBKUserGetTopAlbumsResult
     
     private enum CodingKeys: String, CodingKey {
@@ -15,7 +15,7 @@ struct SBKUserGetTopAlbumsResponse: Decodable {
     }
 }
 
-struct SBKUserGetTopAlbumsResult: Decodable {
+struct SBKUserGetTopAlbumsResult: Decodable, Sendable {
     let attributes: SBKUserGetTopAlbumsAttributes
     let albums: [SBKAlbum]
     
@@ -33,7 +33,7 @@ struct SBKUserGetTopAlbumsAttributes: SBKSearchAttribute {
     var total: String
 }
 
-struct SBKUserGetTopArtistsResponse: Decodable {
+struct SBKUserGetTopArtistsResponse: Decodable, Sendable {
     let topArtists: SBKUserGetTopArtistsResult
     
     private enum CodingKeys: String, CodingKey {
@@ -41,7 +41,7 @@ struct SBKUserGetTopArtistsResponse: Decodable {
     }
 }
 
-struct SBKUserGetTopArtistsResult: Decodable {
+struct SBKUserGetTopArtistsResult: Decodable, Sendable {
     let attributes: SBKUserGetTopAlbumsAttributes
     let artists: [SBKArtist]
     
@@ -51,7 +51,7 @@ struct SBKUserGetTopArtistsResult: Decodable {
     }
 }
 
-struct SBKUserGetTopTagsResponse: Decodable {
+struct SBKUserGetTopTagsResponse: Decodable, Sendable {
     let topTags: SBKUserGetTopTagsResult
     
     private enum CodingKeys: String, CodingKey {
@@ -59,7 +59,7 @@ struct SBKUserGetTopTagsResponse: Decodable {
     }
 }
 
-struct SBKUserGetTopTagsResult: Decodable {
+struct SBKUserGetTopTagsResult: Decodable, Sendable {
     let attributes: SBKUserGetTopTagsAttribute
     let tags: [SBKTag]
     
@@ -69,11 +69,11 @@ struct SBKUserGetTopTagsResult: Decodable {
     }
 }
 
-struct SBKUserGetTopTagsAttribute: Decodable {
+struct SBKUserGetTopTagsAttribute: Decodable, Sendable {
     let user: String
 }
 
-struct SBKUserGetTopTracksResponse: Decodable {
+struct SBKUserGetTopTracksResponse: Decodable, Sendable {
     let topTracks: SBKUserGetTopTracksResult
     
     private enum CodingKeys: String, CodingKey {
@@ -81,7 +81,7 @@ struct SBKUserGetTopTracksResponse: Decodable {
     }
 }
 
-struct SBKUserGetTopTracksResult: Decodable {
+struct SBKUserGetTopTracksResult: Decodable, Sendable {
     let attributes: SBKUserGetTopAlbumsAttributes
     let tracks: [SBKTrack]
     
