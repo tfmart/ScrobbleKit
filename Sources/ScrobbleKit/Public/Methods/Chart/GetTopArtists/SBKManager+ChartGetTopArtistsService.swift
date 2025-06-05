@@ -16,7 +16,6 @@ public extension SBKManager {
     /// - Returns: An array of ``SBKArtist`` objects.
     /// - Throws: An error if the API call fails or the response cannot be decoded.
     ///
-    /// - Note: This method is asynchronous and should be called from within an `async` context.
     /// See [Last.fm API documentation](https://www.last.fm/api/show/chart.getTopArtists) for more information.
     func getArtistsChart(
         page: Int = 1,
