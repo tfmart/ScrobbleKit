@@ -1,6 +1,6 @@
 # ScrobbleKit
 
-ScrobbleKit is a modern Swift library designed to simplify interactions with the [Last.fm API](https://www.last.fm/api) on Apple platforms. It provides a clean, async/await-based interface for seamless integration with your Swift apps.
+ScrobbleKit is a modern Swift library designed to simplify interactions with the [Last.fm API](https://www.last.fm/api) across Apple platforms and Linux. Built with Swift 6.0 concurrency in mind, it provides a thread-safe, async/await-based interface for seamless integration with your Swift apps.
 
 
 ## Getting Started
@@ -52,7 +52,9 @@ For detailed information on all available API methods and models, check out the 
 - macOS 10.15+
 - watchOS 6.0+
 - tvOS 13.0+
-- Swift 5.5+
+- visionOS 1.0+
+- Linux
+- Swift 6.0+
 
 ## Installation
 
