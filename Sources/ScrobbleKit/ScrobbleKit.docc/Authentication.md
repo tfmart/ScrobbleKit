@@ -43,4 +43,4 @@ If you already have a valid session token, provide it to the ``SBKManager/setSes
 manager.setSessionKey(SESSION_KEY)
 ```
 
-This action also saves the session token to the manager instance for future çuse
+This action also saves the session token to the manager instance for future use.
