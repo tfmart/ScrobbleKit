@@ -149,4 +149,23 @@ final class ScrobbleKitTests: XCTestCase {
         let urlString = try XCTUnwrap(try service.makeRequest().url?.absoluteString)
         XCTAssertTrue(urlString.contains("autocorrect=0"))
     }
+
+    func testTrackGetInfoCanUseMusicBrainzIDWithoutTrackAndArtist() throws {
+        let service = TrackGetInfoService(
+            searchMethod: .musicBrainzID("37d516ab-d61f-4bcb-9316-7a0b3eb845a8"),
+            username: "rj",
+            autoCorrect: false,
+            apiKey: "test_api_key",
+            secretKey: "test_secret_key"
+        )
+
+        let urlString = try XCTUnwrap(try service.makeRequest().url?.absoluteString)
+        XCTAssertTrue(urlString.contains("mbid=37d516ab-d61f-4bcb-9316-7a0b3eb845a8"))
+        XCTAssertTrue(urlString.contains("username=rj"))
+        XCTAssertTrue(urlString.contains("autocorrect=0"))
+        XCTAssertFalse(urlString.contains("track="))
+        XCTAssertFalse(urlString.contains("artist="))
+        XCTAssertFalse(urlString.contains("lang="))
+    }
+
 }
