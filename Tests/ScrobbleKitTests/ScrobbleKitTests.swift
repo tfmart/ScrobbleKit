@@ -108,6 +108,38 @@ final class ScrobbleKitTests: XCTestCase {
         XCTAssertTrue(bodyString.contains("api_sig="))
     }
 
+    func testAddTagsAllowsUpToTenTags() {
+        let tags = (1...10).map { "tag\($0)" }
+
+        XCTAssertNoThrow(
+            try AddTagsService(
+                to: .artist("Cher"),
+                tags: tags,
+                apiKey: "test_api_key",
+                secretKey: "test_secret_key",
+                sessionKey: "test_session_key"
+            )
+        )
+    }
+
+    func testAddTagsRejectsMoreThanTenTags() {
+        let tags = (1...11).map { "tag\($0)" }
+
+        XCTAssertThrowsError(
+            try AddTagsService(
+                to: .artist("Cher"),
+                tags: tags,
+                apiKey: "test_api_key",
+                secretKey: "test_secret_key",
+                sessionKey: "test_session_key"
+            )
+        ) { error in
+            guard case SBKClientError.tooManyTags = error else {
+                return XCTFail("Expected tooManyTags, got \(error)")
+            }
+        }
+    }
+
     func testAlbumGetInfoUsesUsernameParameter() throws {
         let service = AlbumGetInfoService(
             searchMethod: .albumArtist(album: "Believe", artist: "Cher"),

@@ -23,11 +23,11 @@ public extension SBKManager {
     @discardableResult
     func addTags(toAlbum album: String, artist: String, tags: [String]) async throws -> Bool {
         guard let sessionKey else { throw SBKClientError.missingSessionKey }
-        let service = AddTagsService(to: .album(album, artist: artist),
-                                     tags: tags,
-                                     apiKey: apiKey,
-                                     secretKey: secret,
-                                     sessionKey: sessionKey)
+        let service = try AddTagsService(to: .album(album, artist: artist),
+                                         tags: tags,
+                                         apiKey: apiKey,
+                                         secretKey: secret,
+                                         sessionKey: sessionKey)
         _ = try await service.start()
         return true
     }
