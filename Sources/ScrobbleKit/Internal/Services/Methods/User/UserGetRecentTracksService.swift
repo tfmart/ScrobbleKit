@@ -18,7 +18,7 @@ struct UserGetRecentTracksService: SBKService {
     var httpMethod: SBKHttpMethod = .get
     
     init(user: String,
-         limit: Int = 50,
+         limit: Int = .sbkLimitPerPage,
          page: Int = .sbkFirstPage,
          from: Date? = nil,
          extended: Bool? = nil,

@@ -23,7 +23,7 @@ public extension SBKManager {
      */
     func getSimilarArtists(
         _ searchMethod: SBKArtistSearchMethod,
-        limit: Int = 50,
+        limit: Int = .sbkLimitPerPage,
         autoCorrect: Bool = true
     ) async throws -> [SBKSimilarArtist] {
         let service = ArtistGetSimilarService(

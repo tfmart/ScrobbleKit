@@ -17,7 +17,7 @@ struct UserGetTopTracksService: SBKService {
     var queries: [URLQueryItem]
     var httpMethod: SBKHttpMethod = .get
     
-    init(user: String, period: String? = nil, limit: Int = 50, page: Int = .sbkFirstPage, apiKey: String, secretKey: String) {
+    init(user: String, period: String? = nil, limit: Int = .sbkLimitPerPage, page: Int = .sbkFirstPage, apiKey: String, secretKey: String) {
         self.apiKey = apiKey
         self.secretKey = secretKey
         

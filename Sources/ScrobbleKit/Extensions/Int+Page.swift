@@ -7,4 +7,5 @@
 
 public extension Int {
     static var sbkFirstPage: Int { 1 }
+    static var sbkLimitPerPage: Int { 50 }
 }

@@ -24,7 +24,7 @@ public extension SBKManager {
      */
     func getTopTracks(
         forCountry country: SBKCountry,
-        limit: Int = 50,
+        limit: Int = .sbkLimitPerPage,
         page: Int = .sbkFirstPage
     ) async throws -> [SBKTrack] {
         let service = GeoGetTopTracksService(

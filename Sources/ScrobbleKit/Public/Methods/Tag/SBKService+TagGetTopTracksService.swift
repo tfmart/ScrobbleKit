@@ -23,7 +23,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's tag.getTopTracks documentation](https://www.last.fm/api/show/tag.getTopTracks) for more information.
      */
-    func getTopTracks(forTag tag: String, limit: Int = 50, page: Int = .sbkFirstPage) async throws -> [SBKTrack] {
+    func getTopTracks(forTag tag: String, limit: Int = .sbkLimitPerPage, page: Int = .sbkFirstPage) async throws -> [SBKTrack] {
         let service = TagGetTopTracksService(tag: tag, limit: limit, page: page, apiKey: apiKey, secretKey: secret)
         let response = try await service.start()
         return response.tracks
