@@ -38,31 +38,4 @@ public extension SBKManager {
         let track = response.track
         return track
     }
-
-    /**
-     Retrieves the metadata for a track on Last.fm using the track name and artist.
-
-     - Parameters:
-        - track: The name of the track to retrieve metadata for.
-        - artist: The name of the artist of the track.
-        - username: (Optional) The username for the context of the request. Defaults to `nil`.
-        - autoCorrect: (Optional) Whether to automatically correct misspelled artist/track names. Defaults to `false`.
-        - languageCode: This endpoint does not support a language parameter. This argument is ignored.
-
-     - Returns: A `SBKTrack` object representing the track metadata.
-     */
-    @available(*, deprecated, message: "Use getInfo(forTrack:username:autoCorrect:) with SBKTrackSearchMethod. Last.fm track.getInfo does not support a language parameter.")
-    func getInfo(
-        forTrack track: String,
-        artist: String,
-        username: String? = nil,
-        autoCorrect: Bool = false,
-        languageCode: SBKLanguageCode = .english
-    ) async throws -> SBKTrack {
-        try await getInfo(
-            forTrack: .trackInfo(track, artist: artist),
-            username: username,
-            autoCorrect: autoCorrect
-        )
-    }
 }
