@@ -107,4 +107,34 @@ final class ScrobbleKitTests: XCTestCase {
         XCTAssertTrue(bodyString.contains("chosenByUser%5B49%5D=1"))
         XCTAssertTrue(bodyString.contains("api_sig="))
     }
+
+    func testAlbumGetInfoUsesUsernameParameter() throws {
+        let service = AlbumGetInfoService(
+            searchMethod: .albumArtist(album: "Believe", artist: "Cher"),
+            autoCorrect: true,
+            username: "rj",
+            languageCode: .english,
+            apiKey: "test_api_key",
+            secretKey: "test_secret_key"
+        )
+
+        let urlString = try XCTUnwrap(try service.makeRequest().url?.absoluteString)
+        XCTAssertTrue(urlString.contains("username=rj"))
+        XCTAssertFalse(urlString.contains("user=rj"))
+    }
+
+    func testArtistGetInfoUsesUsernameParameter() throws {
+        let service = ArtistGetInfoService(
+            searchMethod: .artistName("Cher"),
+            autoCorrect: true,
+            username: "rj",
+            languageCode: .english,
+            apiKey: "test_api_key",
+            secretKey: "test_secret_key"
+        )
+
+        let urlString = try XCTUnwrap(try service.makeRequest().url?.absoluteString)
+        XCTAssertTrue(urlString.contains("username=rj"))
+        XCTAssertFalse(urlString.contains("user=rj"))
+    }
 }
