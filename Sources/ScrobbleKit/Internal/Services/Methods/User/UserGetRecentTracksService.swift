@@ -19,7 +19,7 @@ struct UserGetRecentTracksService: SBKService {
     
     init(user: String,
          limit: Int = 50,
-         page: Int = 1,
+         page: Int = .sbkFirstPage,
          from: Date? = nil,
          extended: Bool? = nil,
          to: Date? = nil,

@@ -23,7 +23,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getTopArtists documentation](https://www.last.fm/api/show/user.getTopArtists) for more information.
      */
-    func getTopArtists(forUser user: String, period: SBKSearchPeriod = .overall, limit: Int = 50, page: Int = 1) async throws -> SBKSearchResult<SBKArtist> {
+    func getTopArtists(forUser user: String, period: SBKSearchPeriod = .overall, limit: Int = 50, page: Int = .sbkFirstPage) async throws -> SBKSearchResult<SBKArtist> {
         let service = UserGetTopArtistsService(
             user: user,
             period: period.rawValue,

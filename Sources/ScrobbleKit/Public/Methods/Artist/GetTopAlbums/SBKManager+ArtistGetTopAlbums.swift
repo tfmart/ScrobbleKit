@@ -25,7 +25,7 @@ public extension SBKManager {
     func getTopAlbums(
         forArtist searchMethod: SBKArtistSearchMethod,
         limit: Int = 50,
-        page: Int = 1,
+        page: Int = .sbkFirstPage,
         autoCorrect: Bool = true
     ) async throws -> [SBKAlbum] {
         let service = ArtistGetTopAlbumsService(

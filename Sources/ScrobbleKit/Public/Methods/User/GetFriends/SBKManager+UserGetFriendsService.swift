@@ -23,7 +23,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getFriends documentation](https://www.last.fm/api/show/user.getFriends) for more information.
      */
-    func getFriends(for user: String, recentTracks: Bool = false, limit: Int = 50, page: Int = 1) async throws -> [SBKUser] {
+    func getFriends(for user: String, recentTracks: Bool = false, limit: Int = 50, page: Int = .sbkFirstPage) async throws -> [SBKUser] {
         let service = UserGetFriendsService(
             user: user,
             recentTracks: recentTracks,

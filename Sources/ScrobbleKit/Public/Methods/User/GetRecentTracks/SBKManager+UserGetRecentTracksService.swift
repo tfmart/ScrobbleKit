@@ -28,7 +28,7 @@ public extension SBKManager {
     func getRecentTracks(
         fromUser user: String,
         limit: Int = 50,
-        page: Int = 1,
+        page: Int = .sbkFirstPage,
         startDate: Date? = nil,
         extended: Bool = false,
         endDate: Date? = nil

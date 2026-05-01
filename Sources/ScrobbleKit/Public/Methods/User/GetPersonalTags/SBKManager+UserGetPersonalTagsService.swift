@@ -23,7 +23,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getPersonalTags documentation](https://www.last.fm/api/show/user.getPersonalTags) for more information.
      */
-    func getPersonalTagsForArtists(fromUser user: String, tag: String, limit: Int = 50, page: Int = 1) async throws -> SBKSearchResult<SBKArtist> {
+    func getPersonalTagsForArtists(fromUser user: String, tag: String, limit: Int = 50, page: Int = .sbkFirstPage) async throws -> SBKSearchResult<SBKArtist> {
         let service = UserGetPersonalTagsService(
             user: user,
             tag: tag,
@@ -67,7 +67,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getPersonalTags documentation](https://www.last.fm/api/show/user.getPersonalTags) for more information.
      */
-    func getPersonalTagsForTracks(fromUser user: String, tag: String, limit: Int = 50, page: Int = 1) async throws -> SBKSearchResult<SBKTrack> {
+    func getPersonalTagsForTracks(fromUser user: String, tag: String, limit: Int = 50, page: Int = .sbkFirstPage) async throws -> SBKSearchResult<SBKTrack> {
         let service = UserGetPersonalTagsService(
             user: user,
             tag: tag,
@@ -111,7 +111,7 @@ public extension SBKManager {
      
      - Note: See [Last.fm's user.getPersonalTags documentation](https://www.last.fm/api/show/user.getPersonalTags) for more information.
      */
-    func getPersonalTagsForAlbums(fromUser user: String, tag: String, limit: Int = 50, page: Int = 1) async throws -> SBKSearchResult<SBKAlbum> {
+    func getPersonalTagsForAlbums(fromUser user: String, tag: String, limit: Int = 50, page: Int = .sbkFirstPage) async throws -> SBKSearchResult<SBKAlbum> {
         let service = UserGetPersonalTagsService(
             user: user,
             tag: tag,

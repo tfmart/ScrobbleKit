@@ -24,7 +24,7 @@ public extension SBKManager {
      */
     func search(
         album: String,
-        page: Int = 1,
+        page: Int = .sbkFirstPage,
         limit: Int = 50
     ) async throws -> [SBKAlbum] {
         let service = AlbumSearchService(album: album, limit: limit, page: page, apiKey: apiKey, secretKey: secret)
