@@ -123,6 +123,21 @@ final class ScrobbleKitTests: XCTestCase {
         XCTAssertFalse(urlString.contains("user=rj"))
     }
 
+    func testAlbumGetTagsFallsBackToSessionKey() throws {
+        let service = AlbumGetTagsService(
+            searchMethod: .albumArtist(album: "Believe", artist: "Cher"),
+            autoCorrect: true,
+            username: nil,
+            apiKey: "test_api_key",
+            secretKey: "test_secret_key",
+            sessionKey: "test_session_key"
+        )
+
+        let urlString = try XCTUnwrap(try service.makeRequest().url?.absoluteString)
+        XCTAssertTrue(urlString.contains("sk=test_session_key"))
+        XCTAssertFalse(urlString.contains("user="))
+    }
+
     func testArtistGetInfoUsesUsernameParameter() throws {
         let service = ArtistGetInfoService(
             searchMethod: .artistName("Cher"),
@@ -136,6 +151,21 @@ final class ScrobbleKitTests: XCTestCase {
         let urlString = try XCTUnwrap(try service.makeRequest().url?.absoluteString)
         XCTAssertTrue(urlString.contains("username=rj"))
         XCTAssertFalse(urlString.contains("user=rj"))
+    }
+
+    func testArtistGetTagsFallsBackToSessionKey() throws {
+        let service = ArtistGetTagsService(
+            searchMethod: .artistName("Cher"),
+            user: nil,
+            autocorrect: true,
+            apiKey: "test_api_key",
+            secretKey: "test_secret_key",
+            sessionKey: "test_session_key"
+        )
+
+        let urlString = try XCTUnwrap(try service.makeRequest().url?.absoluteString)
+        XCTAssertTrue(urlString.contains("sk=test_session_key"))
+        XCTAssertFalse(urlString.contains("user="))
     }
 
     func testTrackGetTopTagsUsesRequestedAutocorrectValue() throws {

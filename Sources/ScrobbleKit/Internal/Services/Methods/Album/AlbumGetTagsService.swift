@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct AlbumGetTagsService: SBKService {
+struct AlbumGetTagsService: SBKOptionallyAuthenticatedService {
+    var username: String?
+    var sessionKey: String?
+
     var apiKey: String
     var secretKey: String
     
@@ -21,7 +24,10 @@ struct AlbumGetTagsService: SBKService {
          autoCorrect: Bool,
          username: String?,
          apiKey: String,
-         secretKey: String) {
+         secretKey: String,
+         sessionKey: String?) {
+        self.username = username
+        self.sessionKey = sessionKey
         self.apiKey = apiKey
         self.secretKey = secretKey
         switch searchMethod {
@@ -29,14 +35,12 @@ struct AlbumGetTagsService: SBKService {
             self.queries = [
                 .init(name: "artist", value: artist),
                 .init(name: "album", value: album),
-                .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect),
-                .init(name: "user", value: username)
+                .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect)
             ]
         case .musicBrainzID(let id):
             self.queries = [
                 .init(name: SBKParameter.musicBrainzID.rawValue, value: id),
-                .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect),
-                .init(name: "user", value: username)
+                .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect)
             ]
         }
     }
