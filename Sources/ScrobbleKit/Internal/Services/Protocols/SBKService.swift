@@ -41,7 +41,7 @@ internal extension SBKService {
     
     var url: URL? {
         guard var urlComponents = URLComponents(string: baseURL) else { return nil }
-        let queriesWithSignature = completedQueries + [.init(name: "api_sig",
+        let queriesWithSignature = completedQueries + [.init(parameter: .apiSig,
                                                              value: signature)]
         urlComponents.queryItems = queriesWithSignature
         urlComponents.percentEncodedQuery = urlComponents.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
