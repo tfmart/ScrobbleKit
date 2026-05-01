@@ -39,12 +39,22 @@ internal extension SBKService {
         ] + queries.filter { $0.value != nil}
     }
     
+    var signedQueries: [URLQueryItem] {
+        completedQueries + [URLQueryItem(parameter: .apiSig, value: signature)]
+    }
+
+    var encodedSignedQueries: String? {
+        var urlComponents = URLComponents()
+        urlComponents.queryItems = signedQueries
+        urlComponents.percentEncodedQuery = urlComponents.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        return urlComponents.percentEncodedQuery
+    }
+
     var url: URL? {
         guard var urlComponents = URLComponents(string: baseURL) else { return nil }
-        let queriesWithSignature = completedQueries + [.init(parameter: .apiSig,
-                                                             value: signature)]
-        urlComponents.queryItems = queriesWithSignature
-        urlComponents.percentEncodedQuery = urlComponents.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        if httpMethod == .get {
+            urlComponents.percentEncodedQuery = encodedSignedQueries
+        }
         return urlComponents.url
     }
     
@@ -61,6 +71,25 @@ internal extension SBKService {
         }
         let result = signature + secretKey
         return result.md5
+    }
+}
+
+// MARK: Request builder
+internal extension SBKService {
+    func makeRequest() throws -> URLRequest {
+        guard let url = url else {
+            throw SBKClientError.badURL
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = httpMethod.rawValue
+
+        if httpMethod == .post {
+            request.httpBody = encodedSignedQueries?.data(using: .utf8)
+            request.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        }
+
+        return request
     }
 }
 
@@ -105,11 +134,7 @@ internal extension SBKService {
 // MARK: Default start() implementations
 extension SBKService {
     func start() async throws -> ResponseType {
-        guard let url = url else {
-            throw SBKClientError.badURL
-        }
-        var request = URLRequest(url: url)
-        request.httpMethod = httpMethod.rawValue
+        let request = try makeRequest()
         let (data, _) = try await URLSession.shared.data(for: request)
         let decodedModel = try await parse(data)
         return decodedModel
