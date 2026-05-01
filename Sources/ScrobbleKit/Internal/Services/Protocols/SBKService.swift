@@ -108,19 +108,6 @@ internal extension SBKService {
         }
     }
     
-    func parse(_ response: Data) async throws -> ResponseType {
-        do {
-            let resultModel = try JSONDecoder().decode(ResponseType.self, from: response)
-            return resultModel
-        } catch {
-            if let sbkError = parseError(response) {
-                throw sbkError
-            } else {
-                throw error
-            }
-        }
-    }
-    
     func parseError(_ errorData: Data) -> SBKError? {
         do {
             let errorMessage = try JSONDecoder().decode(SBKErrorMessage.self, from: errorData)
@@ -136,7 +123,7 @@ extension SBKService {
     func start() async throws -> ResponseType {
         let request = try makeRequest()
         let (data, _) = try await URLSession.shared.data(for: request)
-        let decodedModel = try await parse(data)
+        let decodedModel = try parse(data)
         return decodedModel
     }
 }
