@@ -137,4 +137,16 @@ final class ScrobbleKitTests: XCTestCase {
         XCTAssertTrue(urlString.contains("username=rj"))
         XCTAssertFalse(urlString.contains("user=rj"))
     }
+
+    func testTrackGetTopTagsUsesRequestedAutocorrectValue() throws {
+        let service = TrackGetTopTagsService(
+            searchMethod: .trackInfo("Believe", artist: "Cher"),
+            autoCorrect: false,
+            apiKey: "test_api_key",
+            secretKey: "test_secret_key"
+        )
+
+        let urlString = try XCTUnwrap(try service.makeRequest().url?.absoluteString)
+        XCTAssertTrue(urlString.contains("autocorrect=0"))
+    }
 }

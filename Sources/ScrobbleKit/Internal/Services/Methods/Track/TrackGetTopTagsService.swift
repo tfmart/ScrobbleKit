@@ -27,7 +27,7 @@ struct TrackGetTopTagsService: SBKService {
         self.secretKey = secretKey
         
         var queries: [URLQueryItem] = [
-            .init(parameter: .autoCorrect, bool: true),
+            .init(parameter: .autoCorrect, bool: autoCorrect),
         ]
         
         switch searchMethod {
