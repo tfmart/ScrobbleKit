@@ -15,6 +15,7 @@ enum SBKTaggableContent {
 
 struct AddTagsService: SBKAuthenticatedService {
     typealias ResponseType = SBKEmptyResponse
+    static let maximumTagsPerRequest = 10
     
     var taggableContent: SBKTaggableContent
     
@@ -37,7 +38,11 @@ struct AddTagsService: SBKAuthenticatedService {
     var sessionKey: String
     
     init(to taggableContent: SBKTaggableContent, tags: [String],
-         apiKey: String, secretKey: String, sessionKey: String) {
+         apiKey: String, secretKey: String, sessionKey: String) throws {
+        guard tags.count <= Self.maximumTagsPerRequest else {
+            throw SBKClientError.tooManyTags
+        }
+
         self.taggableContent = taggableContent
         self.apiKey = apiKey
         self.secretKey = secretKey

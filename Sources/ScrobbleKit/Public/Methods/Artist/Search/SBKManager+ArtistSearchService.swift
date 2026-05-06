@@ -24,8 +24,8 @@ public extension SBKManager {
      */
     func search(
         artist query: String,
-        limit: Int = 50,
-        page: Int = 1
+        limit: Int = .sbkLimitPerPage,
+        page: Int = .sbkFirstPage
     ) async throws -> [SBKArtist] {
         let service = ArtistSearchService(
             query,

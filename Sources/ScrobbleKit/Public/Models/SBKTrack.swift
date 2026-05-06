@@ -32,6 +32,8 @@ public struct SBKTrack: Decodable, Sendable {
         case playcount
         case listeners
         case artist
+        case duration
+        case url
         case imageList = "image"
     }
     
@@ -53,6 +55,8 @@ public struct SBKTrack: Decodable, Sendable {
         self.musicBrainzID = UUID(optionalString: try container.decodeIfPresent(String.self, forKey: SBKTrack.CodingKeys.musicBrainzID))
         self.playcount = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKTrack.CodingKeys.playcount)?.intValue
         self.listeners = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKTrack.CodingKeys.listeners)?.intValue
+        self.duration = try container.decodeIfPresent(String.self, forKey: SBKTrack.CodingKeys.duration)
+        self.url = try container.decodeIfPresent(URL.self, forKey: SBKTrack.CodingKeys.url)
         if let artist = try? container.decode(SBKArtist.self, forKey: SBKTrack.CodingKeys.artist) {
             self.artist = artist
         } else {

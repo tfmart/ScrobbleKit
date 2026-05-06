@@ -9,14 +9,12 @@ import Foundation
 
 public extension SBKManager {
     /**
-     Retrieves the metadata for a track on Last.fm.
+     Retrieves the metadata for a track on Last.fm using the track name and artist or a MusicBrainz ID.
      
      - Parameters:
-        - track: The name of the track to retrieve metadata for.
-        - artist: The name of the artist of the track.
+        - searchMethod: The search method for the track. It can be either the track name and artist name or a MusicBrainz ID.
         - username: (Optional) The username for the context of the request. Defaults to `nil`.
         - autoCorrect: (Optional) Whether to automatically correct misspelled artist/track names. Defaults to `false`.
-        - languageCode: (Optional) The ISO 639-1 language code for the language to return the biography in. Defaults to `.english`.
      
      - Returns: A `SBKTrack` object representing the track metadata.
      
@@ -25,13 +23,17 @@ public extension SBKManager {
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/track.getInfo).
      */
     func getInfo(
-        forTrack track: String,
-        artist: String,
+        forTrack searchMethod: SBKTrackSearchMethod,
         username: String? = nil,
-        autoCorrect: Bool = false,
-        languageCode: SBKLanguageCode = .english
+        autoCorrect: Bool = false
     ) async throws -> SBKTrack {
-        let service = TrackGetInfoService(track: track, artist: artist, username: username, autoCorrect: autoCorrect, apiKey: apiKey, secretKey: secret)
+        let service = TrackGetInfoService(
+            searchMethod: searchMethod,
+            username: username,
+            autoCorrect: autoCorrect,
+            apiKey: apiKey,
+            secretKey: secret
+        )
         let response = try await service.start()
         let track = response.track
         return track

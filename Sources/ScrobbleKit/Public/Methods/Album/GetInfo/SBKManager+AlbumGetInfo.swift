@@ -17,7 +17,7 @@ public extension SBKManager {
         - username: The username for the context of the request. If supplied, the user's playcount for this album is included in the response. The default value is `nil`.
         - languageCode: The language to return the biography in, expressed as an ISO 639 alpha-2 code. The default value is ``SBKLanguageCode/english``.
      
-     - Returns: An ``SBKAlbumResponse`` object that contains the metadata and tracklist for the album.
+     - Returns: An ``SBKAlbum`` object that contains the metadata and tracklist for the album.
      
      - Throws: An error of type ``SBKClientError``or ``SBKError`` if the operation fails
      

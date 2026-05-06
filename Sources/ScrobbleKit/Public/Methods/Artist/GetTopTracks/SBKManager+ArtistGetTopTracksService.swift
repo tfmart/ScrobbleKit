@@ -25,8 +25,8 @@ public extension SBKManager {
      */
     func getArtistTopTracks(
         _ searchMethod: SBKArtistSearchMethod,
-        limit: Int = 50,
-        page: Int = 1,
+        limit: Int = .sbkLimitPerPage,
+        page: Int = .sbkFirstPage,
         autoCorrect: Bool = true
     ) async throws -> [SBKTrack] {
         let service = ArtistGetTopTracksService(

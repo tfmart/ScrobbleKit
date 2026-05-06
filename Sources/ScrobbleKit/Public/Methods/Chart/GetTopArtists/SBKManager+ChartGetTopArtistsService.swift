@@ -18,8 +18,8 @@ public extension SBKManager {
     ///
     /// See [Last.fm API documentation](https://www.last.fm/api/show/chart.getTopArtists) for more information.
     func getArtistsChart(
-        page: Int = 1,
-        limit: Int = 50
+        page: Int = .sbkFirstPage,
+        limit: Int = .sbkLimitPerPage
     ) async throws -> [SBKArtist] {
         let service = ChartGetTopArtistsService(
             limit: limit,

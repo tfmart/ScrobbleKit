@@ -13,6 +13,8 @@ public extension SBKManager {
      
      - Parameters:
         - user: The Last.fm username to fetch the library of.
+        - limit: The number of artists to fetch per page.
+        - page: The page number to fetch.
      
      - Returns: An array of ``SBKArtist`` objects representing the library.
      
@@ -20,7 +22,7 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/library.getArtists).
      */
-    func getArtistsFromLibrary(from user: String, limit: Int = 50, page: Int = 1) async throws -> [SBKArtist] {
+    func getArtistsFromLibrary(from user: String, limit: Int = .sbkLimitPerPage, page: Int = .sbkFirstPage) async throws -> [SBKArtist] {
         let service = LibraryGetArtistsService(user: user, limit: limit, page: page, apiKey: apiKey, secret: secret)
         let response = try await service.start()
         return response.artists.artist

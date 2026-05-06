@@ -30,7 +30,9 @@ public extension SBKManager {
             user: user,
             autocorrect: autocorrect,
             apiKey: apiKey,
-            secretKey: secret)
+            secretKey: secret,
+            sessionKey: sessionKey
+        )
         let response = try await service.start()
         guard let tags = response.tags.tag else {
             return []

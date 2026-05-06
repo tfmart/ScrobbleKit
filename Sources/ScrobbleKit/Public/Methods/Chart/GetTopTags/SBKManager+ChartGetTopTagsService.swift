@@ -20,7 +20,7 @@ public extension SBKManager {
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/chart.getTopTags).
      */
-    func getTagsChart(page: Int = 1, limit: Int = 50) async throws -> [SBKTag] {
+    func getTagsChart(page: Int = .sbkFirstPage, limit: Int = .sbkLimitPerPage) async throws -> [SBKTag] {
         let service = ChartGetTopTagsService(page: page, limit: limit, apiKey: apiKey, secretKey: secret)
         let response = try await service.start()
         guard let tags = response.toptags.tag else {

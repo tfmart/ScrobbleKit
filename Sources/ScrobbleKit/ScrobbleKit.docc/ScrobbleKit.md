@@ -19,11 +19,11 @@ To begin using ScrobbleKit, you can check out our <doc:QuickStart> guide for an 
 - ``SBKManager/startSession(username:password:)-76puy``
 - ``SBKManager/setSessionKey(_:)``
 
-### Scrobbling
+### Track Scrobbling
 
 - <doc:Scrobbling>
 - ``SBKScrobbleResponse``
-- ``SBKManager/scrobble(track:artist:album:)``
+- ``SBKManager/scrobble(tracks:)``
 
 ### Update Now Playing
 
@@ -71,7 +71,7 @@ To begin using ScrobbleKit, you can check out our <doc:QuickStart> guide for an 
 
 - ``SBKManager/addTags(toTrack:artist:tags:)``
 - ``SBKManager/getCorrectedTrackInfo(for:by:)``
-- ``SBKManager/getInfo(forTrack:artist:username:autoCorrect:languageCode:)``
+- ``SBKManager/getInfo(forTrack:username:autoCorrect:)``
 - ``SBKManager/getSimilarTracks(_:autoCorrect:limit:)``
 - ``SBKManager/getTags(forTrack:autoCorrect:username:)``
 - ``SBKManager/getTopTagsForTrack(searchMethod:autoCorrect:)``
@@ -79,7 +79,7 @@ To begin using ScrobbleKit, you can check out our <doc:QuickStart> guide for an 
 - ``SBKManager/removeTag(fromTrack:artist:tag:)``
 - ``SBKManager/search(track:artist:limit:page:)``
 - ``SBKManager/unloveTrack(track:artist:)``
-- ``SBKManager/getInfo(forTrack:artist:username:autoCorrect:languageCode:)``
+- ``SBKManager/getInfo(forTrack:username:autoCorrect:)``
 
 ### User
 
@@ -89,7 +89,7 @@ To begin using ScrobbleKit, you can check out our <doc:QuickStart> guide for an 
 - ``SBKManager/getPersonalTagsForAlbums(fromUser:tag:limit:page:)``
 - ``SBKManager/getPersonalTagsForTracks(fromUser:tag:limit:page:)``
 - ``SBKManager/getPersonalTagsForArtists(fromUser:tag:limit:page:)``
-- ``SBKManager/getRecentTracks(fromUser:limit:page:from:extended:to:)``
+- ``SBKManager/getRecentTracks(fromUser:limit:page:startDate:extended:endDate:)``
 - ``SBKManager/getTopAlbums(forUser:period:limit:page:)``
 - ``SBKManager/getTopArtists(forUser:period:limit:page:)``
 - ``SBKManager/getTopTags(forUser:limit:)``

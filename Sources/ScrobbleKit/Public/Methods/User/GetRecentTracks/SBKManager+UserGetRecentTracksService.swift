@@ -24,11 +24,11 @@ public extension SBKManager {
      - Throws: An error of type ``SBKError`` if the operation fails.
      
      - Note: See [Last.fm's user.getRecentTracks documentation](https://www.last.fm/api/show/user.getRecentTracks) for more information.
-     */
+    */
     func getRecentTracks(
         fromUser user: String,
-        limit: Int = 50,
-        page: Int = 1,
+        limit: Int = .sbkLimitPerPage,
+        page: Int = .sbkFirstPage,
         startDate: Date? = nil,
         extended: Bool = false,
         endDate: Date? = nil

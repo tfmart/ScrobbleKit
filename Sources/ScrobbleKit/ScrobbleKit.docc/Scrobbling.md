@@ -92,7 +92,7 @@ Each `SBKScrobbleResult` contains:
 - `error`: An ``SBKScrobbleError`` object if the scrobble failed, `nil` otherwise.
 - `correctedTrack`, `correctedArtist`, `correctedAlbum`, `correctedAlbumArtist`: Corrected values if Last.fm made any corrections.
 
-You can scrobble up to 50 tracks in a single request. Attempting to scrobble more than 50 tracks will result in a ``SBKClientError.tooManyTracks`` error.
+You can scrobble up to 50 tracks in a single request. Attempting to scrobble more than 50 tracks will result in a ``SBKClientError/tooManyTracks`` error.
 
 ### Convenience Methods
 

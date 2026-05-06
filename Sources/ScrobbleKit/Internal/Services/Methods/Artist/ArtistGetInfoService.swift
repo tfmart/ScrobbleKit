@@ -33,14 +33,14 @@ struct ArtistGetInfoService: SBKService {
             self.queries = [
                 .init(name: "artist", value: artist),
                 .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect),
-                .init(name: "user", value: username),
+                .init(name: "username", value: username),
                 .init(name: "lang", value: languageCode.rawValue)
             ]
         case .musicBrainzID(let id):
             self.queries = [
                 .init(name: SBKParameter.musicBrainzID.rawValue, value: id),
                 .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect),
-                .init(name: "user", value: username),
+                .init(name: "username", value: username),
                 .init(name: "lang", value: languageCode.rawValue)
             ]
         }

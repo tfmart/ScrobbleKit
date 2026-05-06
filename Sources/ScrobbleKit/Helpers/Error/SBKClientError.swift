@@ -38,6 +38,11 @@ public enum SBKClientError: Error, LocalizedError {
     ///
     /// - Reduce the number of tracks you're trying to scrobble in a single request. Consider splitting the tracks into multiple requests if necessary.
     case tooManyTracks
+
+    /// Indicates that too many tags were provided in a single request.
+    ///
+    /// - Reduce the number of tags in the request. Last.fm accepts a maximum of 10 tags per add-tags call.
+    case tooManyTags
     
     /// A localized description of the error.
     public var errorDescription: String? {
@@ -54,6 +59,8 @@ public enum SBKClientError: Error, LocalizedError {
             return NSLocalizedString("No tracks were provided to scrobble. Please ensure you have at least one track before making the scrobble request.", comment: "")
         case .tooManyTracks:
             return NSLocalizedString("Too many tracks were provided for scrobbling in a single request. Please reduce the number of tracks or split them into multiple requests.", comment: "")
+        case .tooManyTags:
+            return NSLocalizedString("Too many tags were provided. Last.fm accepts a maximum of 10 tags per add-tags call.", comment: "")
         }
     }
 }

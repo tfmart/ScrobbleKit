@@ -7,8 +7,11 @@
 
 import Foundation
 
-struct ArtistGetTagsService: SBKService {
+struct ArtistGetTagsService: SBKOptionallyAuthenticatedService {
     typealias ResponseType = SBKAddTagAlbumResponse
+
+    var username: String?
+    var sessionKey: String?
     
     var apiKey: String
     var secretKey: String
@@ -17,7 +20,16 @@ struct ArtistGetTagsService: SBKService {
     var queries: [URLQueryItem]
     var httpMethod: SBKHttpMethod = .get
     
-    public init(searchMethod: SBKArtistSearchMethod, user: String?, autocorrect: Bool?, apiKey: String, secretKey: String) {
+    public init(
+        searchMethod: SBKArtistSearchMethod,
+        user: String?,
+        autocorrect: Bool?,
+        apiKey: String,
+        secretKey: String,
+        sessionKey: String?
+    ) {
+        self.username = user
+        self.sessionKey = sessionKey
         self.apiKey = apiKey
         self.secretKey = secretKey
         
@@ -28,10 +40,6 @@ struct ArtistGetTagsService: SBKService {
             queries.append(URLQueryItem(name: "artist", value: artist))
         case .musicBrainzID(let mbid):
             queries.append(URLQueryItem(name: SBKParameter.musicBrainzID.rawValue, value: mbid))
-        }
-        
-        if let user = user {
-            queries.append(URLQueryItem(name: "user", value: user))
         }
         
         if let autoCorrect = autocorrect {

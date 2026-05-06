@@ -18,9 +18,7 @@ struct TrackGetInfoService: SBKService {
     var httpMethod: SBKHttpMethod = .get
 
     init(
-        track: String,
-        artist: String,
-        mbid: String? = nil,
+        searchMethod: SBKTrackSearchMethod,
         username: String? = nil,
         autoCorrect: Bool = true,
         apiKey: String,
@@ -28,13 +26,22 @@ struct TrackGetInfoService: SBKService {
     ) {
         self.apiKey = apiKey
         self.secretKey = secretKey
-        
-        self.queries = [
-            .init(name: "track", value: track),
-            .init(name: "artist", value: artist),
+
+        var queries: [URLQueryItem] = [
             .init(name: SBKParameter.autoCorrect.rawValue, bool: autoCorrect),
-            .init(name: "username", value: username),
-            .init(name: "mbid", value: mbid)
+            .init(name: "username", value: username)
         ]
+
+        switch searchMethod {
+        case .trackInfo(let title, artist: let artist):
+            queries.append(contentsOf: [
+                .init(name: "track", value: title),
+                .init(name: "artist", value: artist)
+            ])
+        case .musicBrainzID(let mbid):
+            queries.append(.init(parameter: .musicBrainzID, value: mbid))
+        }
+
+        self.queries = queries
     }
 }

@@ -24,7 +24,7 @@ public extension SBKManager {
     func addTags(toTrack track: String, artist: String, tags: [String]) async throws -> Bool {
         guard let sessionKey = sessionKey else { throw SBKClientError.missingSessionKey }
         
-        let service = AddTagsService(
+        let service = try AddTagsService(
             to: .track(track, artist: artist),
             tags: tags,
             apiKey: apiKey,
