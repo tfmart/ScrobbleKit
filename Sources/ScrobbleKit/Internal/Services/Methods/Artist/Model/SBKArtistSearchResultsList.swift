@@ -13,4 +13,9 @@ struct SBKArtistSearchResultsList: Decodable, Sendable {
     private enum CodingKeys: String, CodingKey {
         case artists = "artist"
     }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.artists = try container.decodeOneOrMany(SBKArtist.self, forKey: .artists)
+    }
 }

@@ -21,6 +21,11 @@ struct SBKArtistGetTopAlbumsList: Decodable, Sendable {
     enum CodingKeys: String, CodingKey {
         case albums = "album"
     }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.albums = try container.decodeOneOrMany(SBKArtistTopAlbum.self, forKey: .albums)
+    }
 }
 
 struct SBKArtistTopAlbum: Decodable, Sendable {

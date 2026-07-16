@@ -23,13 +23,7 @@ struct SBKUserGetRecentTracksResult: Decodable, Sendable {
     
     init(from decoder: Decoder) throws {
         let container: KeyedDecodingContainer<SBKUserGetRecentTracksResult.CodingKeys> = try decoder.container(keyedBy: SBKUserGetRecentTracksResult.CodingKeys.self)
-        let trackList: [SBKThrowable<SBKScrobbledTrack>]
-        if let tracks = try? container.decode([SBKThrowable<SBKScrobbledTrack>].self, forKey: .tracks) {
-            trackList = tracks
-        } else {
-            let track = try container.decode(SBKThrowable<SBKScrobbledTrack>.self, forKey: .tracks)
-            trackList = [track]
-        }
+        let trackList = try container.decodeOneOrMany(SBKThrowable<SBKScrobbledTrack>.self, forKey: .tracks)
         self.tracks = trackList.compactMap { $0.object }
         self.attributes = try container.decode(SBKUserGetRecentTracksAttributes.self, forKey: .attributes)
         

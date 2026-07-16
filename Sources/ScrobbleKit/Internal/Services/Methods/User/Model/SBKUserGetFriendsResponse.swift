@@ -19,6 +19,12 @@ struct SBKUserGetFriendsResponse: Decodable, Sendable {
         case friends = "user"
         case attributes = "@attr"
     }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.attributes = try container.decode(SBKUserGetFriendsAttribute.self, forKey: .attributes)
+        self.friends = try container.decodeOneOrMany(SBKUserInfoDataResponse.self, forKey: .friends)
+    }
 }
 
 struct SBKUserGetFriendsAttribute: Decodable, Sendable {

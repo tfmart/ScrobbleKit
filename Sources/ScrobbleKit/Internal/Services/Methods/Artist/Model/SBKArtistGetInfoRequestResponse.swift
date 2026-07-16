@@ -31,6 +31,15 @@ struct SBKArtistGetInfoPropertiesStats: Decodable, Sendable {
 
 struct SBKArtistGetInfoSimilarResponse: Decodable, Sendable {
     var artist: [SBKArtistGetInfoSimilarArtist]
+
+    private enum CodingKeys: CodingKey {
+        case artist
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.artist = try container.decodeOneOrMany(SBKArtistGetInfoSimilarArtist.self, forKey: .artist)
+    }
     
     var sbkArtist: [SBKArtist] {
         return artist.map { SBKArtist(similarArtist: $0) }

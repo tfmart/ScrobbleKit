@@ -16,6 +16,15 @@ struct SBKUserWeeklyChartListResponse: Decodable, Sendable {
 
     private struct ChartList: Decodable, Sendable {
         let chart: [SBKWeeklyChart]
+
+        private enum CodingKeys: CodingKey {
+            case chart
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.chart = try container.decodeOneOrMany(SBKWeeklyChart.self, forKey: .chart)
+        }
     }
 
     init(from decoder: Decoder) throws {
@@ -45,7 +54,7 @@ struct SBKUserWeeklyAlbumChart: Decodable, Sendable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.attributes = try container.decode(SBKUserWeeklyChartAttributes.self, forKey: .attributes)
-        self.albums = try container.decodeIfPresent([SBKAlbum].self, forKey: .albums) ?? []
+        self.albums = try container.decodeOneOrManyIfPresent(SBKAlbum.self, forKey: .albums) ?? []
     }
 }
 
@@ -69,7 +78,7 @@ struct SBKUserWeeklyArtistChart: Decodable, Sendable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.attributes = try container.decode(SBKUserWeeklyChartAttributes.self, forKey: .attributes)
-        self.artists = try container.decodeIfPresent([SBKArtist].self, forKey: .artists) ?? []
+        self.artists = try container.decodeOneOrManyIfPresent(SBKArtist.self, forKey: .artists) ?? []
     }
 }
 
@@ -93,7 +102,7 @@ struct SBKUserWeeklyTrackChart: Decodable, Sendable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.attributes = try container.decode(SBKUserWeeklyChartAttributes.self, forKey: .attributes)
-        self.tracks = try container.decodeIfPresent([SBKTrack].self, forKey: .tracks) ?? []
+        self.tracks = try container.decodeOneOrManyIfPresent(SBKTrack.self, forKey: .tracks) ?? []
     }
 }
 

@@ -38,6 +38,15 @@ struct TagSimilarResponse: Decodable, Sendable {
     
     struct SimilarTags: Decodable, Sendable {
         let tag: [SBKTag]
+
+        private enum CodingKeys: CodingKey {
+            case tag
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.tag = try container.decodeOneOrMany(SBKTag.self, forKey: .tag)
+        }
     }
     
     init(from decoder: Decoder) throws {

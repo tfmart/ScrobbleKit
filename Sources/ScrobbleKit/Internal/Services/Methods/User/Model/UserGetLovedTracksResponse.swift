@@ -19,6 +19,12 @@ struct _UserLovedTracksList: Decodable, Sendable {
         case track
         case attributes = "@attr"
     }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.track = try container.decodeOneOrMany(_UserLovedTrack.self, forKey: .track)
+        self.attributes = try container.decode(_UserLovedTracksAttributes.self, forKey: .attributes)
+    }
 }
 
 struct _UserLovedTrack: Decodable, Sendable {

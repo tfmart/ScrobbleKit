@@ -38,6 +38,15 @@ struct TagGetWeeklyChartListResponse: Decodable, Sendable {
     
     struct WeeklyChartList: Decodable, Sendable {
         let chart: [WeeklyChartTag]
+
+        private enum CodingKeys: CodingKey {
+            case chart
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.chart = try container.decodeOneOrMany(WeeklyChartTag.self, forKey: .chart)
+        }
     }
     
     struct WeeklyChartTag: Decodable, Sendable {

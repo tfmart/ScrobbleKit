@@ -29,7 +29,7 @@ struct SBKTagRequestResponseList: Decodable, Sendable {
             if tagString.isEmpty { self.tag = [] }
             else { self.tag = [.init(name: tagString)] }
         } else {
-            self.tag = try container.decodeIfPresent([SBKTag].self, forKey: .tag)
+            self.tag = try container.decodeOneOrManyIfPresent(SBKTag.self, forKey: .tag)
         }
     }
     
@@ -48,11 +48,7 @@ struct SBKAlbumTracksRequestResponseList: Decodable, Sendable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        if let track = try? container.decode(SBKAlbumTrack.self, forKey: .track) {
-            self.track = [track]
-        } else {
-            self.track = try container.decode([SBKAlbumTrack].self, forKey: .track)
-        }
+        self.track = try container.decodeOneOrMany(SBKAlbumTrack.self, forKey: .track)
     }
 }
 

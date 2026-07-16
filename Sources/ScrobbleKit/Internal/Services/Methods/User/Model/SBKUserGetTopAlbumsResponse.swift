@@ -23,6 +23,12 @@ struct SBKUserGetTopAlbumsResult: Decodable, Sendable {
         case albums = "album"
         case attributes = "@attr"
     }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.attributes = try container.decode(SBKUserGetTopAlbumsAttributes.self, forKey: .attributes)
+        self.albums = try container.decodeOneOrMany(SBKAlbum.self, forKey: .albums)
+    }
 }
 
 struct SBKUserGetTopAlbumsAttributes: SBKSearchAttribute {
@@ -49,6 +55,12 @@ struct SBKUserGetTopArtistsResult: Decodable, Sendable {
         case artists = "artist"
         case attributes = "@attr"
     }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.attributes = try container.decode(SBKUserGetTopAlbumsAttributes.self, forKey: .attributes)
+        self.artists = try container.decodeOneOrMany(SBKArtist.self, forKey: .artists)
+    }
 }
 
 struct SBKUserGetTopTagsResponse: Decodable, Sendable {
@@ -66,6 +78,12 @@ struct SBKUserGetTopTagsResult: Decodable, Sendable {
     private enum CodingKeys: String, CodingKey {
         case tags = "tag"
         case attributes = "@attr"
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.attributes = try container.decode(SBKUserGetTopTagsAttribute.self, forKey: .attributes)
+        self.tags = try container.decodeOneOrMany(SBKTag.self, forKey: .tags)
     }
 }
 
@@ -88,5 +106,11 @@ struct SBKUserGetTopTracksResult: Decodable, Sendable {
     private enum CodingKeys: String, CodingKey {
         case tracks = "track"
         case attributes = "@attr"
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.attributes = try container.decode(SBKUserGetTopAlbumsAttributes.self, forKey: .attributes)
+        self.tracks = try container.decodeOneOrMany(SBKTrack.self, forKey: .tracks)
     }
 }

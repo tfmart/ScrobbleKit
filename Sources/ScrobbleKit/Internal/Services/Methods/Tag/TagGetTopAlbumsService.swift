@@ -38,6 +38,15 @@ struct TagGetTopAlbumsService: SBKService {
 struct TagTopAlbumsResponse: Sendable, Decodable {
     struct TagTopAlbumsList: Decodable, Sendable {
         let album: [SBKAlbum]
+
+        private enum CodingKeys: CodingKey {
+            case album
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.album = try container.decodeOneOrMany(SBKAlbum.self, forKey: .album)
+        }
     }
     
     let albums: [SBKAlbum]

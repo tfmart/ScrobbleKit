@@ -44,6 +44,15 @@ struct TagTopTracksResponse: Sendable, Decodable {
     
     struct TopTracks: Decodable, Sendable {
         let track: [SBKTrack]
+
+        private enum CodingKeys: CodingKey {
+            case track
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.track = try container.decodeOneOrMany(SBKTrack.self, forKey: .track)
+        }
     }
     
     init(from decoder: Decoder) throws {
