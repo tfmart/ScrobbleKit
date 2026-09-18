@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct IntegerStringDecoder: Decodable {
+struct IntegerStringDecoder: Decodable, Sendable {
     var intValue: Int?
     
     init(from decoder: Decoder) throws {
