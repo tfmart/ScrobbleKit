@@ -13,6 +13,8 @@ public struct SBKArtist: Sendable, Decodable {
     public let name: String
     /// The playcount of the artist.
     public let playcount: Int?
+    /// Plays by the username supplied to artist.getInfo; nil when omitted.
+    public var userPlaycount: Int?
     /// The number of listeners for the artist.
     public let listeners: Int?
     /// The MusicBrainz ID of the artist, if available.
@@ -37,6 +39,7 @@ public struct SBKArtist: Sendable, Decodable {
     enum CodingKeys: String, CodingKey {
         case name
         case playcount
+        case userPlaycount = "userplaycount"
         case listeners
         case musicBrainzID = "mbid"
         case url
@@ -58,6 +61,7 @@ public struct SBKArtist: Sendable, Decodable {
         }
         
         self.playcount = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKArtist.CodingKeys.playcount)?.intValue
+        self.userPlaycount = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: .userPlaycount)?.intValue
         self.listeners = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKArtist.CodingKeys.listeners)?.intValue
         self.musicBrainzID = UUID(optionalString: try container.decodeIfPresent(String.self, forKey: SBKArtist.CodingKeys.musicBrainzID))
         self.url = try container.decodeIfPresent(URL.self, forKey: SBKArtist.CodingKeys.url)
@@ -80,6 +84,7 @@ public struct SBKArtist: Sendable, Decodable {
     
     internal init(getInfoData: SBKArtistGetInfoRequestResponse) {
         self.name = getInfoData.artist.name
+        self.userPlaycount = getInfoData.artist.stats?.userplaycount?.intValue
         self.playcount = Int(optionalString: getInfoData.artist.stats?.playcount)
         self.listeners = Int(optionalString: getInfoData.artist.stats?.listeners)
         self.musicBrainzID = UUID(optionalString: getInfoData.artist.mbid)

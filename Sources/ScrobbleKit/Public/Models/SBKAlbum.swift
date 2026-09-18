@@ -17,6 +17,8 @@ public struct SBKAlbum: Decodable, Sendable {
     public var musicBrainzID: UUID?
     /// The playcount of the album.
     public var playcount: Int?
+    /// Plays by the username supplied to album.getInfo; nil when omitted.
+    public var userPlaycount: Int?
     /// The URL of the album on Last.fm.
     public var url: URL?
     /// The number of listeners for the album.
@@ -34,6 +36,7 @@ public struct SBKAlbum: Decodable, Sendable {
         case musicBrainzID = "mbid"
         case tagList = "tags"
         case playcount
+        case userPlaycount = "userplaycount"
         case image
         case tracks
         case url
@@ -101,6 +104,7 @@ public struct SBKAlbum: Decodable, Sendable {
         self.name = try container.decode(String.self, forKey: SBKAlbum.CodingKeys.name)
         self.musicBrainzID = UUID(optionalString: try container.decodeIfPresent(String.self, forKey: SBKAlbum.CodingKeys.musicBrainzID))
         self.playcount = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKAlbum.CodingKeys.playcount)?.intValue
+        self.userPlaycount = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: .userPlaycount)?.intValue
         self.image = try container.decodeIfPresent([SBKImageResponse].self, forKey: SBKAlbum.CodingKeys.image)
         self.tracks = try container.decodeIfPresent(SBKAlbumTracksRequestResponseList.self, forKey: SBKAlbum.CodingKeys.tracks)
         self.url = try container.decodeIfPresent(URL.self, forKey: SBKAlbum.CodingKeys.url)

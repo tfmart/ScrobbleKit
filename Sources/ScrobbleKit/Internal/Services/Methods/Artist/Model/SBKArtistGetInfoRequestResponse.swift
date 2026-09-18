@@ -25,6 +25,7 @@ struct SBKArtistGetInfoProperties: Decodable, Sendable {
 }
 
 struct SBKArtistGetInfoPropertiesStats: Decodable, Sendable {
+    var userplaycount: IntegerStringDecoder?
     var listeners: String
     var playcount: String
 }

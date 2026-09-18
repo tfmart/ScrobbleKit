@@ -23,7 +23,11 @@ struct SBKUserGetFriendsResponse: Decodable, Sendable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.attributes = try container.decode(SBKUserGetFriendsAttribute.self, forKey: .attributes)
-        self.friends = try container.decodeOneOrMany(SBKUserInfoDataResponse.self, forKey: .friends)
+        if let empty = try? container.decode(String.self, forKey: .friends), empty.isEmpty {
+            self.friends = []
+        } else {
+            self.friends = try container.decodeOneOrManyIfPresent(SBKUserInfoDataResponse.self, forKey: .friends) ?? []
+        }
     }
 }
 
