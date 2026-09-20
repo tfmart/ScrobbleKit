@@ -67,6 +67,12 @@ To begin using ScrobbleKit, you can check out our <doc:QuickStart> guide for an 
 
 - ``SBKManager/getArtistsFromLibrary(from:limit:page:)``
 
+### Tag
+
+- ``SBKManager/getTopAlbums(forTag:limit:page:)``
+- ``SBKManager/getTopArtists(forTag:limit:page:)``
+- ``SBKManager/getTopTracks(forTag:limit:page:)``
+
 ### Track
 
 - ``SBKManager/addTags(toTrack:artist:tags:)``
