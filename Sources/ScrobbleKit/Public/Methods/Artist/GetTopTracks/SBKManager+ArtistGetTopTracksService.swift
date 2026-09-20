@@ -17,7 +17,7 @@ public extension SBKManager {
      - limit: The number of tracks to return.
      - page: The page number to fetch.
      
-     - Returns: An array of ``SBKTrack`` objects representing the artist's top tracks.
+     - Returns: An ``SBKSearchResult`` containing the artist's top tracks and pagination metadata reported by Last.fm.
      
      - Throws: An error of type ``SBKClientError`` or ``SBKError`` if there is an issue with the API request or decoding the response.
      
@@ -28,7 +28,7 @@ public extension SBKManager {
         limit: Int = .sbkLimitPerPage,
         page: Int = .sbkFirstPage,
         autoCorrect: Bool = true
-    ) async throws -> [SBKTrack] {
+    ) async throws -> SBKSearchResult<SBKTrack> {
         let service = ArtistGetTopTracksService(
             searchMethod,
             limit: limit,
@@ -38,6 +38,14 @@ public extension SBKManager {
             secretKey: secret
         )
         let response = try await service.start()
-        return response.toptracks.track
+        guard let attributes = response.toptracks.attributes else {
+            throw SBKClientError.failedToDecodeResponse
+        }
+        let pagination = try SBKPagination(attributes: attributes)
+        return .init(
+            results: response.toptracks.track,
+            searchTerms: [.artist: searchMethod.searchTerm],
+            pagination: pagination
+        )
     }
 }

@@ -37,6 +37,7 @@ struct TagGetTopArtistsService: SBKService {
 
 struct TagTopArtistsResponse: Decodable, Sendable {
     let artists: [SBKArtist]
+    let attributes: SBKPaginationAttributes?
     
     enum CodingKeys: String, CodingKey {
         case artists = "topartists"
@@ -44,14 +45,17 @@ struct TagTopArtistsResponse: Decodable, Sendable {
     
     struct TopArtists: Decodable, Sendable {
         let artist: [SBKArtist]
+        let attributes: SBKPaginationAttributes?
 
-        private enum CodingKeys: CodingKey {
+        private enum CodingKeys: String, CodingKey {
             case artist
+            case attributes = "@attr"
         }
 
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             self.artist = try container.decodeOneOrMany(SBKArtist.self, forKey: .artist)
+            self.attributes = try? container.decodeIfPresent(SBKPaginationAttributes.self, forKey: .attributes)
         }
     }
     
@@ -59,5 +63,6 @@ struct TagTopArtistsResponse: Decodable, Sendable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let topArtists = try container.decode(TopArtists.self, forKey: .artists)
         self.artists = topArtists.artist
+        self.attributes = topArtists.attributes
     }
 }

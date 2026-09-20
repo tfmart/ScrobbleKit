@@ -37,6 +37,7 @@ struct TagGetTopTracksService: SBKService {
 
 struct TagTopTracksResponse: Sendable, Decodable {
     let tracks: [SBKTrack]
+    let attributes: SBKPaginationAttributes?
     
     enum CodingKeys: String, CodingKey {
         case tracks = "tracks"
@@ -44,14 +45,17 @@ struct TagTopTracksResponse: Sendable, Decodable {
     
     struct TopTracks: Decodable, Sendable {
         let track: [SBKTrack]
+        let attributes: SBKPaginationAttributes?
 
-        private enum CodingKeys: CodingKey {
+        private enum CodingKeys: String, CodingKey {
             case track
+            case attributes = "@attr"
         }
 
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             self.track = try container.decodeOneOrMany(SBKTrack.self, forKey: .track)
+            self.attributes = try? container.decodeIfPresent(SBKPaginationAttributes.self, forKey: .attributes)
         }
     }
     
@@ -59,5 +63,6 @@ struct TagTopTracksResponse: Sendable, Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let topTracks = try container.decode(TopTracks.self, forKey: .tracks)
         self.tracks = topTracks.track
+        self.attributes = topTracks.attributes
     }
 }

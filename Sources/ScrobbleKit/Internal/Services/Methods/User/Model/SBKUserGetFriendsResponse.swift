@@ -12,7 +12,7 @@ struct SBKUserGetFriendsRootObject: Decodable, Sendable {
 }
 
 struct SBKUserGetFriendsResponse: Decodable, Sendable {
-    let attributes: SBKUserGetFriendsAttribute
+    let attributes: SBKUserGetFriendsAttribute?
     let friends: [SBKUserInfoDataResponse]
     
     private enum CodingKeys: String, CodingKey {
@@ -22,7 +22,7 @@ struct SBKUserGetFriendsResponse: Decodable, Sendable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.attributes = try container.decode(SBKUserGetFriendsAttribute.self, forKey: .attributes)
+        self.attributes = try? container.decodeIfPresent(SBKUserGetFriendsAttribute.self, forKey: .attributes)
         if let empty = try? container.decode(String.self, forKey: .friends), empty.isEmpty {
             self.friends = []
         } else {
@@ -32,9 +32,22 @@ struct SBKUserGetFriendsResponse: Decodable, Sendable {
 }
 
 struct SBKUserGetFriendsAttribute: Decodable, Sendable {
-    var user: String
-    var totalPages: String
-    var page: String
-    var total: String
-    var perPage: String
+    let user: String?
+    let totalPages: String?
+    let page: String?
+    let total: String?
+    let perPage: String?
+
+    private enum CodingKeys: String, CodingKey {
+        case user, totalPages, page, total, perPage
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        user = try? container.decodeIfPresent(String.self, forKey: .user)
+        totalPages = try? container.decodeIfPresent(String.self, forKey: .totalPages)
+        page = try? container.decodeIfPresent(String.self, forKey: .page)
+        total = try? container.decodeIfPresent(String.self, forKey: .total)
+        perPage = try? container.decodeIfPresent(String.self, forKey: .perPage)
+    }
 }

@@ -13,13 +13,16 @@ struct SBKGeoTopArtistsResponse: Decodable, Sendable {
 
 struct SBKGeoTopArtistsList: Decodable, Sendable {
     let artist: [SBKArtist]
+    let attributes: SBKPaginationAttributes?
 
-    private enum CodingKeys: CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case artist
+        case attributes = "@attr"
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.artist = try container.decodeOneOrMany(SBKArtist.self, forKey: .artist)
+        self.attributes = try? container.decodeIfPresent(SBKPaginationAttributes.self, forKey: .attributes)
     }
 }

@@ -13,16 +13,30 @@ public extension SBKManager {
      
      - Parameters:
         - user: The Last.fm username to fetch the library of.
+        - limit: The number of artists to fetch per page.
+        - page: The page number to fetch.
      
-     - Returns: An array of ``SBKArtist`` objects representing the library.
+     - Returns: An ``SBKSearchResult`` containing the library artists and pagination metadata reported by Last.fm.
      
      - Throws: An error of type ``SBKClientError`` or ``SBKError`` if there is an issue with the API request or decoding the response.
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/library.getArtists).
      */
-    func getArtistsFromLibrary(from user: String, limit: Int = .sbkLimitPerPage, page: Int = .sbkFirstPage) async throws -> [SBKArtist] {
+    func getArtistsFromLibrary(
+        from user: String,
+        limit: Int = .sbkLimitPerPage,
+        page: Int = .sbkFirstPage
+    ) async throws -> SBKSearchResult<SBKArtist> {
         let service = LibraryGetArtistsService(user: user, limit: limit, page: page, apiKey: apiKey, secret: secret)
         let response = try await service.start()
-        return response.artists.artist
+        guard let attributes = response.artists.attributes else {
+            throw SBKClientError.failedToDecodeResponse
+        }
+        let pagination = try SBKPagination(attributes: attributes)
+        return .init(
+            results: response.artists.artist,
+            searchTerms: [.user: user],
+            pagination: pagination
+        )
     }
 }

@@ -17,14 +17,17 @@ struct SBKArtistGetTopAlbumsResponse: Decodable, Sendable {
 
 struct SBKArtistGetTopAlbumsList: Decodable, Sendable {
     let albums: [SBKArtistTopAlbum]
+    let attributes: SBKPaginationAttributes?
     
     enum CodingKeys: String, CodingKey {
         case albums = "album"
+        case attributes = "@attr"
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.albums = try container.decodeOneOrMany(SBKArtistTopAlbum.self, forKey: .albums)
+        self.attributes = try? container.decodeIfPresent(SBKPaginationAttributes.self, forKey: .attributes)
     }
 }
 
