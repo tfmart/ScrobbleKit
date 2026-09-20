@@ -12,10 +12,10 @@ struct SBKSearchResultsResponse<T: Decodable & Sendable>: Decodable, Sendable {
 }
 
 struct SBKSearchResultsDetails<T: Decodable & Sendable>: Decodable, Sendable {
-    let query: SBKSearchQuery
-    let totalResults: String
-    let startIndex: String
-    let itemsPerPage: String
+    let query: SBKSearchQuery?
+    let totalResults: String?
+    let startIndex: String?
+    let itemsPerPage: String?
     let matches: T
     
     private enum CodingKeys: String, CodingKey {
@@ -35,10 +35,10 @@ struct SBKSearchResultsDetails<T: Decodable & Sendable>: Decodable, Sendable {
     init(from decoder: Decoder) throws {
         let container: KeyedDecodingContainer<SBKSearchResultsDetails<T>.CodingKeys> = try decoder.container(keyedBy: SBKSearchResultsDetails<T>.CodingKeys.self)
         
-        self.query = try container.decode(SBKSearchQuery.self, forKey: SBKSearchResultsDetails<T>.CodingKeys.query)
-        self.totalResults = try container.decode(String.self, forKey: SBKSearchResultsDetails<T>.CodingKeys.totalResults)
-        self.startIndex = try container.decode(String.self, forKey: SBKSearchResultsDetails<T>.CodingKeys.startIndex)
-        self.itemsPerPage = try container.decode(String.self, forKey: SBKSearchResultsDetails<T>.CodingKeys.itemsPerPage)
+        self.query = try? container.decodeIfPresent(SBKSearchQuery.self, forKey: SBKSearchResultsDetails<T>.CodingKeys.query)
+        self.totalResults = try? container.decodeIfPresent(String.self, forKey: SBKSearchResultsDetails<T>.CodingKeys.totalResults)
+        self.startIndex = try? container.decodeIfPresent(String.self, forKey: SBKSearchResultsDetails<T>.CodingKeys.startIndex)
+        self.itemsPerPage = try? container.decodeIfPresent(String.self, forKey: SBKSearchResultsDetails<T>.CodingKeys.itemsPerPage)
         
         let matchesContainer: KeyedDecodingContainer<SBKSearchResultsDetails<T>.MatchesCodingKeys> = try decoder.container(keyedBy: SBKSearchResultsDetails<T>.MatchesCodingKeys.self)
         switch "\(T.self)" {

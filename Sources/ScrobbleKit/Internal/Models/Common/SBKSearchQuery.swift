@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct SBKSearchQuery: Codable {
+struct SBKSearchQuery: Codable, Sendable {
     let text: String
     let role: String
     let searchTerms: String?
-    let startPage: String
+    let startPage: String?
 
     private enum CodingKeys: String, CodingKey {
         case text = "#text"
