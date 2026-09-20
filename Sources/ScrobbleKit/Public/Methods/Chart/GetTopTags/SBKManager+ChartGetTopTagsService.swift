@@ -14,20 +14,22 @@ public extension SBKManager {
      - Parameters:
      - limit: The maximum number of tags to return per page.
      
-     - Returns: An array of ``SBKTag`` objects representing the top tags.
+     - Returns: An ``SBKSearchResult`` containing the top tags and pagination metadata reported by Last.fm.
      
      - Throws: An error of type ``SBKClientError`` or ``SBKError`` if there is an issue with the API request or decoding the response.
      
      - Note: For more information, see the [Last.fm API documentation](https://www.last.fm/api/show/chart.getTopTags).
      */
-    func getTagsChart(page: Int = .sbkFirstPage, limit: Int = .sbkLimitPerPage) async throws -> [SBKTag] {
+    func getTagsChart(
+        page: Int = .sbkFirstPage,
+        limit: Int = .sbkLimitPerPage
+    ) async throws -> SBKSearchResult<SBKTag> {
         let service = ChartGetTopTagsService(page: page, limit: limit, apiKey: apiKey, secretKey: secret)
         let response = try await service.start()
-        guard let tags = response.toptags.tag else {
-            return []
+        guard let attributes = response.tags.attributes else {
+            throw SBKClientError.failedToDecodeResponse
         }
-        return tags
+        let pagination = try SBKPagination(attributes: attributes)
+        return .init(results: response.tags.tag ?? [], searchTerms: [:], pagination: pagination)
     }
 }
-
-

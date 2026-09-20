@@ -18,9 +18,11 @@ struct SBKTagRequestResponse: Decodable, Sendable {
 
 struct SBKTagRequestResponseList: Decodable, Sendable {
     var tag: [SBKTag]?
-    
-    enum CodingKeys: CodingKey {
+    var attributes: SBKPaginationAttributes?
+
+    enum CodingKeys: String, CodingKey {
         case tag
+        case attributes = "@attr"
     }
     
     init(from decoder: Decoder) throws {
@@ -31,10 +33,12 @@ struct SBKTagRequestResponseList: Decodable, Sendable {
         } else {
             self.tag = try container.decodeOneOrManyIfPresent(SBKTag.self, forKey: .tag)
         }
+        self.attributes = try? container.decodeIfPresent(SBKPaginationAttributes.self, forKey: .attributes)
     }
     
-    internal init(tag: [SBKTag]? = nil) {
+    internal init(tag: [SBKTag]? = nil, attributes: SBKPaginationAttributes? = nil) {
         self.tag = tag
+        self.attributes = attributes
     }
 }
 
