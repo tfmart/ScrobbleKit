@@ -23,7 +23,7 @@ public struct SBKURLBuilder {
         guard let url = URL(string: "music/\(encodedArtist)/_/\(encodedTrack)", relativeTo: baseURL) else {
             throw SBKURLBuilderError.generatedBadURL
         }
-        return url
+        return url.absoluteURL
     }
     
     /// Constructs a URL for a specific artist on Last.fm.
@@ -37,7 +37,7 @@ public struct SBKURLBuilder {
         guard let url = URL(string: "music/\(encodedArtist)", relativeTo: baseURL) else {
             throw SBKURLBuilderError.generatedBadURL
         }
-        return url
+        return url.absoluteURL
     }
     
     /// Constructs a URL for a specific album by a specific artist on Last.fm.
@@ -54,7 +54,7 @@ public struct SBKURLBuilder {
         guard let url = URL(string: "music/\(encodedArtist)/\(encodedAlbum)", relativeTo: baseURL) else {
             throw SBKURLBuilderError.generatedBadURL
         }
-        return url
+        return url.absoluteURL
     }
     
     /// Constructs a URL for a specific tag on Last.fm.
@@ -68,7 +68,7 @@ public struct SBKURLBuilder {
         guard let url = URL(string: "tag/\(encodedTag)", relativeTo: baseURL) else {
             throw SBKURLBuilderError.generatedBadURL
         }
-        return url
+        return url.absoluteURL
     }
     
     private static func encode(_ string: String) throws -> String {
@@ -84,6 +84,6 @@ public struct SBKURLBuilder {
         guard let url = URL(string: "https://www.last.fm") else {
             throw SBKURLBuilderError.badBaseURL
         }
-        return url
+        return url.absoluteURL
     }
 }

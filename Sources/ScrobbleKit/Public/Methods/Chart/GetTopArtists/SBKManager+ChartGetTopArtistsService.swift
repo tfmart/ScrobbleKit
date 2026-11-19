@@ -13,14 +13,14 @@ public extension SBKManager {
     /// - Parameters:
     ///   - page: The page number to fetch. Defaults to first page.
     ///   - limit: The number of results to fetch per page. Defaults to 50.
-    /// - Returns: An array of ``SBKArtist`` objects.
+    /// - Returns: An ``SBKSearchResult`` containing the top artists and pagination metadata reported by Last.fm.
     /// - Throws: An error if the API call fails or the response cannot be decoded.
     ///
     /// See [Last.fm API documentation](https://www.last.fm/api/show/chart.getTopArtists) for more information.
     func getArtistsChart(
         page: Int = .sbkFirstPage,
         limit: Int = .sbkLimitPerPage
-    ) async throws -> [SBKArtist] {
+    ) async throws -> SBKSearchResult<SBKArtist> {
         let service = ChartGetTopArtistsService(
             limit: limit,
             page: page,
@@ -28,6 +28,10 @@ public extension SBKManager {
             secretKey: secret
         )
         let response = try await service.start()
-        return response.artists.artists
+        guard let attributes = response.artists.attributes else {
+            throw SBKClientError.failedToDecodeResponse
+        }
+        let pagination = try SBKPagination(attributes: attributes)
+        return .init(results: response.artists.artists, searchTerms: [:], pagination: pagination)
     }
 }

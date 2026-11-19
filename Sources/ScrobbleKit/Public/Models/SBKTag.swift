@@ -51,11 +51,17 @@ public struct SBKTag: Sendable, Decodable {
         name = try container.decode(String.self, forKey: .name)
         let urlString = try container.decodeIfPresent(String.self, forKey: .url)
         url = URL(optionalString: urlString)
-        reach = try container.decodeIfPresent(Int.self, forKey: .reach)
-        taggings = try container.decodeIfPresent(Int.self, forKey: .taggings)
-        streamable = try container.decodeIfPresent(Bool.self, forKey: .streamable)
-        wiki = try container.decodeIfPresent(SBKWiki.self, forKey: .wiki)
-        count = try container.decodeIfPresent(Int.self, forKey: .count)
+        reach = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: .reach)?.intValue
+        taggings = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: .taggings)?.intValue
+        if let booleanValue = try? container.decodeIfPresent(Bool.self, forKey: .streamable) {
+            streamable = booleanValue
+        } else if let integerValue = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: .streamable)?.intValue {
+            streamable = Bool(integer: integerValue)
+        } else {
+            streamable = nil
+        }
+        wiki = try? container.decodeIfPresent(SBKWiki.self, forKey: .wiki)
+        count = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: .count)?.intValue
         
         streamableString = try container.decodeIfPresent(String.self, forKey: .streamableString)
         

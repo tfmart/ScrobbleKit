@@ -25,13 +25,7 @@ struct SBKScrobbles: Decodable, Sendable {
     
     init(from decoder: Decoder) throws {
         let container: KeyedDecodingContainer<SBKScrobbles.CodingKeys> = try decoder.container(keyedBy: SBKScrobbles.CodingKeys.self)
-        
-        if let scrobbleList = try? container.decode([SBKScrobble].self, forKey: SBKScrobbles.CodingKeys.scrobbles) {
-            self.scrobbles = scrobbleList
-        } else {
-            let singleEntry = try container.decode(SBKScrobble.self, forKey: SBKScrobbles.CodingKeys.scrobbles)
-            self.scrobbles = [singleEntry]
-        }
+        self.scrobbles = try container.decodeOneOrMany(SBKScrobble.self, forKey: .scrobbles)
         self.attr = try container.decode(SBKAttr.self, forKey: SBKScrobbles.CodingKeys.attr)
     }
 }
@@ -69,4 +63,3 @@ struct SBKIgnoredMessage: Decodable, Sendable {
         case text = "#text"
     }
 }
-

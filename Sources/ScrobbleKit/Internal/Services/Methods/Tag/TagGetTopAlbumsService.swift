@@ -38,9 +38,22 @@ struct TagGetTopAlbumsService: SBKService {
 struct TagTopAlbumsResponse: Sendable, Decodable {
     struct TagTopAlbumsList: Decodable, Sendable {
         let album: [SBKAlbum]
+        let attributes: SBKPaginationAttributes?
+
+        private enum CodingKeys: String, CodingKey {
+            case album
+            case attributes = "@attr"
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.album = try container.decodeOneOrMany(SBKAlbum.self, forKey: .album)
+            self.attributes = try? container.decodeIfPresent(SBKPaginationAttributes.self, forKey: .attributes)
+        }
     }
     
     let albums: [SBKAlbum]
+    let attributes: SBKPaginationAttributes?
     
     enum CodingKeys: String, CodingKey {
         case albums = "albums"
@@ -50,5 +63,6 @@ struct TagTopAlbumsResponse: Sendable, Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let topAlbums = try container.decode(TagTopAlbumsList.self, forKey: .albums)
         self.albums = topAlbums.album
+        self.attributes = topAlbums.attributes
     }
 }

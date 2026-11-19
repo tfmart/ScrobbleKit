@@ -8,9 +8,9 @@
 import Foundation
 
 struct ChartGetTopTagsService: SBKService {
-    typealias ResponseType = SBKChartGetTopTagsResponse
+    typealias ResponseType = SBKChartTopTagsResponse
     
-    var sbkMethod: SBKMethod = .tagTopTags
+    var sbkMethod: SBKMethod = .getTopTagsFromChart
     var queries: [URLQueryItem]
     var httpMethod: SBKHttpMethod = .get
     

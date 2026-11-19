@@ -32,8 +32,8 @@ public struct SBKScrobbledTrack: Decodable, Sendable {
             artist: artist,
             url: URL(string: url)
         )
-        let timestamp = try container.decode(SBKTimestamp.self, forKey: .date)
-        if let timeInterval = TimeInterval(timestamp.timestamp) {
+        if let timestamp = try container.decodeIfPresent(SBKTimestamp.self, forKey: .date),
+           let timeInterval = TimeInterval(timestamp.timestamp) {
             self.date = Date(timeIntervalSince1970: timeInterval)
         } else {
             self.date = nil

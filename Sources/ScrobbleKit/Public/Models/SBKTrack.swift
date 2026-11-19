@@ -15,6 +15,10 @@ public struct SBKTrack: Decodable, Sendable {
     public var musicBrainzID: UUID?
     /// The playcount of the track.
     public var playcount: Int?
+    /// Plays by the username supplied to track.getInfo; nil when omitted.
+    public var userPlaycount: Int?
+    /// Whether that user loves this track; nil when no user context is available.
+    public var isLoved: Bool?
     /// The number of listeners for the track.
     public var listeners: Int?
     /// The duration of the track.
@@ -30,6 +34,8 @@ public struct SBKTrack: Decodable, Sendable {
         case name
         case musicBrainzID = "mbid"
         case playcount
+        case userPlaycount = "userplaycount"
+        case isLoved = "userloved"
         case listeners
         case artist
         case duration
@@ -54,6 +60,15 @@ public struct SBKTrack: Decodable, Sendable {
         self.name = try container.decode(String.self, forKey: SBKTrack.CodingKeys.name)
         self.musicBrainzID = UUID(optionalString: try container.decodeIfPresent(String.self, forKey: SBKTrack.CodingKeys.musicBrainzID))
         self.playcount = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKTrack.CodingKeys.playcount)?.intValue
+        self.userPlaycount = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: .userPlaycount)?.intValue
+        let lovedValue = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: .isLoved)?.intValue
+        self.isLoved = lovedValue.flatMap { value in
+            switch value {
+            case 0: false
+            case 1: true
+            default: nil
+            }
+        }
         self.listeners = try container.decodeIfPresent(IntegerStringDecoder.self, forKey: SBKTrack.CodingKeys.listeners)?.intValue
         self.duration = try container.decodeIfPresent(String.self, forKey: SBKTrack.CodingKeys.duration)
         self.url = try container.decodeIfPresent(URL.self, forKey: SBKTrack.CodingKeys.url)

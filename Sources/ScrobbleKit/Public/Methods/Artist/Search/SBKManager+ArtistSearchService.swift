@@ -16,7 +16,7 @@ public extension SBKManager {
      - limit: The maximum number of results to return.
      - page: The page number of results to return.
      
-     - Returns: An array of ``SBKArtist`` objects representing the search results.
+     - Returns: An ``SBKSearchResult`` containing the matching artists and pagination metadata reported by Last.fm.
      
      - Throws: An error of type ``SBKClientError`` or ``SBKError`` if there is an issue with the API request or decoding the response.
      
@@ -26,7 +26,7 @@ public extension SBKManager {
         artist query: String,
         limit: Int = .sbkLimitPerPage,
         page: Int = .sbkFirstPage
-    ) async throws -> [SBKArtist] {
+    ) async throws -> SBKSearchResult<SBKArtist> {
         let service = ArtistSearchService(
             query,
             limit: limit,
@@ -35,6 +35,10 @@ public extension SBKManager {
             secretKey: secret
         )
         let response = try await service.start()
-        return response.results.matches.artists
+        return try .init(
+            results: response.results.matches.artists,
+            searchTerms: [.artist: response.results.query?.searchTerms ?? query],
+            response: response.results
+        )
     }
 }

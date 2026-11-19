@@ -19,3 +19,14 @@ public enum SBKArtistSearchMethod: Sendable {
     /// - Parameter id: The MusicBrainz ID of the artist.
     case musicBrainzID(_ id: String)
 }
+
+extension SBKArtistSearchMethod {
+    var searchTerm: String {
+        switch self {
+        case .artistName(let artist):
+            artist
+        case .musicBrainzID(let id):
+            id
+        }
+    }
+}

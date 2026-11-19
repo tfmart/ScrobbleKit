@@ -16,7 +16,7 @@ public extension SBKManager {
      - limit: The maximum number of results to return. Defaults to 50.
      - page: The page number of results to return. Defaults to 1.
      
-     - Returns: An array of `SBKArtist` objects representing the top artists for the given location.
+     - Returns: An ``SBKSearchResult`` containing the top artists and pagination metadata reported by Last.fm.
      
      - Throws: An error of type `SBKClientError` or `SBKError` if there is an issue with the API request or decoding the response.
      
@@ -26,7 +26,7 @@ public extension SBKManager {
         forCountry country: SBKCountry,
         limit: Int = .sbkLimitPerPage,
         page: Int = .sbkFirstPage
-    ) async throws -> [SBKArtist] {
+    ) async throws -> SBKSearchResult<SBKArtist> {
         let service = GeoGetTopArtistsService(
             country: country,
             limit: limit,
@@ -35,6 +35,14 @@ public extension SBKManager {
             secretKey: secret
         )
         let response = try await service.start()
-        return response.topartists.artist
+        guard let attributes = response.topartists.attributes else {
+            throw SBKClientError.failedToDecodeResponse
+        }
+        let pagination = try SBKPagination(attributes: attributes)
+        return .init(
+            results: response.topartists.artist,
+            searchTerms: [:],
+            pagination: pagination
+        )
     }
 }

@@ -16,7 +16,7 @@ public extension SBKManager {
      - limit: The maximum number of albums to return. Default is 50.
      - page: The page of results to return. Default is 1.
      
-     - Returns: An array of ``SBKAlbum`` objects representing the artist's top albums.
+     - Returns: An ``SBKSearchResult`` containing the artist's top albums and pagination metadata reported by Last.fm.
      
      - Throws: An error of type ``SBKClientError`` or ``SBKError`` if there is an issue with the API request or decoding the response.
      
@@ -27,7 +27,7 @@ public extension SBKManager {
         limit: Int = .sbkLimitPerPage,
         page: Int = .sbkFirstPage,
         autoCorrect: Bool = true
-    ) async throws -> [SBKAlbum] {
+    ) async throws -> SBKSearchResult<SBKAlbum> {
         let service = ArtistGetTopAlbumsService(
             searchMethod,
             limit: limit,
@@ -37,6 +37,14 @@ public extension SBKManager {
             secretKey: secret
         )
         let response = try await service.start()
-        return response.topAlbums.albums.map({ SBKAlbum(topAlbumArtist: $0) })
+        guard let attributes = response.topAlbums.attributes else {
+            throw SBKClientError.failedToDecodeResponse
+        }
+        let pagination = try SBKPagination(attributes: attributes)
+        return .init(
+            results: response.topAlbums.albums.map { SBKAlbum(topAlbumArtist: $0) },
+            searchTerms: [.artist: searchMethod.searchTerm],
+            pagination: pagination
+        )
     }
 }

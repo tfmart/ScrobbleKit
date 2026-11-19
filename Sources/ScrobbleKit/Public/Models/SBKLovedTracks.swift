@@ -18,7 +18,7 @@ public struct SBKLovedTracks: Sendable {
         let responseAttributes = response.lovedtracks.attributes
         self.searchAttributes = SBKSearchAttributes(
             term: responseAttributes.user,
-            totalPages: responseAttributes.total,
+            totalPages: responseAttributes.totalPages,
             page: responseAttributes.page,
             perPage: responseAttributes.perPage,
             total: responseAttributes.total

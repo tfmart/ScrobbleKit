@@ -16,7 +16,7 @@ public extension SBKManager {
         - limit: The number of results to fetch per page. Defaults to 50.
         - page: The page number to fetch. Defaults to 1.
      
-     - Returns: An array of ``SBKTrack`` objects representing the top tracks for the specified country.
+     - Returns: An ``SBKSearchResult`` containing the top tracks and pagination metadata reported by Last.fm.
      
      - Throws: An error of type ``SBKClientError`` or ``SBKError`` if there is an issue with the API request or decoding the response.
      
@@ -26,7 +26,7 @@ public extension SBKManager {
         forCountry country: SBKCountry,
         limit: Int = .sbkLimitPerPage,
         page: Int = .sbkFirstPage
-    ) async throws -> [SBKTrack] {
+    ) async throws -> SBKSearchResult<SBKTrack> {
         let service = GeoGetTopTracksService(
             country: country,
             limit: limit,
@@ -35,6 +35,14 @@ public extension SBKManager {
             secretKey: secret
         )
         let response = try await service.start()
-        return response.tracks.track
+        guard let attributes = response.tracks.attributes else {
+            throw SBKClientError.failedToDecodeResponse
+        }
+        let pagination = try SBKPagination(attributes: attributes)
+        return .init(
+            results: response.tracks.track,
+            searchTerms: [:],
+            pagination: pagination
+        )
     }
 }

@@ -21,6 +21,11 @@ struct SBKTrackGetSimilarList: Sendable, Decodable {
     enum CodingKeys: String, CodingKey {
         case tracks = "track"
     }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.tracks = try container.decodeOneOrMany(SBKTrackGetSimilarListTrack.self, forKey: .tracks)
+    }
 }
 
 struct SBKTrackGetSimilarListTrack: Sendable, Decodable {
